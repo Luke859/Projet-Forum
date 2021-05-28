@@ -24,6 +24,14 @@ Le but de ce projet est de créer un forum dans le sens général, c'est à dire
 - Il faudra pouvoir s'inscrire et s'authentifier; les mots de passe devront être hashés.
 - Une session utilisateur sera mise en place en utilisant un cookie avec un tempsd'expiration.
 
+### Les contraintes
+
+- Le serveur web devra être écrit en GoUne URL par page
+- La base de données sera créée et administrée grâce à la bibliothèque SQLite
+- Les mots de passe seront sécurisés
+- Les sessions de connexion exploiteront des cookiesLe site pourra être déployé avec Docker
+- Les packages autorisés sont les packages standards, bcrypt, sqlite3, uuid
+
 ### Liens
 
 [Lien Google DOC](https://docs.google.com/document/d/1omAeKbQOeYaap4RX3qKg7whCzQdDwmaRJPslWD8ngG0/edit)     
