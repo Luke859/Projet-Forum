@@ -9,9 +9,9 @@
 ### Le projet en quelques phrases:
 
 Le but de ce projet est de créer un forum dans le sens général, c'est à dire un site qui permette de :
-    -Créer des posts (sujets) qui soient du texte et/ou des images.  
-    -Chaque post aura une ou plusieurs catégories (parmi une liste pré-déterminée)Laisser d'autres utilisateurs y réagir en postant des commentaires (ou réponses).  
-    -Ajouter des votes (Likes et dislikes)Les posts et commentaires seront accessible par tout le monde, mais participernécessitera de créer un compte utilisateur.  
+    - Créer des posts (sujets) qui soient du texte et/ou des images.
+    - Chaque post aura une ou plusieurs catégories (parmi une liste pré-déterminée)Laisser d'autres utilisateurs y réagir en postant des commentaires (ou réponses).
+    - Ajouter des votes (Likes et dislikes)Les posts et commentaires seront accessible par tout le monde, mais participernécessitera de créer un compte utilisateur.
 
 ### Liens
 
