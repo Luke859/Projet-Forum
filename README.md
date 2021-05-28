@@ -17,6 +17,11 @@ Le but de ce projet est de créer un forum dans le sens général, c'est à dire
     - Pour ne voir que les posts qu'on a soi-même likés
     - Pour ne voir que les posts qu'on a soi-même postés
 
+### Les attendus du projet:
+
+- Il faudra pouvoir s'inscrire et s'authentifier; les mots de passe devront être hashés.
+- Une session utilisateur sera mise en place en utilisant un cookie avec un tempsd'expiration.
+
 ### Liens
 
 [Lien Google DOC](https://docs.google.com/document/d/1omAeKbQOeYaap4RX3qKg7whCzQdDwmaRJPslWD8ngG0/edit)     
