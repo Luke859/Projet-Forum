@@ -24,7 +24,7 @@ Le but de ce projet est de créer un forum dans le sens général, c'est à dire
 - Il faudra pouvoir s'inscrire et s'authentifier; les mots de passe devront être hashés.
 - Une session utilisateur sera mise en place en utilisant un cookie avec un tempsd'expiration.
 
-### Les contraintes
+### ~~Les contraintes~~
 
 - Le serveur web devra être écrit en GoUne URL par page
 - La base de données sera créée et administrée grâce à la bibliothèque SQLite
