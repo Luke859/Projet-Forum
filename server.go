@@ -1,9 +1,9 @@
 package main
 
 import (
-	APIartist "Groupie-Tracker/src/APIartist"
-	APIcarte "Groupie-Tracker/src/APIlocations"
-	accueil "Groupie-Tracker/src/accueil"
+	APIartist "Projet-Forum/src/APIartist"
+	APIcarte "Projet-Forum/src/APIlocations"
+	accueil "Projet-Forum/src/accueil"
 	"net/http"
 )
 
