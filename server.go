@@ -3,14 +3,14 @@ package main
 import (
 	"net/http"
 
-	accueil "./src/Accueil"
+	Accueil "./src/Accueil"
 )
 
 func main() {
 
-	http.HandleFunc("/", accueil.AccueilPage)
- http.HandleFunc("/connexion", APIartist.ArtistPage)
-	// http.HandleFunc("/carte", APIcarte.CartePage)
+	http.HandleFunc("/", Accueil.AccueilPage)
+	http.HandleFunc("/connexion", Accueil.ConnexionPage)
+	http.HandleFunc("/inscription", Accueil.InscriptionPage)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.ListenAndServe(":8080", nil)
 }
