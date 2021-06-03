@@ -1,10 +1,9 @@
 package main
 
 import (
-	// APIartist "Projet-Forum/src/APIartist"
-	// APIcarte "Projet-Forum/src/APIlocations"
-	accueil "Projet-Forum/src/accueil"
 	"net/http"
+
+	accueil "./src/Accueil"
 )
 
 func main() {
