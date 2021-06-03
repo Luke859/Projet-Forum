@@ -37,7 +37,7 @@ header .logo {
 }
 
 header.sticky{
-    background: black;
+    background-color: rgba(0, 0, 255, 0.5);
     padding: 10px 100px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     transition: 0,5;
@@ -84,18 +84,6 @@ input {
     outline: none;
 }
 
-button {
-    color: #fff;
-    padding: 17px 22px;
-    border-color: white;
-    background-color: black;
-    font-size: 12px;
-    border-radius: 12px;
-    text-transform: uppercase;
-    cursor: pointer;
-    outline: none;
-}
-
 #recherche{
     position: relative;
     text-align: center;
@@ -115,16 +103,44 @@ button {
 }
 /* ////////////////////////////////////////////////PAGE ACCUEIL ///////////////////////////////////////////////////////////////////////////////////// */
 
-/* Block entier -> page accueil*/
-
-
-/* Block 1 -> page accueil*/
-
-
-
-
 .connect {
     margin-top: 1000px;
     display: center;
     right: 50%;
+}
+
+
+/* /////////////POST/////////////////// */
+
+.likes {
+    position: relative;
+    height:100px;
+    width: 100px;
+}
+
+#likeBtn {
+    margin: 20px;
+    height: 50px;
+    width: 50px;
+
+}
+
+.post{
+    margin-top: 50%;
+    margin-left: 50%;
+    width: 350px;
+    height: 500px;
+    background: turquoise;
+    margin-top: 250px;
+}
+
+.img{
+    background: url(/Static/Images/coeur.png);
+    height: 100px;
+    width: 100px;
+}
+.input{
+    margin: 10px;
+    width: 200px;
+    height: 50px;
 }
