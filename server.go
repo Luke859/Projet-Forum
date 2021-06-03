@@ -9,7 +9,7 @@ import (
 func main() {
 
 	http.HandleFunc("/", accueil.AccueilPage)
-	// http.HandleFunc("/groupes", APIartist.ArtistPage)
+ http.HandleFunc("/connexion", APIartist.ArtistPage)
 	// http.HandleFunc("/carte", APIcarte.CartePage)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.ListenAndServe(":8080", nil)
