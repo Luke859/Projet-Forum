@@ -3,7 +3,7 @@ package main
 import (
 	// APIartist "Projet-Forum/src/APIartist"
 	// APIcarte "Projet-Forum/src/APIlocations"
-	accueil "Projet-Forum/src/accueil"
+	accueil "Projet-Forum/Static/HTML/accueil.html"
 	"net/http"
 )
 
