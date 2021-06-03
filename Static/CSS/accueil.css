@@ -117,45 +117,14 @@ button {
 
 /* Block entier -> page accueil*/
 
-#ToutLeBlock {
-    position: relative;
-}
 
 /* Block 1 -> page accueil*/
 
-.block {
-    position: relative;
-    bottom: 5%;
-    font-size: 150px;
-    font-family: "gisbon_demodemo";
-    color: #fff;
-    text-shadow: 4px 4px rgb(192, 103, 103);
-    height: 400px;
-    overflow: hidden;
-}
-
-#un {
-    position: absolute;
-    align-items: top;
-    bottom: 75%;
-    left: 34%;
-    
- }
 
 
-.textes2 {
-    position: relative;
-    bottom: 5%;
-    font-size: 30px;
-    color: rgb(37, 35, 35);
-    text-shadow: 4px 4px rgb(248, 247, 247);
-    height: 400px;
-    overflow: hidden;
-}
 
-#t2 {
-    position: absolute;
-    align-items: top;
-    bottom: 18%;
-    left: 5%;
+.connect {
+    margin-top: 1000px;
+    display: center;
+    right: 50%;
 }
