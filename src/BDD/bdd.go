@@ -4,13 +4,13 @@ package main
 changer le nom de la base ln 17, 58
 changer le nom de la variable HMpd ln 60
 msg d'erreur print dans le terminal
-func check utilisateur non fonctionelle
 */
 
 import (
 	"context"
 	"database/sql"
 	"fmt"
+	"strings"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -50,6 +50,10 @@ func newUser(pseudo string, Hmpd string, db *sql.DB) int {
 
 func checkUser(pseudo string, Hmpd string, db *sql.DB) int {
 	ctx := context.Background()
+	var tabUser []string
+
+	tabUser = append(tabUser, pseudo)
+	tabUser = append(tabUser, Hmpd)
 
 	err := db.PingContext(ctx)
 	if err != nil {
@@ -57,9 +61,9 @@ func checkUser(pseudo string, Hmpd string, db *sql.DB) int {
 		return 500
 	}
 
-	tsql := fmt.Sprintf("SELECT id, name, Hmpd FROM NOMDEBASE.User") //il faudra metre le bon nom de la base &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+	tsql := fmt.Sprintf("SELECT name, Hmpd FROM NOMDEBASE.User") //il faudra metre le bon nom de la base &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-	rows, err2 := db.QueryContext(ctx, tsql)
+	/*rows, err2 := db.QueryContext(ctx, tsql)
 	if err2 != nil {
 		fmt.Println("error Querry")
 		return 500
@@ -69,7 +73,14 @@ func checkUser(pseudo string, Hmpd string, db *sql.DB) int {
 
 	for rows.Next() {
 		/*if pseudo == rows. {
-		}*/
+		}
+	}*/
+	tabbd := strings.Split(tsql, " ")
+	for i := 0; i < 4; i++ {
+		if strings.Compare(tabUser[i], tabbd[i]) != 0 {
+			fmt.Println("invalide username or password")
+			return 401
+		}
 	}
-	return 1
+	return 0
 }
