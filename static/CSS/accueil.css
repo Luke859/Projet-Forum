@@ -45,8 +45,8 @@ header.sticky{
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     transition: 0,5;
 }
-
-/*header.sticky .navbar__links{
+/*
+header.sticky .navbar__links{
     background: linear-gradient(90deg, lightgray, gray,black);
 }
 
@@ -54,8 +54,8 @@ header.sticky .navbar__links:hover {
     color: white;
     background: linear-gradient(90deg, black, gray,lightgray);
 }
-*/
 
+*/
 
 
 a.inscription__links { 
@@ -169,43 +169,39 @@ li.nav-item {
   padding: 20px;
   font-size: 22px;
 }
-       /*--------end of navigation styling--------*/
+
+
 
 .site-wrap {
   min-width: 100%;
   min-height: 100%;
-  background-color: #ffffff; /* white */
+  background-color: #ffffff;
   position: relative;
   top: 0;
   bottom: 100%;
   left: 0;
   z-index: 1;
-  padding: 4em; /*spaces out content from hamburger*/
+  padding: 4em;
 }
 
-    /*----stylize nav-trigger actions and looks-----*/
-/*hide the checkbox*/
 .nav-trigger {
   position: absolute;
   clip: rect(0, 0, 0, 0);
 }
 
 label[for="nav-trigger"] {
-  /*nav stays in the same spot as user scrolls*/
   position: fixed; 
-  /*position hamburger menu*/
+ 
   top: 15px;
   left: 15px;
-  /*z-index needs to be 1 higher than site-wrap*/
+ 
   z-index: 2;
   width: 30px;
   height: 30px;
-  /*changing to pointer indicates interactivity*/
   cursor: pointer;
   color: #111111;
 }
 
-/*styling to create "hamburger" icon (refer to notes)*/
 .hidden_nav:before {
 	content: "";
 	position: absolute;
@@ -217,32 +213,23 @@ label[for="nav-trigger"] {
 	z-index: 3;
 }
 
-/*the following lines make the effect work*/
-/*below styling controls label position when menu opens- add 15px, because we did left:15px in label[for="nav-trigger"]*/
-/*uses adjacent sibling selector (+)--> nav-trigger:checked must come first so label moves after checkbox is activated*/
 .nav-trigger:checked + label {
   left: 200px;
 }
 
-/*ensures that the site-wrap is pushed to the right*/
-/*uses general sibling selector (~) to target site wrap after nav-trigger gets activated*/
 .nav-trigger:checked ~ .site-wrap {
   left: 180px;
 }
 
-/*add slight transition to effect*/
 
 .nav-trigger + label, .site-wrap {
   transition: left 0.2s;
 }
 
-/*keep site-wrap from scrolling across window from left to right when menu is opened*/
 body {
   overflow-x: hidden;
 }
-    /*----end of styling navigation actions and looks----*/
 
-/*---end of what is required for sliding hamburger drawer effect--*/
 
 p {
   padding-right: 120px;
@@ -535,7 +522,7 @@ p {
     margin:0;
     padding:0;
     font-family: sans-serif;
-    background: linear-gradient(#141e30, #243b55);
+    background: #243b55;
   }
   
   .login-box {
