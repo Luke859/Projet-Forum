@@ -1,8 +1,6 @@
 package main
 
 /*
-changer le nom de la base ln 17, 58
-changer le nom de la variable HMpd ln 60
 msg d'erreur print dans le terminal
 */
 
@@ -18,7 +16,7 @@ import (
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func gestionData() int {
-	db, err := sql.Open("sqlitte3", "./nomBase.db")
+	db, err := sql.Open("sqlitte3", "./ProjetFormu.db")
 	if err != nil {
 		fmt.Print("error ouvertur base")
 		return (500)
@@ -37,7 +35,7 @@ func gestionData() int {
 /*/////////////////////////////////////////////////////creation d'un nouvelle identifiant///////////////////////////////////////////////*/
 
 func newUser(pseudo string, Hmpd string, db *sql.DB) int {
-	statement, err := db.Prepare("INSERT INTO User (pseudo, Hmpd) VALUES(?,?)")
+	statement, err := db.Prepare("INSERT INTO User (pseudo, Password) VALUES(?,?)")
 	if err != nil {
 		fmt.Print("error new user")
 		return (5)
@@ -61,8 +59,9 @@ func checkUser(pseudo string, Hmpd string, db *sql.DB) int {
 		return 500
 	}
 
-	tsql := fmt.Sprintf("SELECT name, Hmpd FROM NOMDEBASE.User") //il faudra metre le bon nom de la base &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+	tsql := fmt.Sprintf("SELECT pseudo, Password FROM User WHERE pseudo") //il faudra metre le bon nom de la base &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+	//tsql, err := db.Query("SELECT pseudo, Password FROM User WHERE pseudo (?)")
 	/*rows, err2 := db.QueryContext(ctx, tsql)
 	if err2 != nil {
 		fmt.Println("error Querry")
@@ -87,6 +86,11 @@ func checkUser(pseudo string, Hmpd string, db *sql.DB) int {
 
 /*//////////////////////////////////////////////////recupe post////////////////////*/
 
-func getPost() int {
-	return 0
+func getPost(db *sql.DB, id string) (int, string) {
+	statement, err := db.Query("SELECT Id_post FROM Post WHERE User")
+	if err != nil {
+		fmt.Println("querry didn't work, can't catch ")
+		return 500, "error"
+	}
+	return 0, ""
 }
