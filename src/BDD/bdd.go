@@ -84,3 +84,9 @@ func checkUser(pseudo string, Hmpd string, db *sql.DB) int {
 	}
 	return 0
 }
+
+/*//////////////////////////////////////////////////recupe post////////////////////*/
+
+func getPost() int {
+	return 0
+}
