@@ -146,7 +146,7 @@ button {
 
 .navigation {
   list-style: none;
-  background: #92d3b3; /*light green */
+  background: #243b55;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -684,4 +684,4 @@ p {
       bottom: 100%;
     }
   }
-  
+

@@ -77,22 +77,13 @@
 	</schema>
 	<connector name="Projet-Forum" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.34.0.jar" driver_desc="Standard" host="localhost" port="7210" instance="C:/Users/dagna/Downloads/ProjetForum.db" />
 	<layout name="Layout" id="Layout_797" joined_routing="y" show_relation="columns" >
-		<entity schema="Default" name="Commentaires" color="39ABC1" x="512" y="80" />
-		<entity schema="Default" name="Likes" color="C13939" x="512" y="176" />
-		<entity schema="Default" name="Post" color="3986C1" x="224" y="96" />
-		<entity schema="Default" name="Session" color="F0FF00" x="48" y="208" />
-		<entity schema="Default" name="User" color="47FF00" x="48" y="80" />
-		<group name="utilisateur" color="0000FF" >
-			<entity schema="Default" name="Session" />
-			<entity schema="Default" name="User" />
-		</group>
-		<group name="Forum" color="0000FF" >
-			<entity schema="Default" name="Commentaires" />
-			<entity schema="Default" name="Likes" />
-			<entity schema="Default" name="Post" />
-		</group>
+		<entity schema="Default" name="Commentaires" color="39ABC1" x="512" y="48" />
+		<entity schema="Default" name="Likes" color="C13939" x="512" y="144" />
+		<entity schema="Default" name="Post" color="3986C1" x="224" y="64" />
+		<entity schema="Default" name="Session" color="F0FF00" x="48" y="176" />
+		<entity schema="Default" name="User" color="47FF00" x="48" y="48" />
 		<script name="SQL_Editor" id="Editor_a15" language="SQL" >
-			<string><![CDATA[INSERT INTO Commentaires (Id_user, Id_cmt, texte)
+			<string><![CDATA[INSERT INTO Commentaires (Id_cmt, Id_post, texte)
 VALUES (4, 4, "titre");]]></string>
 		</script>
 	</layout>
