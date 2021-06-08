@@ -1,6 +1,7 @@
 package Accueil
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"text/template"
@@ -14,4 +15,5 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
+	fmt.Println("Page Post ⌛")
 }
