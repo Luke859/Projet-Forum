@@ -3,10 +3,13 @@
   font-family: sans-serif;
   font-size: 21px;
   line-height: 1.6;
-  margin: 0;
   display: flex;
   color: rgb(50, 139, 212);
   transition: transform .4s cubic-bezier(.25, .1, .25, 1);
+  float:left;
+  margin-right:7%;
+  text-align: left;
+  width: 40%;
 }
 
 #wrap{
@@ -23,7 +26,7 @@ label {
 
 a,
 label {
-  color: #243b55;
+  color: rgb(50, 139, 212);
   text-decoration: none;
   display: block;
 }
@@ -48,7 +51,7 @@ label {
 
 label>span{
   display:none;
-  color: r#243b55;
+  color: rgb(50, 139, 212);
 }
 #menu:checked ~ #wrap label>span{
   display:block;
