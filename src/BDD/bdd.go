@@ -11,7 +11,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
+/*func main() {
 	status, db := gestionData()
 	fmt.Println(status)
 	//index := newUser("test", "test", db)
@@ -19,7 +19,7 @@ func main() {
 	status, tab := checkUser("test", db)
 	fmt.Println(status)
 	fmt.Println(tab)
-}
+}*/
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
