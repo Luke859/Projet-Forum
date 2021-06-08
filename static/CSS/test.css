@@ -40,7 +40,7 @@ label {
 }
 
 #menu{
-  display:none
+  display:none;
 }
 #menu:checked ~ #wrap{
   transform: translate3d(0, 0, 0);
