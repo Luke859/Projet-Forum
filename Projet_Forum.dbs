@@ -5,32 +5,32 @@
 			<column name="Id-cmt" type="integer" jt="4" mandatory="y" >
 				<identity><![CDATA[autoincrement]]></identity>
 			</column>
-			<column name="Id-user" type="integer" jt="4" />
 			<column name="texte" type="varchar" length="250" jt="12" />
+			<column name="Id_post" type="integer" jt="4" mandatory="y" />
 			<index name="pk_Commentaires" unique="PRIMARY_KEY" >
 				<column name="Id-cmt" />
-			</index>
-			<index name="Unq_Commentaires_Id-user" unique="UNIQUE_KEY" >
-				<column name="Id-user" />
 			</index>
 			<fk name="Fk_Commentaires" to_schema="Default" to_table="Post" >
 				<fk_column name="Id-cmt" pk="Id_cmt" />
 			</fk>
+			<fk name="Fk_Commentaires_0" to_schema="Default" to_table="Post" >
+				<fk_column name="Id_post" pk="Id_post" />
+			</fk>
 		</table>
 		<table name="Likes" >
-			<column name="Id-likes" type="integer" jt="4" mandatory="y" >
+			<column name="Id_likes" prior="Id-likes" type="integer" jt="4" mandatory="y" >
 				<identity><![CDATA[autoincrement]]></identity>
 			</column>
-			<column name="Id-user" type="integer" jt="4" />
 			<column name="Verif_like" prior="Verif" type="boolean" jt="-7" />
+			<column name="Id_post" type="integer" jt="4" mandatory="y" />
 			<index name="pk_Likes" unique="PRIMARY_KEY" >
-				<column name="Id-likes" />
-			</index>
-			<index name="Unq_Likes_Id-user" unique="UNIQUE_KEY" >
-				<column name="Id-user" />
+				<column name="Id_likes" />
 			</index>
 			<fk name="Fk_Likes" to_schema="Default" to_table="Post" >
-				<fk_column name="Id-likes" pk="Id_likes" />
+				<fk_column name="Id_likes" pk="Id_likes" />
+			</fk>
+			<fk name="Fk_Likes_0" to_schema="Default" to_table="Post" >
+				<fk_column name="Id_post" pk="Id_post" />
 			</fk>
 		</table>
 		<table name="Post" >
@@ -41,8 +41,8 @@
 			<column name="Titre" type="text" jt="-1" />
 			<column name="texte" type="text" jt="-1" mandatory="y" />
 			<column name="Image" type="integer" jt="4" />
-			<column name="Id_likes" type="integer" jt="4" />
-			<column name="Id_cmt" type="integer" jt="4" />
+			<column name="Id_likes" type="integer" jt="4" mandatory="y" />
+			<column name="Id_cmt" type="integer" jt="4" mandatory="y" />
 			<index name="pk_Post" unique="PRIMARY_KEY" >
 				<column name="Id_post" />
 			</index>
@@ -73,24 +73,27 @@
 			<index name="pk_User" unique="PRIMARY_KEY" >
 				<column name="Id_user" />
 			</index>
-			<fk name="Fk_User" to_schema="Default" to_table="Commentaires" >
-				<fk_column name="Id_user" pk="Id-user" />
-			</fk>
-			<fk name="Fk_User_0" to_schema="Default" to_table="Likes" >
-				<fk_column name="Id_user" pk="Id-user" />
-			</fk>
 		</table>
 	</schema>
 	<connector name="Projet-Forum" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.34.0.jar" driver_desc="Standard" host="localhost" port="7210" instance="C:/Users/dagna/Downloads/ProjetForum.db" />
-	<layout name="Layout" id="Layout_797" show_relation="columns" >
-		<entity schema="Default" name="Commentaires" color="39ABC1" x="480" y="80" />
-		<entity schema="Default" name="Likes" color="C13939" x="48" y="64" />
-		<entity schema="Default" name="Post" color="3986C1" x="208" y="48" />
-		<entity schema="Default" name="Session" color="C1D8EE" x="336" y="160" />
-		<entity schema="Default" name="User" color="3EC139" x="48" y="208" />
+	<layout name="Layout" id="Layout_797" joined_routing="y" show_relation="columns" >
+		<entity schema="Default" name="Commentaires" color="39ABC1" x="512" y="80" />
+		<entity schema="Default" name="Likes" color="C13939" x="512" y="176" />
+		<entity schema="Default" name="Post" color="3986C1" x="224" y="96" />
+		<entity schema="Default" name="Session" color="F0FF00" x="48" y="208" />
+		<entity schema="Default" name="User" color="47FF00" x="48" y="80" />
+		<group name="utilisateur" color="0000FF" >
+			<entity schema="Default" name="Session" />
+			<entity schema="Default" name="User" />
+		</group>
+		<group name="Forum" color="0000FF" >
+			<entity schema="Default" name="Commentaires" />
+			<entity schema="Default" name="Likes" />
+			<entity schema="Default" name="Post" />
+		</group>
 		<script name="SQL_Editor" id="Editor_a15" language="SQL" >
-			<string><![CDATA[INSERT INTO Post (Id_user, Id_Post, Titre, texte, Id_likes, Id_cmt)
-VALUES (4, 4, "titre", "message", 4, 4);]]></string>
+			<string><![CDATA[INSERT INTO Commentaires (Id_user, Id_cmt, texte)
+VALUES (4, 4, "titre");]]></string>
 		</script>
 	</layout>
 </project>
