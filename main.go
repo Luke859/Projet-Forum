@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"database/sql"
 	"fmt"
@@ -7,7 +8,7 @@ import (
 )
 
 struct type Catery {
-	
+
 }
 
 func main(){
@@ -21,18 +22,17 @@ func main(){
 		fmt.Println("Could not Query database")
 		return
 	}
-	var name string 
+	var name string
 	var color string
 
 	for entries.Next() {
 		entries.Scan(&name, &color)
 		fmt.Println(name + " " + color)
 	}
-	
+
 	var cat Category{
 
 	}
 }
 
-
-	
+*/
