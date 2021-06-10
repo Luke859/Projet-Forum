@@ -35,7 +35,7 @@ Le but de ce projet est de créer un forum dans le sens général, c'est à dire
 
 ### **Lancement:**
 Pour lancer le server, entrer la commande suivante:     
-```go   
+```fix   
 go run server.go
 ```
 
