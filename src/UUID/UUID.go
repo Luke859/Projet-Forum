@@ -1,137 +1,257 @@
-package main
+// Copyright 2018 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+package uuid
 
 import (
 	"bytes"
+	"crypto/rand"
 	"encoding/hex"
+	"errors"
+	"fmt"
+	"io"
+	"strings"
 )
 
-// Size of a UUID in bytes.
-const Size = 16
+// A UUID is a 128 bit (16 byte) Universal Unique IDentifier as defined in RFC
+// 4122.
+type UUID [16]byte
 
-// UUID representation compliant with specification
-// described in RFC 4122.
-type UUID [Size]byte
+// A Version represents a UUID's version.
+type Version byte
 
-// UUID versions
+// A Variant represents a UUID's variant.
+type Variant byte
+
+// Constants returned by Variant.
 const (
-	_ byte = iota
-	V1
-	V2
-	V3
-	V4
-	V5
+	Invalid   = Variant(iota) // Invalid UUID
+	RFC4122                   // The variant specified in RFC4122
+	Reserved                  // Reserved, NCS backward compatibility.
+	Microsoft                 // Reserved, Microsoft Corporation backward compatibility.
+	Future                    // Reserved for future definition.
 )
 
-// UUID layout variants.
-const (
-	VariantNCS byte = iota
-	VariantRFC4122
-	VariantMicrosoft
-	VariantFuture
-)
+var rander = rand.Reader // random function
 
-// UUID DCE domains.
-const (
-	DomainPerson = iota
-	DomainGroup
-	DomainOrg
-)
+type invalidLengthError struct{ len int }
 
-// String parse helpers.
-var (
-	urnPrefix  = []byte("urn:uuid:")
-	byteGroups = []int{8, 4, 4, 4, 12}
-)
-
-// Nil is special form of UUID that is specified to have all
-// 128 bits set to zero.
-var Nil = UUID{}
-
-// Predefined namespace UUIDs.
-var (
-	NamespaceDNS  = Must(FromString("6ba7b810-9dad-11d1-80b4-00c04fd430c8"))
-	NamespaceURL  = Must(FromString("6ba7b811-9dad-11d1-80b4-00c04fd430c8"))
-	NamespaceOID  = Must(FromString("6ba7b812-9dad-11d1-80b4-00c04fd430c8"))
-	NamespaceX500 = Must(FromString("6ba7b814-9dad-11d1-80b4-00c04fd430c8"))
-)
-
-// Equal returns true if u1 and u2 equals, otherwise returns false.
-func Equal(u1 UUID, u2 UUID) bool {
-	return bytes.Equal(u1[:], u2[:])
+func (err invalidLengthError) Error() string {
+	return fmt.Sprintf("invalid UUID length: %d", err.len)
 }
 
-// Version returns algorithm version used to generate UUID.
-func (u UUID) Version() byte {
-	return u[6] >> 4
+// IsInvalidLengthError is matcher function for custom error invalidLengthError
+func IsInvalidLengthError(err error) bool {
+	_, ok := err.(invalidLengthError)
+	return ok
 }
 
-// Variant returns UUID layout variant.
-func (u UUID) Variant() byte {
-	switch {
-	case (u[8] >> 7) == 0x00:
-		return VariantNCS
-	case (u[8] >> 6) == 0x02:
-		return VariantRFC4122
-	case (u[8] >> 5) == 0x06:
-		return VariantMicrosoft
-	case (u[8] >> 5) == 0x07:
-		fallthrough
+// Parse decodes s into a UUID or returns an error.  Both the standard UUID
+// forms of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx and
+// urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx are decoded as well as the
+// Microsoft encoding {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} and the raw hex
+// encoding: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
+func Parse(s string) (UUID, error) {
+	var uuid UUID
+	switch len(s) {
+	// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	case 36:
+
+	// urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	case 36 + 9:
+		if strings.ToLower(s[:9]) != "urn:uuid:" {
+			return uuid, fmt.Errorf("invalid urn prefix: %q", s[:9])
+		}
+		s = s[9:]
+
+	// {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
+	case 36 + 2:
+		s = s[1:]
+
+	// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	case 32:
+		var ok bool
+		for i := range uuid {
+			uuid[i], ok = xtob(s[i*2], s[i*2+1])
+			if !ok {
+				return uuid, errors.New("invalid UUID format")
+			}
+		}
+		return uuid, nil
 	default:
-		return VariantFuture
+		return uuid, invalidLengthError{len(s)}
 	}
+	// s is now at least 36 bytes long
+	// it must be of the form  xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	if s[8] != '-' || s[13] != '-' || s[18] != '-' || s[23] != '-' {
+		return uuid, errors.New("invalid UUID format")
+	}
+	for i, x := range [16]int{
+		0, 2, 4, 6,
+		9, 11,
+		14, 16,
+		19, 21,
+		24, 26, 28, 30, 32, 34} {
+		v, ok := xtob(s[x], s[x+1])
+		if !ok {
+			return uuid, errors.New("invalid UUID format")
+		}
+		uuid[i] = v
+	}
+	return uuid, nil
 }
 
-// Bytes returns bytes slice representation of UUID.
-func (u UUID) Bytes() []byte {
-	return u[:]
-}
-
-// Returns canonical string representation of UUID:
-// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.
-func (u UUID) String() string {
-	buf := make([]byte, 36)
-
-	hex.Encode(buf[0:8], u[0:4])
-	buf[8] = '-'
-	hex.Encode(buf[9:13], u[4:6])
-	buf[13] = '-'
-	hex.Encode(buf[14:18], u[6:8])
-	buf[18] = '-'
-	hex.Encode(buf[19:23], u[8:10])
-	buf[23] = '-'
-	hex.Encode(buf[24:], u[10:])
-
-	return string(buf)
-}
-
-// SetVersion sets version bits.
-func (u *UUID) SetVersion(v byte) {
-	u[6] = (u[6] & 0x0f) | (v << 4)
-}
-
-// SetVariant sets variant bits.
-func (u *UUID) SetVariant(v byte) {
-	switch v {
-	case VariantNCS:
-		u[8] = (u[8]&(0xff>>1) | (0x00 << 7))
-	case VariantRFC4122:
-		u[8] = (u[8]&(0xff>>2) | (0x02 << 6))
-	case VariantMicrosoft:
-		u[8] = (u[8]&(0xff>>3) | (0x06 << 5))
-	case VariantFuture:
-		fallthrough
+// ParseBytes is like Parse, except it parses a byte slice instead of a string.
+func ParseBytes(b []byte) (UUID, error) {
+	var uuid UUID
+	switch len(b) {
+	case 36: // xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	case 36 + 9: // urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+		if !bytes.Equal(bytes.ToLower(b[:9]), []byte("urn:uuid:")) {
+			return uuid, fmt.Errorf("invalid urn prefix: %q", b[:9])
+		}
+		b = b[9:]
+	case 36 + 2: // {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
+		b = b[1:]
+	case 32: // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+		var ok bool
+		for i := 0; i < 32; i += 2 {
+			uuid[i/2], ok = xtob(b[i], b[i+1])
+			if !ok {
+				return uuid, errors.New("invalid UUID format")
+			}
+		}
+		return uuid, nil
 	default:
-		u[8] = (u[8]&(0xff>>3) | (0x07 << 5))
+		return uuid, invalidLengthError{len(b)}
 	}
+	// s is now at least 36 bytes long
+	// it must be of the form  xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	if b[8] != '-' || b[13] != '-' || b[18] != '-' || b[23] != '-' {
+		return uuid, errors.New("invalid UUID format")
+	}
+	for i, x := range [16]int{
+		0, 2, 4, 6,
+		9, 11,
+		14, 16,
+		19, 21,
+		24, 26, 28, 30, 32, 34} {
+		v, ok := xtob(b[x], b[x+1])
+		if !ok {
+			return uuid, errors.New("invalid UUID format")
+		}
+		uuid[i] = v
+	}
+	return uuid, nil
 }
 
-// Must is a helper that wraps a call to a function returning (UUID, error)
-// and panics if the error is non-nil. It is intended for use in variable
-// initializations such as
-//	var packageUUID = uuid.Must(uuid.FromString("123e4567-e89b-12d3-a456-426655440000"));
-func Must(u UUID, err error) UUID {
+// MustParse is like Parse but panics if the string cannot be parsed.
+// It simplifies safe initialization of global variables holding compiled UUIDs.
+func MustParse(s string) UUID {
+	uuid, err := Parse(s)
+	if err != nil {
+		panic(`uuid: Parse(` + s + `): ` + err.Error())
+	}
+	return uuid
+}
+
+// FromBytes creates a new UUID from a byte slice. Returns an error if the slice
+// does not have a length of 16. The bytes are copied from the slice.
+func FromBytes(b []byte) (uuid UUID, err error) {
+	err = uuid.UnmarshalBinary(b)
+	return uuid, err
+}
+
+// Must returns uuid if err is nil and panics otherwise.
+func Must(uuid UUID, err error) UUID {
 	if err != nil {
 		panic(err)
 	}
-	return u
+	return uuid
+}
+
+// String returns the string form of uuid, xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+// , or "" if uuid is invalid.
+func (uuid UUID) String() string {
+	var buf [36]byte
+	encodeHex(buf[:], uuid)
+	return string(buf[:])
+}
+
+// URN returns the RFC 2141 URN form of uuid,
+// urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx,  or "" if uuid is invalid.
+func (uuid UUID) URN() string {
+	var buf [36 + 9]byte
+	copy(buf[:], "urn:uuid:")
+	encodeHex(buf[9:], uuid)
+	return string(buf[:])
+}
+
+func encodeHex(dst []byte, uuid UUID) {
+	hex.Encode(dst, uuid[:4])
+	dst[8] = '-'
+	hex.Encode(dst[9:13], uuid[4:6])
+	dst[13] = '-'
+	hex.Encode(dst[14:18], uuid[6:8])
+	dst[18] = '-'
+	hex.Encode(dst[19:23], uuid[8:10])
+	dst[23] = '-'
+	hex.Encode(dst[24:], uuid[10:])
+}
+
+// Variant returns the variant encoded in uuid.
+func (uuid UUID) Variant() Variant {
+	switch {
+	case (uuid[8] & 0xc0) == 0x80:
+		return RFC4122
+	case (uuid[8] & 0xe0) == 0xc0:
+		return Microsoft
+	case (uuid[8] & 0xe0) == 0xe0:
+		return Future
+	default:
+		return Reserved
+	}
+}
+
+// Version returns the version of uuid.
+func (uuid UUID) Version() Version {
+	return Version(uuid[6] >> 4)
+}
+
+func (v Version) String() string {
+	if v > 15 {
+		return fmt.Sprintf("BAD_VERSION_%d", v)
+	}
+	return fmt.Sprintf("VERSION_%d", v)
+}
+
+func (v Variant) String() string {
+	switch v {
+	case RFC4122:
+		return "RFC4122"
+	case Reserved:
+		return "Reserved"
+	case Microsoft:
+		return "Microsoft"
+	case Future:
+		return "Future"
+	case Invalid:
+		return "Invalid"
+	}
+	return fmt.Sprintf("BadVariant%d", int(v))
+}
+
+// SetRand sets the random number generator to r, which implements io.Reader.
+// If r.Read returns an error when the package requests random data then
+// a panic will be issued.
+//
+// Calling SetRand with nil sets the random number generator to the default
+// generator.
+func SetRand(r io.Reader) {
+	if r == nil {
+		rander = rand.Reader
+		return
+	}
+	rander = r
 }
