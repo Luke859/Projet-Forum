@@ -16,9 +16,14 @@ func main() {
 	fmt.Println(status)
 	//index := newUser("test", "test", db)
 	//fmt.Print(index)
-	status, tab := checkUser("test", db)
-	fmt.Println(status)
-	fmt.Println(tab)
+	//status, tab := checkUser("test", db)
+	//fmt.Println(status)
+	//fmt.Println(tab)
+	statusPost := makePost("Id_Test", "", "lorem ipsum", "Titre")
+	fmt.Println(statusPost)
+	statusGetPost, tabPost := getPost(db, "Id_Test")
+	fmt.Println(statusGetPost)
+	fmt.Println(tabPost)
 }
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
@@ -71,29 +76,45 @@ func checkUser(username string, db *sql.DB) (int, [2]string) {
 
 /*//////////////////////////////////////////////////recupe post////////////////////*/
 
-/*func getPost(db *sql.DB, id string) (int, string) {
-	statement, err := db.Query("SELECT Id_post FROM Post WHERE User")
+func getPost(db *sql.DB, id string) (int, [3]string) {
+	var tabPost [3]string
+
+	var image string
+	var text string
+	var titre string
+
+	statement, err := db.Query("SELECT image, texte, titre FROM Post WHERE Id_user = (?)", id)
 	if err != nil {
-		fmt.Println("querry didn't work, can't catch ")
-		return 500, "error"
+		fmt.Println(err)
+		return 500, tabPost
 	}
-	return 0, ""
-}*/
+
+	for statement.Next() {
+		statement.Scan(&image, &text, &titre)
+	}
+	tabPost[0] = image
+	tabPost[1] = text
+	tabPost[2] = titre
+
+	return 0, tabPost
+}
 
 /*////////////////////////////////////// create post///////////////////////////////*/
 
-func makePost(user string, text string, categorie string) (int, int) {
+func makePost(id string, image string, text string, titre string) int {
 	status, db := gestionData()
 	if status == 500 {
 		fmt.Println("can't open BDD")
-		return 500, 1
+		return 500
 	}
-	newPost, err := db.Prepare("INSERT INTO Post (PseudoUser, Titre, texte) VALUES(?,?,?)")
+	newPost, err := db.Prepare("INSERT INTO Post (Id_user, image, texte, titre) VALUES(?,?,?,?)")
 	if err != nil {
 		fmt.Println("Prepare error")
-		return 500, 1
+		fmt.Println(err)
+		return 500
 	} else {
-		newPost.Exec(user, categorie, text)
-		return 300, 0
+		newPost.Exec(id, image, text, titre)
+		db.Close()
+		return 300
 	}
 }
