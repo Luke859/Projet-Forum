@@ -33,6 +33,10 @@ Le but de ce projet est de créer un forum dans le sens général, c'est à dire
 - Les sessions de connexion exploiteront des cookiesLe site pourra être déployé avec Docker
 - Les packages autorisés sont les packages standards, bcrypt, sqlite3, uuid
 
+### **Lancement:**
+Pour lancer le server, entrer la commande suivante:
+        go run server.go
+
 ### **Liens**
 
 [Lien Google DOC](https://docs.google.com/document/d/1omAeKbQOeYaap4RX3qKg7whCzQdDwmaRJPslWD8ngG0/edit)     
