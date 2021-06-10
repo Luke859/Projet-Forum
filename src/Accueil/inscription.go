@@ -32,12 +32,28 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 	pseudo := r.FormValue("Pseudo")
 	password := r.FormValue("Password")
 
-	fmt.Println(pseudo, password)
+	fmt.Println(" Identidiant d'Inscription : ", pseudo, password)
 	http.Redirect(w, r, "/connexion", http.StatusSeeOther)
 	var HashPass = hashPassword(password)
-	fmt.Println(HashPass)
+	fmt.Println("Mot de passe Hashé ⌛ :", HashPass)
 }
 
+// Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion"
+
+func GetSignConnect(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Fatal()
+	}
+	pseudoconnect := r.FormValue("PseudoConnect")
+	passwordconnect := r.FormValue("PasswordConnect")
+
+	fmt.Println(" Identifiant de connexion : ", pseudoconnect, passwordconnect)
+	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+
+}
+
+// Hash du mot de passe puis l'afficher dans le terminal
 func hashPassword(password string) string {
 	var passByte = []byte(password)
 
@@ -47,4 +63,17 @@ func hashPassword(password string) string {
 	}
 
 	return string(hash)
+}
+
+// Verif du mot de passe
+func comparePasswords(HashPass string, passwordconnect []byte) bool {
+
+	byteHash := []byte(HashPass)
+	err := bcrypt.CompareHashAndPassword(byteHash, passwordconnect)
+	if err != nil {
+		log.Println(err)
+		return false
+	}
+
+	return true
 }
