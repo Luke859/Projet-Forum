@@ -11,20 +11,21 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
+/*func main() {
 	status, db := gestionData()
 	fmt.Println(status)
-	//index := newUser("test", "test", db)
-	//fmt.Print(index)
-	//status, tab := checkUser("test", db)
-	//fmt.Println(status)
-	//fmt.Println(tab)
+	index := newUser("test1", "test1", db)
+	fmt.Println(index)
+	status, db = gestionData()
+	statusUser, tab := checkUser("test1", db)
+	fmt.Println(statusUser)
+	fmt.Println(tab)
 	statusPost := makePost("Id_Test", "", "lorem ipsum", "Titre")
 	fmt.Println(statusPost)
 	statusGetPost, tabPost := getPost(db, "Id_Test")
 	fmt.Println(statusGetPost)
 	fmt.Println(tabPost)
-}
+}*/
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
