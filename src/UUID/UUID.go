@@ -1,7 +1,3 @@
-// Copyright 2018 Google Inc.  All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 package uuid
 
 import (
@@ -14,17 +10,12 @@ import (
 	"strings"
 )
 
-// A UUID is a 128 bit (16 byte) Universal Unique IDentifier as defined in RFC
-// 4122.
 type UUID [16]byte
 
-// A Version represents a UUID's version.
 type Version byte
 
-// A Variant represents a UUID's variant.
 type Variant byte
 
-// Constants returned by Variant.
 const (
 	Invalid   = Variant(iota) // Invalid UUID
 	RFC4122                   // The variant specified in RFC4122
@@ -41,35 +32,25 @@ func (err invalidLengthError) Error() string {
 	return fmt.Sprintf("invalid UUID length: %d", err.len)
 }
 
-// IsInvalidLengthError is matcher function for custom error invalidLengthError
 func IsInvalidLengthError(err error) bool {
 	_, ok := err.(invalidLengthError)
 	return ok
 }
 
-// Parse decodes s into a UUID or returns an error.  Both the standard UUID
-// forms of xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx and
-// urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx are decoded as well as the
-// Microsoft encoding {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} and the raw hex
-// encoding: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
 func Parse(s string) (UUID, error) {
 	var uuid UUID
 	switch len(s) {
-	// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 	case 36:
 
-	// urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 	case 36 + 9:
 		if strings.ToLower(s[:9]) != "urn:uuid:" {
 			return uuid, fmt.Errorf("invalid urn prefix: %q", s[:9])
 		}
 		s = s[9:]
 
-	// {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
 	case 36 + 2:
 		s = s[1:]
 
-	// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	case 32:
 		var ok bool
 		for i := range uuid {
@@ -82,8 +63,6 @@ func Parse(s string) (UUID, error) {
 	default:
 		return uuid, invalidLengthError{len(s)}
 	}
-	// s is now at least 36 bytes long
-	// it must be of the form  xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 	if s[8] != '-' || s[13] != '-' || s[18] != '-' || s[23] != '-' {
 		return uuid, errors.New("invalid UUID format")
 	}
@@ -102,7 +81,6 @@ func Parse(s string) (UUID, error) {
 	return uuid, nil
 }
 
-// ParseBytes is like Parse, except it parses a byte slice instead of a string.
 func ParseBytes(b []byte) (UUID, error) {
 	var uuid UUID
 	switch len(b) {
@@ -126,8 +104,6 @@ func ParseBytes(b []byte) (UUID, error) {
 	default:
 		return uuid, invalidLengthError{len(b)}
 	}
-	// s is now at least 36 bytes long
-	// it must be of the form  xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 	if b[8] != '-' || b[13] != '-' || b[18] != '-' || b[23] != '-' {
 		return uuid, errors.New("invalid UUID format")
 	}
@@ -146,8 +122,6 @@ func ParseBytes(b []byte) (UUID, error) {
 	return uuid, nil
 }
 
-// MustParse is like Parse but panics if the string cannot be parsed.
-// It simplifies safe initialization of global variables holding compiled UUIDs.
 func MustParse(s string) UUID {
 	uuid, err := Parse(s)
 	if err != nil {
@@ -156,8 +130,6 @@ func MustParse(s string) UUID {
 	return uuid
 }
 
-// FromBytes creates a new UUID from a byte slice. Returns an error if the slice
-// does not have a length of 16. The bytes are copied from the slice.
 func FromBytes(b []byte) (uuid UUID, err error) {
 	err = uuid.UnmarshalBinary(b)
 	return uuid, err
@@ -171,16 +143,12 @@ func Must(uuid UUID, err error) UUID {
 	return uuid
 }
 
-// String returns the string form of uuid, xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-// , or "" if uuid is invalid.
 func (uuid UUID) String() string {
 	var buf [36]byte
 	encodeHex(buf[:], uuid)
 	return string(buf[:])
 }
 
-// URN returns the RFC 2141 URN form of uuid,
-// urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx,  or "" if uuid is invalid.
 func (uuid UUID) URN() string {
 	var buf [36 + 9]byte
 	copy(buf[:], "urn:uuid:")
@@ -242,12 +210,6 @@ func (v Variant) String() string {
 	return fmt.Sprintf("BadVariant%d", int(v))
 }
 
-// SetRand sets the random number generator to r, which implements io.Reader.
-// If r.Read returns an error when the package requests random data then
-// a panic will be issued.
-//
-// Calling SetRand with nil sets the random number generator to the default
-// generator.
 func SetRand(r io.Reader) {
 	if r == nil {
 		rander = rand.Reader
