@@ -135,7 +135,6 @@ func FromBytes(b []byte) (uuid UUID, err error) {
 	return uuid, err
 }
 
-// Must returns uuid if err is nil and panics otherwise.
 func Must(uuid UUID, err error) UUID {
 	if err != nil {
 		panic(err)
@@ -168,7 +167,6 @@ func encodeHex(dst []byte, uuid UUID) {
 	hex.Encode(dst[24:], uuid[10:])
 }
 
-// Variant returns the variant encoded in uuid.
 func (uuid UUID) Variant() Variant {
 	switch {
 	case (uuid[8] & 0xc0) == 0x80:
@@ -182,7 +180,6 @@ func (uuid UUID) Variant() Variant {
 	}
 }
 
-// Version returns the version of uuid.
 func (uuid UUID) Version() Version {
 	return Version(uuid[6] >> 4)
 }
