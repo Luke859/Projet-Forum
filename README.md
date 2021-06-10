@@ -1,4 +1,5 @@
 # **Projet-Forum**
+[![GoDoc](https://github.com/Luke859/Projet-Forum)](https://github.com/Luke859/Projet-Forum)
 ### **Groupe :**
 - Nathy MELLAL
 - Pierric COME
