@@ -17,3 +17,16 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 	fmt.Println("Page Post ⌛")
 }
+
+// Recupération du TEXT dans le form TextArea
+func GetPostInformation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Fatal()
+	}
+
+	TextArea := r.FormValue("text")
+	fmt.Println(" Voici le post écrit :", TextArea)
+	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+
+}
