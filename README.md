@@ -1,6 +1,4 @@
-# **```go   
-Projet-Forum
-```**
+# **Projet-Forum**
 ### **Groupe :**
 - Nathy MELLAL
 - Pierric COME
@@ -37,7 +35,9 @@ Le but de ce projet est de créer un forum dans le sens général, c'est à dire
 
 ### **Lancement:**
 Pour lancer le server, entrer la commande suivante:     
-`go run server.go`
+```go   
+go run server.go
+```
 
 ### **Liens**
 
