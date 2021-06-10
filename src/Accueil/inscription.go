@@ -36,6 +36,7 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/connexion", http.StatusSeeOther)
 	var HashPass = hashPassword(password)
 	fmt.Println("Mot de passe Hashé ⌛ :", HashPass)
+
 }
 
 // Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion"
@@ -76,4 +77,5 @@ func comparePasswords(HashPass string, passwordconnect []byte) bool {
 	}
 
 	return true
+
 }
