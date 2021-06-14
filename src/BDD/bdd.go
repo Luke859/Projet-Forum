@@ -1,4 +1,5 @@
-package BDD
+//package BDD
+package main
 
 /*
 msg d'erreur print dans le terminal
@@ -7,14 +8,15 @@ msg d'erreur print dans le terminal
 import (
 	"database/sql"
 	"fmt"
+	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
-/*func main() {
-	status, db := gestionData()
+func main() {
+	status, db := GestionData()
 	fmt.Println(status)
-	index := newUser("test1", "test1", db)
+	/*index := newUser("test1", "test1", db)
 	fmt.Println(index)
 	status, db = gestionData()
 	statusUser, tab := checkUser("test1", db)
@@ -24,13 +26,14 @@ import (
 	fmt.Println(statusPost)
 	statusGetPost, tabPost := getPost(db, "Id_Test")
 	fmt.Println(statusGetPost)
-	fmt.Println(tabPost)
-}*/
+	fmt.Println(tabPost)*/
+	fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
+}
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "./BDD/ProjetForum.db") //le chemin du projet devra changer dependant de l'endroit exectution
+	db, err := sql.Open("sqlite3", "../../BDD/ProjetForum.db") //./BDD/ProjetForum.db le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
@@ -77,14 +80,14 @@ func CheckUser(username string, db *sql.DB) (int, [2]string) {
 
 /*//////////////////////////////////////////////////recupe post////////////////////*/
 
-func GetPost(db *sql.DB, id string) (int, [3]string) {
+func GetPost(db *sql.DB, id int) (int, [3]string) {
 	var tabPost [3]string
 
 	var image string
 	var text string
 	var titre string
 
-	statement, err := db.Query("SELECT image, texte, titre FROM Post WHERE Id_user = (?)", id)
+	statement, err := db.Query("SELECT image, texte, titre FROM Post WHERE Id_post = (?)", id)
 	if err != nil {
 		fmt.Println(err)
 		return 500, tabPost
@@ -100,21 +103,44 @@ func GetPost(db *sql.DB, id string) (int, [3]string) {
 	return 0, tabPost
 }
 
+////////////////////////////////Get All Post///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func GetAllPost(db *sql.DB) (int, [][]string) {
+	var tabAllPost [][]string
+
+	var text string
+	var id int
+
+	statement, err := db.Query("SELECT Id_post, texte FROM Post")
+	if err != nil {
+		fmt.Println(err)
+		return 500, tabAllPost
+	}
+
+	for statement.Next() {
+		statement.Scan(&id, &text)
+		save := []string{strconv.Itoa(id), text}
+		tabAllPost = append(tabAllPost, save)
+	}
+
+	return 0, tabAllPost
+}
+
 /*////////////////////////////////////// create post///////////////////////////////*/
 
-func MakePost(id string, image string, text string, titre string) int {
+func MakePost(image string, text string, titre string) int {
 	status, db := GestionData()
 	if status == 500 {
 		fmt.Println("can't open BDD")
 		return 500
 	}
-	newPost, err := db.Prepare("INSERT INTO Post (Id_user, image, texte, titre) VALUES(?,?,?,?)")
+	newPost, err := db.Prepare("INSERT INTO Post (image, texte, titre) VALUES(?,?,?)")
 	if err != nil {
 		fmt.Println("Prepare error")
 		fmt.Println(err)
 		return 500
 	} else {
-		newPost.Exec(id, image, text, titre)
+		newPost.Exec(image, text, titre)
 		db.Close()
 		return 300
 	}
@@ -123,7 +149,7 @@ func MakePost(id string, image string, text string, titre string) int {
 ////////////////////////creation post///////////////////////////////
 
 func NewCmt(Id_user string, Id_post string, contenu string, db *sql.DB) int {
-	statement, err := db.Prepare("NSERT INTO Commentaires (Id_user, Id_post, contenu) VALUES(?,?,?)")
+	statement, err := db.Prepare("INSERT INTO Commentaires (Id_user, Id_post, contenu) VALUES(?,?,?)")
 	if err != nil {
 		fmt.Println(err)
 		fmt.Println("error Prepare new comment")
