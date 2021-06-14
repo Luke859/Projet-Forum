@@ -1,4 +1,4 @@
-package main
+package BDD
 
 /*
 msg d'erreur print dans le terminal
@@ -11,26 +11,26 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
+/*func main() {
 	status, db := gestionData()
 	fmt.Println(status)
-	//index := newUser("test", "test", db)
-	//fmt.Print(index)
-	//status, tab := checkUser("test", db)
-	//fmt.Println(status)
-	//fmt.Println(tab)
+	index := newUser("test1", "test1", db)
+	fmt.Println(index)
+	status, db = gestionData()
+	statusUser, tab := checkUser("test1", db)
+	fmt.Println(statusUser)
+	fmt.Println(tab)
 	statusPost := makePost("Id_Test", "", "lorem ipsum", "Titre")
 	fmt.Println(statusPost)
 	statusGetPost, tabPost := getPost(db, "Id_Test")
 	fmt.Println(statusGetPost)
 	fmt.Println(tabPost)
-
-}
+}*/
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
-func gestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "../../BDD/Projet_Forum") //le chemin du projet devra changer dependant de l'endroit exectution
+func GestionData() (int, *sql.DB) {
+	db, err := sql.Open("sqlite3", "./BDD/Projet_Forum") //le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
@@ -41,7 +41,7 @@ func gestionData() (int, *sql.DB) {
 
 /*/////////////////////////////////////////////////////creation d'un nouvelle identifiant///////////////////////////////////////////////*/
 
-func newUser(Pseudo string, HashPass string, db *sql.DB) int {
+func NewUser(Pseudo string, HashPass string, db *sql.DB) int {
 	statement, err := db.Prepare("INSERT INTO User (pseudo, password) VALUES(?,?)")
 	if err != nil {
 		fmt.Println(err)
@@ -55,7 +55,7 @@ func newUser(Pseudo string, HashPass string, db *sql.DB) int {
 
 /*///////////////////////////////////////////////////////////verification de identifiant///////////////////////////////////////////////////////////////////////////////*/
 
-func checkUser(username string, db *sql.DB) (int, [2]string) {
+func CheckUser(username string, db *sql.DB) (int, [2]string) {
 	var tabUser [2]string
 
 	var pseudo string
@@ -77,7 +77,7 @@ func checkUser(username string, db *sql.DB) (int, [2]string) {
 
 /*//////////////////////////////////////////////////recupe post////////////////////*/
 
-func getPost(db *sql.DB, id string) (int, [3]string) {
+func GetPost(db *sql.DB, id string) (int, [3]string) {
 	var tabPost [3]string
 
 	var image string
@@ -102,8 +102,8 @@ func getPost(db *sql.DB, id string) (int, [3]string) {
 
 /*////////////////////////////////////// create post///////////////////////////////*/
 
-func makePost(id string, image string, text string, titre string) int {
-	status, db := gestionData()
+func MakePost(id string, image string, text string, titre string) int {
+	status, db := GestionData()
 	if status == 500 {
 		fmt.Println("can't open BDD")
 		return 500
