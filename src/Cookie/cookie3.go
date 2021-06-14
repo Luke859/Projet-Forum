@@ -1,52 +1,35 @@
-package main
+func Get(w http.ResponseWriter, r *http.Request) *Session {
+	var (
+		err    error
+		cookie *http.Cookie
+		ses    *Session
+		ok     bool
+		ses_id string
+	)
 
-import (
-	"fmt"
-	"net/http"
-	"os"
-	"strconv"
-
-	"github.com/brafales/go-session/handlers"
-)
-
-func main() {
-	cookieName := os.Getenv("COOKIE_NAME")
-	cookieValue := os.Getenv("COOKIE_VALUE")
-	cookieDomain := os.Getenv("COOKIE_DOMAIN")
-	cookiePath := os.Getenv("COOKIE_PATH")
-	cookieDuration := os.Getenv("COOKIE_DURATION")
-
-	cookieDurationInteger, err := strconv.Atoi(cookieDuration)
-
+	cookie, err = r.Cookie(sid)
 	if err != nil {
-		panic(err)
+		ses_id, ses = registry.new()
+
+		cookie = &http.Cookie{Name: sid, Value: ses_id, Path: "/", HttpOnly: true, MaxAge: int(maxlifetime.Seconds())}
+		http.SetCookie(w, cookie)
+
+		return ses
 	}
 
-	handler := http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		rw.Write([]byte("OK"))
-	})
+	ses, ok = registry.get(cookie.Value)
+	if !ok {
+		ses = registry.create(cookie.Value)
 
-	loginHandler := handlers.Login{Name: cookieName,
-		Domain: cookieDomain,
-		Path:   cookiePath,
-		Value:  cookieValue,
-		MaxAge: cookieDurationInteger,
-		Next:   handler,
+		cookie.MaxAge = int(maxlifetime.Seconds())
+		cookie.Path = "/"
+		http.SetCookie(w, cookie)
+
+		return ses
 	}
 
-	logoutHandler := handlers.Logout{
-		Name:   cookieName,
-		Domain: cookieDomain,
-		Path:   cookiePath,
-		Next:   handler,
-	}
+	cookie.MaxAge = int(maxlifetime.Seconds())
+	http.SetCookie(w, cookie)
 
-	http.Handle("/login", loginHandler)
-	http.Handle("/logout", logoutHandler)
-
-	address := fmt.Sprintf(":%s", os.Getenv("PORT"))
-
-	if err := http.ListenAndServe(address, nil); err != nil {
-		panic(err)
-	}
+	return ses
 }
