@@ -30,7 +30,7 @@ import (
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "./BDD/Projet_Forum") //le chemin du projet devra changer dependant de l'endroit exectution
+	db, err := sql.Open("sqlite3", "./BDD/ProjetForum.db") //le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
@@ -118,4 +118,18 @@ func MakePost(id string, image string, text string, titre string) int {
 		db.Close()
 		return 300
 	}
+}
+
+////////////////////////creation post///////////////////////////////
+
+func NewCmt(Id_user string, Id_post string, contenu string, db *sql.DB) int {
+	statement, err := db.Prepare("NSERT INTO Commentaires (Id_user, Id_post, contenu) VALUES(?,?,?)")
+	if err != nil {
+		fmt.Println(err)
+		fmt.Println("error Prepare new comment")
+		return (500)
+	}
+	statement.Exec(Id_user, Id_post, contenu)
+	db.Close()
+	return (0)
 }
