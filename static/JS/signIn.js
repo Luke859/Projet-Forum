@@ -25,4 +25,3 @@ let textarea = document.getElementById('textarea')
 
     function TextRecup(){
         textarea.submit()
-    }
