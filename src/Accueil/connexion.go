@@ -14,4 +14,5 @@ func ConnexionPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
+
 }

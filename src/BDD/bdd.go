@@ -41,14 +41,14 @@ func gestionData() (int, *sql.DB) {
 
 /*/////////////////////////////////////////////////////creation d'un nouvelle identifiant///////////////////////////////////////////////*/
 
-func newUser(pseudo string, Hmpd string, db *sql.DB) int {
+func newUser(Pseudo string, HashPass string, db *sql.DB) int {
 	statement, err := db.Prepare("INSERT INTO User (pseudo, password) VALUES(?,?)")
 	if err != nil {
 		fmt.Println(err)
 		fmt.Println("error Prepare new user")
 		return (500)
 	}
-	statement.Exec(pseudo, Hmpd)
+	statement.Exec(Pseudo, HashPass)
 	db.Close()
 	return (0)
 }
