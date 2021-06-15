@@ -95,6 +95,22 @@ func GetId_User(username string, db *sql.DB) (int, int) {
 	return 0, Id_user
 }
 
+
+
+///////////////////////////////////////////////////Cookie///////////////////////////////////////////////////////////
+
+document.cookie = "test1="Id_user"; SameSite=None; Secure; HttpOnly";
+
+const cookieValue1 = document.cookie
+	.split('; ')
+	.find(row => row.startsWith('test1='))
+	.split('=')[1];
+
+function showCookieValue() {
+	const output = document.getElementById('cookie-value')
+	output.textContent = '> ' + cookieValue1
+}
+
 /*//////////////////////////////////////////////////recupe post////////////////////*/
 
 func GetPost(db *sql.DB, id int) (int, [3]string) {

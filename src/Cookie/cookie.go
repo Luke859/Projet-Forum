@@ -14,4 +14,5 @@ const cookieValue2 = document.cookie
 function showCookieValue() {
 	const output = document.getElementById('cookie-value')
 	output.textContent = '> ' + cookieValue1 + " " + cookieValue2
+	return output
 }
