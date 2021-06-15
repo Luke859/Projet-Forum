@@ -1,9 +1,5 @@
 package main
 
-/*
-msg d'erreur print dans le terminal
-*/
-
 import (
 	"database/sql"
 	"fmt"
@@ -14,11 +10,6 @@ import (
 func main() {
 	status, db := gestionData()
 	fmt.Println(status)
-	//index := newUser("test", "test", db)
-	//fmt.Print(index)
-	//status, tab := checkUser("test", db)
-	//fmt.Println(status)
-	//fmt.Println(tab)
 	statusPost := makePost("Id_Test", "", "lorem ipsum", "Titre")
 	fmt.Println(statusPost)
 	statusGetPost, tabPost := getPost(db, "Id_Test")
@@ -26,7 +17,7 @@ func main() {
 	fmt.Println(tabPost)
 }
 
-/*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
+/*///////////////////////////////////recuperation de la base de donnée /////////////////////////////////////////////////////////////*/
 
 func gestionData() (int, *sql.DB) {
 	db, err := sql.Open("sqlite3", "../../BDD/Projet_Forum") //le chemin du projet devra changer dependant de l'endroit exectution
