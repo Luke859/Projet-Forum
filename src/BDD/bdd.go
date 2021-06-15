@@ -1,5 +1,6 @@
-//package BDD
-package main
+package BDD
+
+//package main
 
 /*
 msg d'erreur print dans le terminal
@@ -13,27 +14,27 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
-	status, db := GestionData()
-	fmt.Println(status)
-	/*index := newUser("test1", "test1", db)
-	fmt.Println(index)
-	status, db = gestionData()
-	statusUser, tab := checkUser("test1", db)
-	fmt.Println(statusUser)
-	fmt.Println(tab)
-	statusPost := makePost("Id_Test", "", "lorem ipsum", "Titre")
-	fmt.Println(statusPost)
-	statusGetPost, tabPost := getPost(db, "Id_Test")
-	fmt.Println(statusGetPost)
-	fmt.Println(tabPost)*/
-	fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
-}
+//func main() {
+//status, db := GestionData()
+//fmt.Println(status)
+/*index := newUser("test1", "test1", db)
+fmt.Println(index)
+status, db = gestionData()
+statusUser, tab := checkUser("test1", db)
+fmt.Println(statusUser)
+fmt.Println(tab)
+statusPost := makePost("Id_Test", "", "lorem ipsum", "Titre")
+fmt.Println(statusPost)
+statusGetPost, tabPost := getPost(db, "Id_Test")
+fmt.Println(statusGetPost)
+fmt.Println(tabPost)*/
+//fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
+//}
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "../../BDD/ProjetForum.db") //./BDD/ProjetForum.db le chemin du projet devra changer dependant de l'endroit exectution
+	db, err := sql.Open("sqlite3", "../../BDD/ProjetForum.db") //lancer depuis : (bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
@@ -78,7 +79,7 @@ func CheckUser(username string, db *sql.DB) (int, [2]string) {
 	return 0, tabUser
 }
 
-//////////////////////////////get id_user/////////////////////////////////////////::
+/////////////////////////////////////////////////////////get id_user/////////////////////////////////////////
 
 func GetId_User(username string, db *sql.DB) (int, int) {
 	var Id_user int = -1
@@ -95,7 +96,7 @@ func GetId_User(username string, db *sql.DB) (int, int) {
 	return 0, Id_user
 }
 
-/*//////////////////////////////////////////////////recupe post////////////////////*/
+/*//////////////////////////////////////////////////recupe post////////////////////////////////////////////////*/
 
 func GetPost(db *sql.DB, id int) (int, [3]string) {
 	var tabPost [3]string
