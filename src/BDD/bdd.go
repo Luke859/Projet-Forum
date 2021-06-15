@@ -78,6 +78,23 @@ func CheckUser(username string, db *sql.DB) (int, [2]string) {
 	return 0, tabUser
 }
 
+//////////////////////////////get id_user/////////////////////////////////////////::
+
+func GetId_User(username string, db *sql.DB) (int, int) {
+	var Id_user int = -1
+
+	tsql, err := db.Query("SELECT Id_user FROM User WHERE pseudo = (?)", username)
+	if err != nil {
+		fmt.Println(err)
+		return 500, Id_user
+	}
+
+	for tsql.Next() {
+		tsql.Scan(&Id_user)
+	}
+	return 0, Id_user
+}
+
 /*//////////////////////////////////////////////////recupe post////////////////////*/
 
 func GetPost(db *sql.DB, id int) (int, [3]string) {
