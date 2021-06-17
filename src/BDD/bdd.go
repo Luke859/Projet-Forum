@@ -1,10 +1,6 @@
 //package BDD
 package main
 
-/*
-msg d'erreur print dans le terminal
-*/
-
 import (
 	"database/sql"
 	"fmt"
@@ -30,7 +26,7 @@ func main() {
 	fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
 }
 
-/*///////////////////////////////////recuperation de la base de donnée //////////////////////////////////////////////////////////*/
+/*///////////////////////////////////recuperation de la base de donnée /////////////////////////////////////////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
 	db, err := sql.Open("sqlite3", "../../BDD/ProjetForum.db") //./BDD/ProjetForum.db le chemin du projet devra changer dependant de l'endroit exectution
