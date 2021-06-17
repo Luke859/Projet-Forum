@@ -829,6 +829,10 @@ p {
   padding: 10px;
 }
 
-
+.post {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
+}
 
   

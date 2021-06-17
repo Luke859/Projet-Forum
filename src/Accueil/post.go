@@ -7,8 +7,25 @@ import (
 	"text/template"
 )
 
+type Page struct {
+    Post    string
+}
+
 func PostPage(w http.ResponseWriter, r *http.Request) {
 	// Déclaration des fichiers à parser
+
+	p := Page{"HELLO THERE IT S LUKE "}
+
+    t := template.New("CIAO")
+
+    t = template.Must(t.ParseFiles("static/HTML/layout.html", "static/HTML/post.html", "static/HTML/navbar.html"))
+
+	err := t.ExecuteTemplate(w, "body", p)
+
+    if err != nil {
+        log.Fatalf("Template execution: %s", err)
+    }
+	
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/post.html", "static/HTML/navbar.html")
 	if err != nil {
 		log.Fatalf("Template execution: %s", err)
