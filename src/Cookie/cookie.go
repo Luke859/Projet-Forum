@@ -5,7 +5,9 @@ import (
 	"github.com/satori/go.uuid"
 )
 
-func main() {
+myuuid=""
+
+func UUID() {
 	myuuid, err := uuid.NewV4()
 	if err == nil{
 		fmt.Println("Your UUID is:", myuuid)
@@ -13,7 +15,7 @@ func main() {
 }
 
 
-document.cookie = "test1="+ myuuid + "; SameSite=None; Secure; HttpOnly";
+document.cookie = "test1= test; SameSite=None; Secure; HttpOnly";
 
 const cookieValue1 = document.cookie
 	.split('; ')
