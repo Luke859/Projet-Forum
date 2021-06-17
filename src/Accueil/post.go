@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"text/template"
 
-	"../BDD"
+	BDD "../BDD"
 )
 
 func PostPage(w http.ResponseWriter, r *http.Request) {
@@ -29,8 +29,8 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 
 	TextArea := r.FormValue("text")
 	fmt.Println(" Voici le post écrit :", TextArea)
-	statusPost := BDD.MakePost("", TextArea, "")
-	if statusPost == 0 {
+	statusPost := BDD.MakePost(TextArea)
+	if statusPost == 300 {
 		fmt.Println("Walla")
 	} else {
 		fmt.Println("WAlla il y avait plus de poulet curry")

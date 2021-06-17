@@ -14,27 +14,27 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-//func main() {
-//status, db := GestionData()
-//fmt.Println(status)
-/*index := newUser("test1", "test1", db)
-fmt.Println(index)
-status, db = gestionData()
-statusUser, tab := checkUser("test1", db)
-fmt.Println(statusUser)
-fmt.Println(tab)
-statusPost := makePost("Id_Test", "", "lorem ipsum", "Titre")
-fmt.Println(statusPost)
-statusGetPost, tabPost := getPost(db, "Id_Test")
-fmt.Println(statusGetPost)
-fmt.Println(tabPost)*/
-//fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
-//}
+/*func main() {
+	//status, db := GestionData()
+	//fmt.Println(status)
+	//index := newUser("test1", "test1", db)
+	//fmt.Println(index)
+	//status, db = gestionData()
+	//statusUser, tab := checkUser("test1", db)
+	//fmt.Println(statusUser)
+	//fmt.Println(tab)
+	statusPost := MakePost("lorem ipsum2")
+	fmt.Println(statusPost)
+	//statusGetPost, tabPost := getPost(db, "Id_Test")
+	//fmt.Println(statusGetPost)
+	//fmt.Println(tabPost)
+	//fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
+}*/
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "../../BDD/ProjetForum.db") //lancer depuis : (bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
+	db, err := sql.Open("sqlite3", "./BDD/ProjetForum.db") //lancer depuis : (bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
@@ -146,19 +146,19 @@ func GetAllPost(db *sql.DB) (int, [][]string) {
 
 /*////////////////////////////////////// create post///////////////////////////////*/
 
-func MakePost(image string, text string, titre string) int {
+func MakePost(text string) int {
 	status, db := GestionData()
 	if status == 500 {
 		fmt.Println("can't open BDD")
 		return 500
 	}
-	newPost, err := db.Prepare("INSERT INTO Post (image, texte, titre) VALUES(?,?,?)")
+	newPost, err := db.Prepare("INSERT INTO Post (texte) VALUES(?)")
 	if err != nil {
 		fmt.Println("Prepare error")
 		fmt.Println(err)
 		return 500
 	} else {
-		newPost.Exec(image, text, titre)
+		newPost.Exec(text)
 		db.Close()
 		return 300
 	}
