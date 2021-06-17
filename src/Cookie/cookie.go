@@ -5,7 +5,7 @@ const cookieValue1 = document.cookie
 	.find(row => row.startsWith('test1='))
 	.split('=')[1];
 
-func showCookieValue() {
+func showCookieValue(){
 	const output = document.getElementById('cookie-value')
 	output.textContent = '> ' + cookieValue1
 	return output
