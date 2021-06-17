@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"text/template"
 
+	BDD "../BDD"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -36,6 +38,13 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/connexion", http.StatusSeeOther)
 	var HashPass = hashPassword(password) // password de l'incription Hashé (Hashpass)
 	fmt.Println("Mot de passe Hashé ⌛ :", HashPass)
+	statusBDD, db := BDD.GestionData()
+	status := BDD.NewUser(pseudo, HashPass, db)
+	if status == 0 && statusBDD == 0 {
+		fmt.Println("walla")
+	} else {
+		fmt.Println("Walla il y avait plus de poulet curry")
+	}
 
 }
 
