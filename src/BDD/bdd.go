@@ -30,7 +30,7 @@ import (
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "./BDD/Projet_Forum") //le chemin du projet devra changer dependant de l'endroit exectution
+	db, err := sql.Open("sqlite3", "./BDD/ProjetForum.db") //le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
