@@ -193,6 +193,7 @@ func GetUUID_User(username string, db *sql.DB) (int, string) {
 		tsql.Scan(&UUID)
 	}
 	return 0, UUID
+
 }
 
 ////////////////////////////////// put UUID in BDD //////////////////////////
@@ -207,4 +208,106 @@ func PutUUID(UUID string, db *sql.DB) int {
 	statement.Exec(UUID)
 	db.Close()
 	return (0)
+}
+
+/////////////////////////////////////////////// like /////////////////////////////////////////////
+
+func CreateLike(ID_User int, Id_post int, likebool bool, db *sql.DB) int {
+	statm, err := db.Prepare("INSERT INTO Likes (Id_post, Id_user, like_button) VALEUS (?,?,?)")
+	if err != nil {
+		fmt.Println(err)
+		fmt.Println("error Prepare new like")
+		return (500)
+	}
+	statm.Exec(ID_User, Id_post, likebool)
+	db.Close()
+	return (0)
+}
+
+//////////////////////////////////////////// update like /////////////////////////////////////////////////
+
+func IsLikedPOST(db *sql.DB, ID_like int) (int, int) {
+	var IsLike int = 0
+
+	tsql, err := db.Query("SELECT like_button FROM Likes WHERE Id_likes = (?)", ID_like) // check for UUID name in database
+	if err != nil {
+		fmt.Println(err)
+		return 500, IsLike
+	}
+
+	for tsql.Next() {
+		tsql.Scan(&IsLike)
+	}
+	return 0, IsLike
+}
+
+func UpdateLikePOST(db *sql.DB, ID_like int, ID_User int, ID_Post int) int {
+	status, IsLike := IsLikedPOST(db, ID_like)
+	if status == 500 {
+		return 500
+	} else {
+		if IsLike == 0 {
+			statement, err := db.Prepare("UPDATE Likes SET like_button = 1 WHERE Id_likes = ?, Id_post =?, Id_user =?)")
+			if err != nil {
+				fmt.Println(err)
+				return 500
+			}
+			statement.Exec(ID_like, ID_User, ID_Post)
+			db.Close()
+			return (0)
+		} else {
+			statement, err := db.Prepare("UPDATE Likes SET like_button = 0 WHERE Id_likes = ?, Id_post =?, Id_user =?)")
+			if err != nil {
+				fmt.Println(err)
+				return 500
+			}
+			statement.Exec(ID_like, ID_User, ID_Post)
+			db.Close()
+			return (0)
+		}
+	}
+}
+
+////////////////////////////////// like cmt ////////////////////////////////////////////////
+
+func IsLikedCMT(db *sql.DB, ID_like int) (int, int) {
+	var IsLike int = 0
+
+	tsql, err := db.Query("SELECT like_button FROM Likes_cmt WHERE Id_likes = (?)", ID_like) // check for UUID name in database
+	if err != nil {
+		fmt.Println(err)
+		return 500, IsLike
+	}
+
+	for tsql.Next() {
+		tsql.Scan(&IsLike)
+	}
+	return 0, IsLike
+}
+
+func UpdateLikeCMT(db *sql.DB, ID_like int, ID_User int, ID_Post int, ID_cmt int) int {
+	status, IsLike := IsLikedCMT(db, ID_like)
+	if status == 500 {
+		return 500
+	} else {
+		if IsLike == 0 {
+			statement, err := db.Prepare("UPDATE Likes_cmt SET like_button = 1 WHERE Id_likes = ?,Id_cmt =?, Id_post =?, Id_user =?)")
+			if err != nil {
+				fmt.Println(err)
+				return 500
+			}
+			statement.Exec(ID_like, ID_cmt, ID_User, ID_Post)
+			db.Close()
+			return (0)
+		} else {
+			statement, err := db.Prepare("UPDATE Likes_cmt SET like_button = 0 WHERE Id_likes = ?, Id_cmt =?, Id_post =?, Id_user =?)")
+			if err != nil {
+				fmt.Println(err)
+				return 500
+			}
+			statement.Exec(ID_like, ID_cmt, ID_User, ID_Post)
+			db.Close()
+			return (0)
+		}
+	}
 }
