@@ -177,3 +177,20 @@ func NewCmt(Id_user string, Id_post string, contenu string, db *sql.DB) int {
 	db.Close()
 	return (0)
 }
+
+//////////////////////////////////////// get UUID from User //////////////////////////////////////
+
+func GetUUID_User(username string, db *sql.DB) (int, string) {
+	var UUID string = ""
+
+	tsql, err := db.Query("SELECT UUID FROM User WHERE pseudo = (?)", username) // check for UUID name in database
+	if err != nil {
+		fmt.Println(err)
+		return 500, UUID
+	}
+
+	for tsql.Next() {
+		tsql.Scan(&UUID)
+	}
+	return 0, UUID
+}
