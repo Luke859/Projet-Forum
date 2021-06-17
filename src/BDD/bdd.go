@@ -1,6 +1,6 @@
-package BDD
+//package BDD
 
-//package main
+package main
 
 /*
 msg d'erreur print dans le terminal
@@ -14,27 +14,31 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-/*func main() {
-	//status, db := GestionData()
-	//fmt.Println(status)
-	//index := newUser("test1", "test1", db)
+func main() {
+	status, db := GestionData()
+	fmt.Println(status)
+	//index := NewUser("test1", "test1", db)
 	//fmt.Println(index)
-	//status, db = gestionData()
-	//statusUser, tab := checkUser("test1", db)
+	//statusUser, tab := CheckUser("test1", db)
 	//fmt.Println(statusUser)
 	//fmt.Println(tab)
-	statusPost := MakePost("lorem ipsum2")
-	fmt.Println(statusPost)
-	//statusGetPost, tabPost := getPost(db, "Id_Test")
+	//statusPost := MakePost("Lorem IPSUM", 3)
+	//fmt.Println(statusPost)
+	//statusGetPost, tabPost := GetPost(db, 4)
 	//fmt.Println(statusGetPost)
 	//fmt.Println(tabPost)
-	//fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
-}*/
+	//statusAllPost, tabAllPost := GetAllPost(db)
+	//fmt.Println(statusAllPost)
+	//fmt.Println(tabAllPost)
+	//fmt.Println(NewCmt(1, 1, "lorem ipsum", db))
+	fmt.Println(CreateLike(1, 1, true, db))
+	fmt.Println(UpdateLikeCMT(db, 1, 1, 1))
+}
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "./BDD/ProjetForum.db") //lancer depuis : (../../bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
+	db, err := sql.Open("sqlite3", "../../BDD/ProjetForum.db") //lancer depuis : (../../bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
@@ -98,25 +102,21 @@ func GetId_User(username string, db *sql.DB) (int, int) {
 
 /*//////////////////////////////////////////////////recupe post////////////////////////////////////////////////*/
 
-func GetPost(db *sql.DB, id int) (int, [3]string) {
-	var tabPost [3]string
+func GetPost(db *sql.DB, id int) (int, [1]string) {
+	var tabPost [1]string
 
-	var image string
 	var text string
-	var titre string
 
-	statement, err := db.Query("SELECT image, texte, titre FROM Post WHERE Id_post = (?)", id)
+	statement, err := db.Query("SELECT  texte FROM Post WHERE Id_post = (?)", id)
 	if err != nil {
 		fmt.Println(err)
 		return 500, tabPost
 	}
 
 	for statement.Next() {
-		statement.Scan(&image, &text, &titre)
+		statement.Scan(&text)
 	}
-	tabPost[0] = image
-	tabPost[1] = text
-	tabPost[2] = titre
+	tabPost[0] = text
 
 	return 0, tabPost
 }
@@ -146,19 +146,19 @@ func GetAllPost(db *sql.DB) (int, [][]string) {
 
 /*////////////////////////////////////// create post///////////////////////////////*/
 
-func MakePost(text string) int {
+func MakePost(text string, ID_User int) int {
 	status, db := GestionData()
 	if status == 500 {
 		fmt.Println("can't open BDD")
 		return 500
 	}
-	newPost, err := db.Prepare("INSERT INTO Post (texte) VALUES(?)")
+	newPost, err := db.Prepare("INSERT INTO Post (texte, Id_user) VALUES(?, ?)")
 	if err != nil {
 		fmt.Println("Prepare error")
 		fmt.Println(err)
 		return 500
 	} else {
-		newPost.Exec(text)
+		newPost.Exec(text, ID_User)
 		db.Close()
 		return 300
 	}
@@ -166,7 +166,7 @@ func MakePost(text string) int {
 
 ////////////////////////creation post///////////////////////////////
 
-func NewCmt(Id_user string, Id_post string, contenu string, db *sql.DB) int {
+func NewCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
 	statement, err := db.Prepare("INSERT INTO Commentaires (Id_user, Id_post, contenu) VALUES(?,?,?)")
 	if err != nil {
 		fmt.Println(err)
@@ -212,15 +212,15 @@ func PutUUID(UUID string, db *sql.DB) int {
 
 /////////////////////////////////////////////// like /////////////////////////////////////////////
 
-func CreateLike(ID_User int, Id_post int, likebool bool, db *sql.DB) int {
-	statm, err := db.Prepare("INSERT INTO Likes (Id_post, Id_user, like_button) VALEUS (?,?,?)")
+func CreateLike(ID_User int, Id_cmt int, likebool bool, db *sql.DB) int {
+	statm, err := db.Prepare("INSERT INTO Likes (Id_cmt, Id_user, like_button) VALUES (?,?,?)")
 	if err != nil {
 		fmt.Println(err)
 		fmt.Println("error Prepare new like")
 		return (500)
 	}
-	statm.Exec(ID_User, Id_post, likebool)
-	db.Close()
+	statm.Exec(ID_User, Id_cmt, likebool)
+	//db.Close()
 	return (0)
 }
 
@@ -247,7 +247,7 @@ func UpdateLikePOST(db *sql.DB, ID_like int, ID_User int, ID_Post int) int {
 		return 500
 	} else {
 		if IsLike == 0 {
-			statement, err := db.Prepare("UPDATE Likes SET like_button = 1 WHERE Id_likes = ?, Id_post =?, Id_user =?)")
+			statement, err := db.Prepare("UPDATE Likes SET like_button = true WHERE Id_likes = ?, Id_post =?, Id_user =?)")
 			if err != nil {
 				fmt.Println(err)
 				return 500
@@ -273,7 +273,7 @@ func UpdateLikePOST(db *sql.DB, ID_like int, ID_User int, ID_Post int) int {
 func IsLikedCMT(db *sql.DB, ID_like int) (int, int) {
 	var IsLike int = 0
 
-	tsql, err := db.Query("SELECT like_button FROM Likes_cmt WHERE Id_likes = (?)", ID_like) // check for UUID name in database
+	tsql, err := db.Query("SELECT like_button FROM Likes WHERE Id_likes = (?)", ID_like) // check for UUID name in database
 	if err != nil {
 		fmt.Println(err)
 		return 500, IsLike
@@ -285,27 +285,29 @@ func IsLikedCMT(db *sql.DB, ID_like int) (int, int) {
 	return 0, IsLike
 }
 
-func UpdateLikeCMT(db *sql.DB, ID_like int, ID_User int, ID_Post int, ID_cmt int) int {
+func UpdateLikeCMT(db *sql.DB, ID_like int, ID_User int, ID_cmt int) int {
 	status, IsLike := IsLikedCMT(db, ID_like)
 	if status == 500 {
 		return 500
 	} else {
 		if IsLike == 0 {
-			statement, err := db.Prepare("UPDATE Likes_cmt SET like_button = 1 WHERE Id_likes = ?,Id_cmt =?, Id_post =?, Id_user =?)")
+			statement, err := db.Prepare("UPDATE Likes SET like_button = 1 WHERE (Id_likes = ?, Id_cmt =?, Id_user =?)")
 			if err != nil {
+				fmt.Println("A")
 				fmt.Println(err)
 				return 500
 			}
-			statement.Exec(ID_like, ID_cmt, ID_User, ID_Post)
+			statement.Exec(ID_like, ID_cmt, ID_User)
 			db.Close()
 			return (0)
 		} else {
-			statement, err := db.Prepare("UPDATE Likes_cmt SET like_button = 0 WHERE Id_likes = ?, Id_cmt =?, Id_post =?, Id_user =?)")
+			statement, err := db.Prepare("UPDATE Likes SET like_button = 0 WHERE Id_likes = ?, Id_cmt =? , Id_post =?, Id_user =?)")
 			if err != nil {
+				fmt.Println("B")
 				fmt.Println(err)
 				return 500
 			}
-			statement.Exec(ID_like, ID_cmt, ID_User, ID_Post)
+			statement.Exec(ID_like, ID_cmt, ID_User)
 			db.Close()
 			return (0)
 		}
