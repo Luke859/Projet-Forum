@@ -194,3 +194,17 @@ func GetUUID_User(username string, db *sql.DB) (int, string) {
 	}
 	return 0, UUID
 }
+
+////////////////////////////////// put UUID in BDD //////////////////////////
+
+func PutUUID(UUID string, db *sql.DB) int {
+	statement, err := db.Prepare("INSERT INTO User UUID VALUES(?)")
+	if err != nil {
+		fmt.Println(err)
+		fmt.Println("error Prepare new user")
+		return (500)
+	}
+	statement.Exec(UUID)
+	db.Close()
+	return (0)
+}
