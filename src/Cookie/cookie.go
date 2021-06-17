@@ -1,20 +1,3 @@
-package main
-
-import (
-	"fmt"
-	"github.com/satori/go.uuid"
-)
-
-myuuid=""
-
-func UUID() {
-	myuuid, err := uuid.NewV4()
-	if err == nil{
-		fmt.Println("Your UUID is:", myuuid)
-	}
-}
-
-
 document.cookie = "test1= test; SameSite=None; Secure; HttpOnly";
 
 const cookieValue1 = document.cookie
