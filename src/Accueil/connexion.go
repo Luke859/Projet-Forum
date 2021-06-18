@@ -4,8 +4,6 @@ import (
 	"log"
 	"net/http"
 	"text/template"
-	"io"
-    "fmt"
     "time"
 )
 
