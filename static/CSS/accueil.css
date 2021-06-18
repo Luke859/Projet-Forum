@@ -70,18 +70,6 @@ a.inscription__links {
     margin-left: 60%;
  } 
 
- a.connexion__links { 
-  color: white;
-  background-color: rgba(9, 9, 53, 0.5);
-  background: rgba(0,0,0,.5);
-  font-size: 15px;
-  margin-top: 9px;
-  border-radius: 50px;
-  padding: 5px 58px;
-  text-decoration: none;
-  margin-left: 37%;
-} 
-
  
 
 
@@ -99,8 +87,7 @@ a.inscription__links {
     border-radius: 44px;
     padding: 9px 64px;
     text-decoration: none;
-    margin-left: 35%;
-    margin-right: -5%;
+    margin-left: 40%;
  } 
 
 .navbar__links:hover {
@@ -751,85 +738,3 @@ p {
     background: transparent;
     padding: 0.35rem 0.75rem;
   }   
-
-  /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-.burger{
-  position: fixed;
-  left: 30px;
-  top: 130px;
-  z-index: 20;
-  cursor: pointer;
-}
-
-.burger .barre {
-  width: 30px;
-  height: 3px;
-  background: rgba(0,0,0,.5);
-  margin-top: 3px;
-}
-
-.filtre {
-  position: fixed;
-  background: rgba(0,0,0,.5);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  padding: 30px;
-  width: 15% ;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  transition: transform .6s ease-in-out;
-  -webkit-transition: transform .6s ease-in-out;
-  transform: translateX(-100%);
-  -webkit-transform: translateX(-100%);
-
-}
-.filtre.isOpen{
-  transform: translateX(0%);
-  -webkit-transform: translateX(0%);
-}
-
-.filtre ul {
-  position: relative;
-  top: 32%;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-}
-
-.filtre ul li {
-  margin: 80px 0;
-  
-}
-
-.filtre ul li:hover ul {
-  display: block;
-  
-}
-
-.filtre ul li a{
-  color: floralwhite;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.filtre ul li ul{
-  display: none;
-  position: absolute;
-  margin: 10px 0;
-  top: 180px;
-}
-
-.filtre ul li ul li{
-  margin: 30px 0;
-
-}
-
-.filtre ul li ul li a:hover{
-  background-color: gray;
-  padding: 10px;
-}
-
-
-
-  

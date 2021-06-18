@@ -1,50 +1,34 @@
 {{ define "body" }}
-<!-- 
 
-    
-
-<body>  
-
-    <div class="connect">
-
-    <form method="post" action="/">
-        <input type="email" name="mail" id="mail" placeholder="Adresse mail"/>
-        <input type="password" name="pass" id="pass" placeholder="Mot de passe"/>
-        <input type="submit" value="Se connecter" />
-    </form>
-       
-</div>
-
-
-</body>
-</html>
--->
-
-
-<body>
-  <div class="login-box">
+<div class="login-box">
     <h2>Se connecter</h2>
 
-    <!-- <a href="/inscription" class="inscription__links"> Inscription</a> -->
+    <a href="/inscription" class="inscription__links"> Inscription</a>
 
-    <form action="/sentConnect" method="POST" id="formconnect">
+    <form>
       <div class="user-box">
-        <input type="text" name="PseudoConnect">
+        <input type="text" name="" required="">
         <label>Pseudo</label>
       </div>
       <div class="user-box">
-        <input type="password" name="PasswordConnect" >
+        <input type="password" name="" required="">
         <label>Mot de passe</label>
       </div>
-      <a onclick="formRecupConnect()">
+      <a href="/">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-        envoyer
+        soumettre
       </a>
     </form>
     <script src="/static/JS/signIn.js"></script>
+    <div>
+      <code id="cookie-value"></code>
+    </div>
+    <script src="../../src/Cookie/cookie.go">
+      showCookieValue()
+    </script>
 
   </div>
 
