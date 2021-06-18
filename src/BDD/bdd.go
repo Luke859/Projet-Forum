@@ -1,6 +1,6 @@
-//package BDD
+package BDD
 
-package main
+//package main
 
 /*
 msg d'erreur print dans le terminal
@@ -14,26 +14,26 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
-	status, db := GestionData()
-	fmt.Println(status)
-	//index := NewUser("PIERRIC", "TESTPASS", db)
-	//fmt.Println(index)
-	statusUser, tab := CheckUser("PIERRIC", db)
-	fmt.Println(statusUser)
-	fmt.Println(tab)
-	//statusPost := MakePost("Lorem IPSUM", 3)
-	//fmt.Println(statusPost)
-	//statusGetPost, tabPost := GetPost(db, 4)
-	//fmt.Println(statusGetPost)
-	//fmt.Println(tabPost)
-	//statusAllPost, tabAllPost := GetAllPost(db)
-	//fmt.Println(statusAllPost)
-	//fmt.Println(tabAllPost)
-	//fmt.Println(NewCmt(1, 1, "lorem ipsum", db))
-	//fmt.Println(CreateLike(1, 1, true, db))
-	//fmt.Println(UpdateLikeCMT(db, 1, 1, 1))
-}
+//func main() {
+//status, db := GestionData()
+//fmt.Println(status)
+//index := NewUser("PIERRIC", "TESTPASS", db)
+//fmt.Println(index)
+//statusUser, tab := CheckUser("PIERRIC", db)
+//fmt.Println(statusUser)
+//fmt.Println(tab)
+//statusPost := MakePost("Lorem IPSUM", 3)
+//fmt.Println(statusPost)
+//statusGetPost, tabPost := GetPost(db, 4)
+//fmt.Println(statusGetPost)
+//fmt.Println(tabPost)
+//statusAllPost, tabAllPost := GetAllPost(db)
+//fmt.Println(statusAllPost)
+//fmt.Println(tabAllPost)
+//fmt.Println(NewCmt(1, 1, "lorem ipsum", db))
+//fmt.Println(CreateLike(1, 1, true, db))
+//fmt.Println(UpdateLikeCMT(db, 1, 1, 1))
+//}
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
