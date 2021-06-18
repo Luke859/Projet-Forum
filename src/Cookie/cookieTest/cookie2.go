@@ -1,11 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"io"
-	"log"
-	"net/http"
-	uuid "github.com/satori/go.uuid"
+    "io"
+    "net/http"
+    "log"
+    "fmt"
+    "time"
+    uuid "github.com/satori/go.uuid"
 )
 
 func DrawMenu(w http.ResponseWriter){
@@ -18,35 +19,38 @@ func DrawMenu(w http.ResponseWriter){
 }
 
 func IndexServer(w http.ResponseWriter, req *http.Request) {
+
     DrawMenu(w)
 }
+
 
 func ReadCookieServer(w http.ResponseWriter, req *http.Request) {
 
     DrawMenu(w)
-    var cookie,err = req.Cookie("CookieName")
+
+    var cookie,err = req.Cookie("testcookiename")
     if err == nil {
         var cookievalue = cookie.Value
         io.WriteString(w, "<b>get cookie value is " + cookievalue + "</b>\n")
     }
+
 }
 
 func WriteCookieServer(w http.ResponseWriter, req *http.Request) {
-    myuuid, err := uuid.NewV4()
-    if err != nil {
-        http.SetCookie(w,&http.Cookie{
-            Name:       "CookieUUID",
-            Value:      myuuid.String(),
-            Domain:     "ProjetForum",
-            Secure:     true,
-            HttpOnly:   true,
-        })
-    }
+
+    myuuid, _ := uuid.NewV4()
+    expire := time.Now().AddDate(0, 0, 1)
+    cookie := http.Cookie{Name: "testcookiename", Value: myuuid.String(), Path: "/", Expires: expire, MaxAge: 86400}
+
+    http.SetCookie(w, &cookie)
+
     DrawMenu(w)
+
 }
 
+
 func DeleteCookieServer(w http.ResponseWriter, req *http.Request) {
-    cookie := http.Cookie{Name: "CookieName", Path: "/", MaxAge: -1}
+    cookie := http.Cookie{Name: "testcookiename", Path: "/", MaxAge: -1}
     http.SetCookie(w, &cookie)
     DrawMenu(w)
 

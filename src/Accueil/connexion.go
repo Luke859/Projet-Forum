@@ -26,17 +26,11 @@ func ConnexionPage(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/connexion.html", "static/HTML/navbar.html")
 	if err != nil {
 		log.Fatalf("Template execution: %s", err)
-		myuuid, err2 := uuid.NewV4()
-		if err2 != nil {
-			http.SetCookie(w,&http.Cookie{
-				Name:       "CookieUUID",
-				Value:      myuuid.String(),
-				Domain:     "ProjetForum",
-				Secure:     true,
-				HttpOnly:   true,
-			})
-			return
-		}
+		myuuid, _ := uuid.NewV4()
+		expire := time.Now().AddDate(0, 0, 1)
+		cookie := http.Cookie{Name: "testcookiename", Value: myuuid.String(), Path: "/", Expires: expire, MaxAge: 86400}
+
+    	http.SetCookie(w, &cookie)
 		t.Execute(w, nil)
 	}
 }
