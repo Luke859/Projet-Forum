@@ -35,7 +35,8 @@ func ConnexionPage(w http.ResponseWriter, r *http.Request) {
 				Secure:     true,
 				HttpOnly:   true,
 			})
-		return
+			return
+		}
+		t.Execute(w, nil)
 	}
-	t.Execute(w, nil)
 }
