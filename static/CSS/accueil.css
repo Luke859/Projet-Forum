@@ -830,9 +830,11 @@ p {
 }
 
 .post {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(5, 1fr);
+  height: 200px;
+  width: 200px;
+  background-color: white;
 }
+
+
 
   

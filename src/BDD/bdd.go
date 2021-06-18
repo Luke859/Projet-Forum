@@ -17,17 +17,20 @@ import (
 //func main() {
 //status, db := GestionData()
 //fmt.Println(status)
-/*index := newUser("test1", "test1", db)
-fmt.Println(index)
-status, db = gestionData()
-statusUser, tab := checkUser("test1", db)
-fmt.Println(statusUser)
-fmt.Println(tab)
-statusPost := makePost("Id_Test", "", "lorem ipsum", "Titre")
-fmt.Println(statusPost)
-statusGetPost, tabPost := getPost(db, "Id_Test")
-fmt.Println(statusGetPost)
-fmt.Println(tabPost)*/
+//index := newUser("test1", "test1", db)
+//fmt.Println(index)
+//status, db = gestionData()
+//statusUser, tab := checkUser("test1", db)
+//fmt.Println(statusUser)
+//fmt.Println(tab)
+//statusPost := MakePost("lorem ipsum", 1)
+//statusPost1 := MakePost("lorem ipsumE", 1)
+//statusPost2 := MakePost("lorem ipsumY", 1)
+//statusPost3 := MakePost("lorem ipsumI", 1)
+//fmt.Println(statusPost, statusPost1,statusPost2,statusPost3)
+//statusGetPost, tabPost := getPost(db, "Id_Test")
+//fmt.Println(statusGetPost)
+//fmt.Println(tabPost)*/
 //fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
 //}
 
@@ -146,24 +149,23 @@ func GetAllPost(db *sql.DB) ([][]string) {
 
 /*////////////////////////////////////// create post///////////////////////////////*/
 
-func MakePost(text string) int {
-	status, db := GestionData()
-	if status == 500 {
-		fmt.Println("can't open BDD")
-		return 500
-	}
-	newPost, err := db.Prepare("INSERT INTO Post (texte) VALUES(?)")
-	if err != nil {
-		fmt.Println("Prepare error")
-		fmt.Println(err)
-		return 500
-	} else {
-		newPost.Exec(text)
-		db.Close()
-		return 300
-	}
+func MakePost(text string, ID_User int) int {
+    status, db := GestionData()
+    if status == 500 {
+        fmt.Println("can't open BDD")
+        return 500
+    }
+    newPost, err := db.Prepare("INSERT INTO Post (texte, Id_user) VALUES(?, ?)")
+    if err != nil {
+        fmt.Println("Prepare error")
+        fmt.Println(err)
+        return 500
+    } else {
+        newPost.Exec(text, ID_User)
+        db.Close()
+        return 300
+    }
 }
-
 ////////////////////////creation post///////////////////////////////
 
 func NewCmt(Id_user string, Id_post string, contenu string, db *sql.DB) int {

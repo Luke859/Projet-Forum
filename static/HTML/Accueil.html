@@ -22,9 +22,13 @@
         </li>
     </ul>
 </div>
-<div class="post">
-    {{.Post}}
-</div>
+
+{{range .}}
+    <div class="post">
+        {{.Post}}
+    </div>
+{{end}}
+
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/static/JS/burger.js"></script>
 
