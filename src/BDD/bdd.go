@@ -123,8 +123,8 @@ func GetPost(db *sql.DB, id int) (int, [1]string) {
 
 ////////////////////////////////Get All Post///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-func GetAllPost(db *sql.DB) (int, []string) {
-	var tabAllPost []string
+func GetAllPost(db *sql.DB) (int, [][]string) {
+	var tabAllPost [][]string
 
 	var text string
 	var id int
