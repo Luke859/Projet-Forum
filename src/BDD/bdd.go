@@ -17,11 +17,11 @@ import (
 func main() {
 	status, db := GestionData()
 	fmt.Println(status)
-	//index := NewUser("test1", "test1", db)
+	//index := NewUser("PIERRIC", "TESTPASS", db)
 	//fmt.Println(index)
-	//statusUser, tab := CheckUser("test1", db)
-	//fmt.Println(statusUser)
-	//fmt.Println(tab)
+	statusUser, tab := CheckUser("PIERRIC", db)
+	fmt.Println(statusUser)
+	fmt.Println(tab)
 	//statusPost := MakePost("Lorem IPSUM", 3)
 	//fmt.Println(statusPost)
 	//statusGetPost, tabPost := GetPost(db, 4)
@@ -31,8 +31,8 @@ func main() {
 	//fmt.Println(statusAllPost)
 	//fmt.Println(tabAllPost)
 	//fmt.Println(NewCmt(1, 1, "lorem ipsum", db))
-	fmt.Println(CreateLike(1, 1, true, db))
-	fmt.Println(UpdateLikeCMT(db, 1, 1, 1))
+	//fmt.Println(CreateLike(1, 1, true, db))
+	//fmt.Println(UpdateLikeCMT(db, 1, 1, 1))
 }
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
@@ -63,24 +63,22 @@ func NewUser(Pseudo string, HashPass string, db *sql.DB) int {
 
 /*///////////////////////////////////////////////////////////verification de identifiant///////////////////////////////////////////////////////////////////////////////*/
 
-func CheckUser(username string, db *sql.DB) (int, [2]string) {
-	var tabUser [2]string
+func CheckPassword(username string, db *sql.DB) (int, string) {
+	var HashPass string
 
-	var pseudo string
 	var password string
 
-	tsql, err := db.Query("SELECT pseudo, password FROM User WHERE pseudo = (?)", username)
+	tsql, err := db.Query("SELECT password FROM User WHERE pseudo = (?)", username)
 	if err != nil {
 		fmt.Println(err)
-		return 500, tabUser
+		return 500, HashPass
 	}
 
 	for tsql.Next() {
-		tsql.Scan(&pseudo, &password)
+		tsql.Scan(&password)
 	}
-	tabUser[0] = pseudo
-	tabUser[1] = password
-	return 0, tabUser
+	HashPass = password
+	return 0, HashPass
 }
 
 /////////////////////////////////////////////////////////get id_user/////////////////////////////////////////
