@@ -1,7 +1,6 @@
 package Accueil
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"text/template"
@@ -15,5 +14,5 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
-	fmt.Println("Page accueil ⌛")
+
 }
