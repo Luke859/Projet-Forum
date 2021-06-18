@@ -1,6 +1,6 @@
-package BDD
+//package BDD
 
-//package main
+package main
 
 /*
 msg d'erreur print dans le terminal
@@ -16,7 +16,7 @@ import (
 
 //func main() {
 //status, db := GestionData()
-//fmt.Println(status)
+//fmt.Println("statu de l'ouverture de la BDD : ", status)
 //index := NewUser("PIERRIC", "TESTPASS", db)
 //fmt.Println(index)
 //statusUser, tab := CheckUser("PIERRIC", db)
@@ -30,7 +30,9 @@ import (
 //statusAllPost, tabAllPost := GetAllPost(db)
 //fmt.Println(statusAllPost)
 //fmt.Println(tabAllPost)
-//fmt.Println(NewCmt(1, 1, "lorem ipsum", db))
+//fmt.Println("status de la creation d'un nouveau cmt :", NewCmt(1, 1, "lorem ipsum", db))
+//status, db = GestionData()
+//fmt.Println(GetAllCmt(db, 2))
 //fmt.Println(CreateLike(1, 1, true, db))
 //fmt.Println(UpdateLikeCMT(db, 1, 1, 1))
 //}
@@ -174,6 +176,27 @@ func NewCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
 	statement.Exec(Id_user, Id_post, contenu)
 	db.Close()
 	return (0)
+}
+
+func GetAllCmt(db *sql.DB, id_post int) (int, [][]string) {
+	var tabAllPost [][]string
+
+	var text string
+	var idUser int
+	var idPost int
+
+	statement, err := db.Query("SELECT Id_user, Id_post, contenu FROM Commentaires WHERE Id_post = ?", id_post)
+	if err != nil {
+		fmt.Println(err)
+		return 500, tabAllPost
+	}
+
+	for statement.Next() {
+		statement.Scan(&idUser, &idPost, &text)
+		save := []string{strconv.Itoa(idUser), strconv.Itoa(idPost), text}
+		tabAllPost = append(tabAllPost, save)
+	}
+	return 0, tabAllPost
 }
 
 //////////////////////////////////////// get UUID from User //////////////////////////////////////
