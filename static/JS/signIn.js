@@ -26,3 +26,9 @@ let textarea = document.getElementById('textarea')
     function TextRecup(){
         textarea.submit()
     }
+
+let cmtarea = document.getElementById('cmtarea')   
+
+    function TextRecup2(){
+        cmtarea.submit()
+    }

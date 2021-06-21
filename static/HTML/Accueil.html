@@ -29,30 +29,21 @@
         <div class="post">
             <div class="name">{{.Post}}</div>
 
-            <div class="cmt">
-                {{.Cmt}}
-                <input class="commentaire" type="text">
-            </div>
+            <div class="cmt">{{.Cmt}}</div>
 
-            <div class="heart-btn">
-                <div class="content">
-                <span class="heart"></span>
-                <span class="text">Like</span>
-                <span class="numb"></span>
+            <form action="/sentText" method="POST" id="cmtarea">
+                <div class="user-box">
+                    <input type="text" name="text">
                 </div>
-            </div>
+                    
+                <a onclick="TextRecup2()">
+                    <div class="press">envoyer</div>
+                </a>
+             </form>
+             <script src="/static/JS/signIn.js"></script>
         </div>
-        <!-- <script>
-            $(document).ready(function(){
-            $('.content').click(function(){
-                $('.content').toggleClass("heart-active")
-                $('.text').toggleClass("heart-active")
-                $('.numb').toggleClass("heart-active")
-                $('.heart').toggleClass("heart-active")
-            });
-            });
-        </script> -->
     </div>
+    
 {{end}}
 
 

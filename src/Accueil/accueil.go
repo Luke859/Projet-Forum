@@ -22,11 +22,12 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 
 	postsDouble = BDD.GetAllPost(db)
+	_, postsDouble = BDD.GetAllCmt(db, 1)
 
 	for _, postSync := range postsDouble {
 		p := PageAccueil{
 			Post: postSync[1],
-			Cmt: "Hello its me !",
+			Cmt: postSync[2],
 		}
 		postOne = append(postOne, p)
 	}
