@@ -19,6 +19,7 @@ import (
 //fmt.Println("statu de l'ouverture de la BDD : ", status)
 //index := NewUser("PIERRIC", "TESTPASS", db)
 //fmt.Println(index)
+//fmt.Println(GetAllUsername(db))
 //statusUser, tab := CheckUser("PIERRIC", db)
 //fmt.Println(statusUser)
 //fmt.Println(tab)
@@ -40,7 +41,7 @@ import (
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "./BDD/ProjetForum.db") //lancer depuis : (../../bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
+	db, err := sql.Open("sqlite3", "../../BDD/ProjetForum.db") //lancer depuis : (../../bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
@@ -98,6 +99,25 @@ func GetId_User(username string, db *sql.DB) (int, int) {
 		tsql.Scan(&Id_user)
 	}
 	return 0, Id_user
+}
+
+////////////////////////////////// Get All Username /////////////////////////////////////////////////////////////////////:
+
+func GetAllUsername(db *sql.DB) (int, []string) {
+	var allUsername []string
+	var username string
+
+	tsql, err := db.Query("SELECT pseudo FROM User")
+	if err != nil {
+		fmt.Println(err)
+		return 500, allUsername
+	}
+
+	for tsql.Next() {
+		tsql.Scan(&username)
+		allUsername = append(allUsername, username)
+	}
+	return 0, allUsername
 }
 
 /*//////////////////////////////////////////////////recupe post////////////////////////////////////////////////*/
