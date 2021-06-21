@@ -33,10 +33,10 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	pseudoconnect := r.FormValue("PseudoConnect")     // pseudo de la connexion
 	passwordconnect := r.FormValue("PasswordConnect") // mdp de la connexion
 
-	// match := CheckPasswordHash(passwordconnect,)
+	// match := CheckPasswordHash(passwordconnect, HashPass)
+	// fmt.Println("Match:   ", match)
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, "/", passwordconnect)
-	// fmt.Println("Match:   ", match)
 
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 
@@ -57,7 +57,6 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(" Identidiant d'Inscription : ", pseudo, "/", password)
 	http.Redirect(w, r, "/connexion", http.StatusSeeOther)
 	var HashPass = hashPassword(password) // password de l'incription Hashé (Hashpass)
-
 	fmt.Println("Mot de passe Hashé ⌛ :", HashPass)
 
 	statusBDD, db := BDD.GestionData()
