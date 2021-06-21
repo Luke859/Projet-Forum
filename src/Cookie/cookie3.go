@@ -1,16 +1,19 @@
 package main
 
 import (
-	"github.com/google/uuid"
+	uuid"github.com/google/uuid"
 	"fmt"
 )
 
-func New() uuid.UUID {
-	test := uuid.New()
-	return test
+func NewUUID() string {
+	myuuid := uuid.New()
+	test := myuuid.String()
+	fmt.Println(test)
+	return ""
 }
 
-func main(){
-	New()
+func main() {
+	test := 1
 	fmt.Println(test)
+	return
 }

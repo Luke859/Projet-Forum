@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-	"github.com/satori/go.uuid"
+	uuid"github.com/satori/go.uuid"
 )
 
 func CreateUUID() string {
@@ -14,20 +14,15 @@ func CreateUUID() string {
 	  return ""
 	}
 	return myuuid.String()
-  }
+}
 
 func WriteCookieServer(w http.ResponseWriter, req *http.Request) {
 	uuid := CreateUUID()
     expire := time.Now().AddDate(0, 0, 1)
     cookie := http.Cookie{Name: "testcookiename", Value: uuid, Path: "/", Expires: expire, MaxAge: 86400}
-
     http.SetCookie(w, &cookie)
-	
 }
 
 func main(){
 	WriteCookieServer(w http.ResponseWriter, req *http.Request)
 }
-
-
-

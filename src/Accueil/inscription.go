@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"text/template"
-	"time"
+	//"time"
 	uuid "github.com/satori/go.uuid"
 
 	"golang.org/x/crypto/bcrypt"
@@ -62,13 +62,15 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	pseudoconnect := r.FormValue("PseudoConnect")
 	passwordconnect := r.FormValue("PasswordConnect")
 
-	fmt.Println(" Identifiant de connexion : ", pseudoconnect, passwordconnect)
-	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
-	uuid := CreateUUID()
+	/*uuid := CreateUUID()
     expire := time.Now().AddDate(0, 0, 1)
     cookie := http.Cookie{Name: "testcookiename", Value: uuid, Path: "/", Expires: expire, MaxAge: 86400}
 
-    http.SetCookie(w, &cookie)
+    http.SetCookie(w, &cookie)*/
+
+	fmt.Println(" Identifiant de connexion : ", pseudoconnect, passwordconnect)
+	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+	
 }
 
 // Hash du mot de passe puis l'afficher dans le terminal
