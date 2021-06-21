@@ -22,9 +22,40 @@
         </li>
     </ul>
 </div>
-<div class="post">
-    {{.Post}}
-</div>
+
+<!-- Block Posts -->
+{{range .}}
+    <div class="scroll">
+        <div class="post">
+            <div class="name">{{.Post}}</div>
+
+            <div class="cmt">
+                {{.Cmt}}
+                <input class="commentaire" type="text">
+            </div>
+
+            <div class="heart-btn">
+                <div class="content">
+                <span class="heart"></span>
+                <span class="text">Like</span>
+                <span class="numb"></span>
+                </div>
+            </div>
+        </div>
+        <!-- <script>
+            $(document).ready(function(){
+            $('.content').click(function(){
+                $('.content').toggleClass("heart-active")
+                $('.text').toggleClass("heart-active")
+                $('.numb').toggleClass("heart-active")
+                $('.heart').toggleClass("heart-active")
+            });
+            });
+        </script> -->
+    </div>
+{{end}}
+
+
 <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/static/JS/burger.js"></script>
 
