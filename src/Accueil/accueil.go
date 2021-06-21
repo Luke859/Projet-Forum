@@ -1,8 +1,8 @@
 package Accueil
 
 import (
-	"log"
 	"fmt"
+	"log"
 	"net/http"
 	"text/template"
 
@@ -11,7 +11,7 @@ import (
 
 type PageAccueil struct {
 	Post string
-	Cmt string
+	Cmt  string
 }
 
 func AccueilPage(w http.ResponseWriter, r *http.Request) {
@@ -26,7 +26,7 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	for _, postSync := range postsDouble {
 		p := PageAccueil{
 			Post: postSync[1],
-			Cmt: "Hello its me !",
+			Cmt:  "Hello its me !",
 		}
 		postOne = append(postOne, p)
 	}

@@ -19,6 +19,7 @@ func InscriptionPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
+
 	fmt.Println("Page inscription ")
 }
 
@@ -70,8 +71,13 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	pseudoconnect := r.FormValue("PseudoConnect")     // pseudo de la connexion
 	passwordconnect := r.FormValue("PasswordConnect") // mdp de la connexion
 
+	_, db := BDD.GestionData()
+	_, recuphash := BDD.CheckPassword(pseudoconnect, db)
+	match := comparePasswords(recuphash, []byte(passwordconnect))
+
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, "/", passwordconnect)
-	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+	fmt.Println("Match:   ", match)
+	// http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
 
 }

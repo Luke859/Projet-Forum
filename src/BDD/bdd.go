@@ -34,6 +34,28 @@ import (
 //fmt.Println(NewCmt("IDUser", "IDPOST1", "lorem ipsum", db))
 //}
 
+/*///////////////////////////////////recup du Hash stocké dans la BDD ///////////////////////////*/
+
+func CheckPassword(username string, db *sql.DB) (int, string) {
+
+	var PassHash string
+	var password string
+
+	tsql, err := db.Query("SELECT password FROM User WHERE pseudo = (?)", username)
+	if err != nil {
+		fmt.Println(err)
+		return 500, PassHash
+	}
+
+	for tsql.Next() {
+		tsql.Scan(&password)
+	}
+	PassHash = password
+	fmt.Println(PassHash)
+
+	return 0, PassHash
+}
+
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 func GestionData() (int, *sql.DB) {
