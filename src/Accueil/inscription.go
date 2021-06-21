@@ -11,6 +11,15 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+func CreateUUID() string {
+	myuuid, err := uuid.NewV4()
+	if err == nil{
+	  fmt.Println("Your UUID is:", myuuid)
+	  return ""
+	}
+	return myuuid.String()
+}
+
 func InscriptionPage(w http.ResponseWriter, r *http.Request) {
 	// Déclaration des fichiers à parser
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/inscription.html", "static/HTML/navbar.html")
@@ -41,6 +50,8 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 
 }
 
+
+
 // Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion"
 
 func GetSignConnect(w http.ResponseWriter, r *http.Request) {
@@ -53,24 +64,11 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, passwordconnect)
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
-	myuuid, _ := uuid.NewV4()
-	expire := time.Now().AddDate(0, 0, 1)
-	cookie := http.Cookie{
-		Name:       "testcookiename",
-		Value:      myuuid.String(),
-		Path:       "/",
-		Domain:     "Forum",
-		Expires:    expire,
-		RawExpires: "",
-		MaxAge:     86400,
-		Secure:     true,
-		HttpOnly:   true,
-		SameSite:   0,
-		Raw:        "",
-		Unparsed:   []string{},
-	}
-	http.SetCookie(w, &cookie)
+	uuid := CreateUUID()
+    expire := time.Now().AddDate(0, 0, 1)
+    cookie := http.Cookie{Name: "testcookiename", Value: uuid, Path: "/", Expires: expire, MaxAge: 86400}
 
+    http.SetCookie(w, &cookie)
 }
 
 // Hash du mot de passe puis l'afficher dans le terminal
