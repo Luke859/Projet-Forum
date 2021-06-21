@@ -1,3 +1,5 @@
+package main
+
 document.cookie = "test1= test; SameSite=None; Secure; HttpOnly";
 
 const cookieValue1 = document.cookie
