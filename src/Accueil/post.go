@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"text/template"
 
-	BDD "../BDD"
+	"../BDD"
 )
 
 func PostPage(w http.ResponseWriter, r *http.Request) {
-	// Déclaration des fichiers à parser
+
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/post.html", "static/HTML/navbar.html")
 	if err != nil {
 		log.Fatalf("Template execution: %s", err)
@@ -29,9 +29,9 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 
 	TextArea := r.FormValue("text")
 	fmt.Println(" Voici le post écrit :", TextArea)
-	statusPost := BDD.MakePost(TextArea)
+	statusPost := BDD.MakePost(TextArea, 1)
 	if statusPost == 300 {
-		fmt.Println("Inscrit dans la BDD")
+		fmt.Println("Walla")
 	} else {
 		fmt.Println("WAlla il y avait plus de poulet curry")
 	}

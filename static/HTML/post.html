@@ -1,14 +1,14 @@
 {{ define "body" }}
 <body>
 	<div class="login-box">
-	  <h2>Créer ton post</h2>
+	  <h2>Se connecter</h2>
   
 	  <!-- <a href="/inscription" class="inscription__links"> Inscription</a> -->
   
 	  <form action="/sentText" method="POST" id="textarea">
 		<div class="user-box">
 		  <input type="text" name="text">
-		 
+		  <label>Post</label>
 		</div>
 		
 		<a onclick="TextRecup()">
@@ -16,7 +16,7 @@
 		  <span></span>
 		  <span></span>
 		  <span></span>
-		  Posté !
+		  envoyer
 		</a>
 	  </form>
 	  <script src="/static/JS/signIn.js"></script>
