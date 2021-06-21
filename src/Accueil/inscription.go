@@ -55,8 +55,20 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	myuuid, _ := uuid.NewV4()
 	expire := time.Now().AddDate(0, 0, 1)
-	cookie := http.Cookie{Name: "testcookiename", Value: myuuid.String(), Path: "/", Expires: expire, MaxAge: 86400}
-
+	cookie := http.Cookie{
+		Name:       "testcookiename",
+		Value:      myuuid.String(),
+		Path:       "/",
+		Domain:     "",
+		Expires:    expire,
+		RawExpires: "",
+		MaxAge:     86400,
+		Secure:     true,
+		HttpOnly:   true,
+		SameSite:   0,
+		Raw:        "",
+		Unparsed:   []string{},
+	}
 	http.SetCookie(w, &cookie)
 
 }
