@@ -59,7 +59,7 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 		Name:       "testcookiename",
 		Value:      myuuid.String(),
 		Path:       "/",
-		Domain:     "",
+		Domain:     "Forum",
 		Expires:    expire,
 		RawExpires: "",
 		MaxAge:     86400,
