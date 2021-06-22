@@ -8,7 +8,7 @@ import (
 )
 
 func CreateUUID() string {
-	myuuid, err := uuid.NewV4()
+	myuuid, err := uuid.NewV4()0
 	if err == nil{
 	  fmt.Println("Your UUID is:", myuuid)
 	  return ""

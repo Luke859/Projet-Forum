@@ -5,20 +5,10 @@ import (
 	"log"
 	"net/http"
 	"text/template"
-	//"time"
-	uuid "github.com/satori/go.uuid"
-
+	"time"
+	guuid"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
-
-func CreateUUID() string {
-	myuuid, err := uuid.NewV4()
-	if err == nil{
-	  fmt.Println("Your UUID is:", myuuid)
-	  return ""
-	}
-	return myuuid.String()
-}
 
 func InscriptionPage(w http.ResponseWriter, r *http.Request) {
 	// Déclaration des fichiers à parser
@@ -62,13 +52,20 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	pseudoconnect := r.FormValue("PseudoConnect")
 	passwordconnect := r.FormValue("PasswordConnect")
 
-	/*uuid := CreateUUID()
-    expire := time.Now().AddDate(0, 0, 1)
-    cookie := http.Cookie{Name: "testcookiename", Value: uuid, Path: "/", Expires: expire, MaxAge: 86400}
-
-    http.SetCookie(w, &cookie)*/
+	myuuid := guuid.New()
+	expire := time.Now().AddDate(0, 0, 1)
+    cookie := http.Cookie{
+        Name: "cookieName",
+        Value: myuuid.String(),
+        Path: "/",
+        Expires: expire,
+        MaxAge: 86400,
+    }
+	fmt.Println(myuuid)
+	
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, passwordconnect)
+	http.SetCookie(w, &cookie)
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	
 }

@@ -1,19 +1,22 @@
 package main
 
 import (
-	uuid"github.com/google/uuid"
+	guuid"github.com/google/uuid"
 	"fmt"
+	"time"
+	"net/http"
 )
 
-func NewUUID() string {
-	myuuid := uuid.New()
-	test := myuuid.String()
-	fmt.Println(test)
+func CreateCookie() string{
+	myuuid := guuid.New()
+	expire := time.Now().AddDate(0, 0, 1)
+    cookie := http.Cookie{
+        Name: "cookieName",
+        Value: myuuid.String(),
+        Path: "/",
+        Expires: expire,
+        MaxAge: 86400,
+    }
+	fmt.Println(myuuid)
 	return ""
-}
-
-func main() {
-	test := 1
-	fmt.Println(test)
-	return
 }
