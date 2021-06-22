@@ -5,10 +5,12 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+	"time"
 
 	BDD "../BDD"
 
 	"golang.org/x/crypto/bcrypt"
+	guuid"github.com/google/uuid"
 )
 
 func InscriptionPage(w http.ResponseWriter, r *http.Request) {
@@ -19,6 +21,7 @@ func InscriptionPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
+
 	fmt.Println("Page inscription ")
 }
 
@@ -60,9 +63,26 @@ func hashPassword(password string) string {
 	return string(hash)
 }
 
+/*func CreateCookie(w http.ResponseWriter, r *http.Request){
+	myuuid := guuid.New()
+
+	if r.Method == "GET" {
+		http.SetCookie(w, &http.Cookie{
+			Name: "cookieName",
+			Value: myuuid.String(),
+			Path: "/",
+			Expires: time.Now().Add(120*time.Second),
+			MaxAge: 86400,
+		})
+	}
+	fmt.Println(myuuid)
+}*/
+
+
 // Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion"
 
 func GetSignConnect(w http.ResponseWriter, r *http.Request) {
+	myuuid := guuid.New()
 	err := r.ParseForm()
 	if err != nil {
 		log.Fatal()
@@ -70,8 +90,35 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	pseudoconnect := r.FormValue("PseudoConnect")     // pseudo de la connexion
 	passwordconnect := r.FormValue("PasswordConnect") // mdp de la connexion
 
+	_, db := BDD.GestionData()
+	_, recuphash := BDD.CheckPassword(pseudoconnect, db)
+	
+	match := comparePasswords(recuphash, []byte(passwordconnect))
+
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, "/", passwordconnect)
-	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+	fmt.Println("Match:   ", match)
+	expire := time.Now().AddDate(0, 0, 1)
+	http.SetCookie(w, &http.Cookie{
+		Name:       "cookieName",
+		Value:      myuuid.String(),
+		Path:       "/",
+		Domain:     "",
+		Expires:    expire,
+		RawExpires: "",
+		MaxAge:     86400,
+		Secure:     true,
+		HttpOnly:   true,
+		SameSite:   0,
+		Raw:        "",
+		Unparsed:   []string{},
+	})
+
+	fmt.Println(myuuid)
+	recupUUID := BDD.PutUUID(myuuid, pseudoconnect, db)
+	if recupUUID == 500 {
+		fmt.Println("Nous rencontrons des perturbations")
+	}
+	// http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
 
 }

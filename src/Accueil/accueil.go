@@ -18,11 +18,10 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	// Déclaration des fichiers à parser
 
 	var postsDouble [][]string
-	//var postsDoubleCmt [][]string
 	var postOne []PageAccueil
 	_, db := BDD.GestionData()
 
-	_, postsDouble = BDD.GetAllPost(db)
+	postsDouble = BDD.GetAllPost(db)
 	_, cmtsDouble := BDD.GetAllCmt(db, 1)
 
 	for _, postSync := range postsDouble {
