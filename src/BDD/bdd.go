@@ -40,6 +40,13 @@ import (
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
+/*
+ouverture de la BDD
+renvois un int qui sert de status d'erreur :
+	500 en cas d'erreur
+	0 en cas de reussite
+renvois un pointeur *sql.DB qui sert dans toute les autre fonctions
+*/
 func GestionData() (int, *sql.DB) {
 	db, err := sql.Open("sqlite3", "./BDD/ProjetForum.db") //lancer depuis : (../../bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
@@ -182,7 +189,13 @@ func MakePost(text string, ID_User int) int {
 	}
 }
 
-////////////////////////creation post///////////////////////////////
+////////////////////////creation commentaire///////////////////////////////
+
+/*
+Creation d'un commentaire dans la BDD
+besoins : d'un indentifiant de l'utilisateur, d'un identifiant du post que on veut commenter et du pointeur sur la BDD
+revois un int fessant code d'erreur 500 pour un echec ou 0 en cas de reussite
+*/
 
 func MakeCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
 	statement, err := db.Prepare("INSERT INTO Commentaires (Id_user, Id_post, contenu) VALUES(?,?,?)")
@@ -195,6 +208,15 @@ func MakeCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
 	db.Close()
 	return (0)
 }
+
+//////////////////////// recupere tous les commentaire d'un post ////////////////////////////////////////////////
+
+/*
+Recuper les commentaire d'un post
+besoins du pointeur de la BDD et de l'identifiant du post en question
+Renvoi un int de valeur : 0 et tous les commentaire du post en cas de succée
+Renvois un int de valeur 500 et un double tableau vide en cas d'echec
+*/
 
 func GetAllCmt(db *sql.DB, id_post int) (int, [][]string) {
 	var tabAllPost [][]string
@@ -209,6 +231,7 @@ func GetAllCmt(db *sql.DB, id_post int) (int, [][]string) {
 		return 500, tabAllPost
 	}
 
+	//remplie notre tableau de tout les commentaire
 	for statement.Next() {
 		statement.Scan(&idUser, &idPost, &text)
 		save := []string{strconv.Itoa(idUser), strconv.Itoa(idPost), text}
@@ -329,6 +352,13 @@ func IsLikedCMT(db *sql.DB, ID_like int) (int, int) {
 	}
 	return 0, IsLike
 }
+
+/*
+La fonction a besoins d'avoir le pointeur de la base de donné et des identifiant de like, user et commentaire
+La fonction va renvoyer un int qui vaut soit : 500 soit : 0.
+500 etant un code d'erreur http error du a un probleme interne du serveur
+les erreurs peuvent venir du fait qu'on a pas pu recupper l'ettat du button like dans la BDD ou que la Querry n'as pas fonctionnait
+*/
 
 func UpdateLikeCMT(db *sql.DB, ID_like int, ID_User int, ID_cmt int) int {
 	status, IsLike := IsLikedCMT(db, ID_like)
