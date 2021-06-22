@@ -68,7 +68,6 @@ func NewUser(Pseudo string, HashPass string, db *sql.DB) int {
 
 func CheckPassword(username string, db *sql.DB) (int, string) {
 	var HashPass string
-
 	var password string
 
 	tsql, err := db.Query("SELECT password FROM User WHERE pseudo = (?)", username)
@@ -124,7 +123,6 @@ func GetAllUsername(db *sql.DB) (int, []string) {
 
 func GetPost(db *sql.DB, id int) (int, [1]string) {
 	var tabPost [1]string
-
 	var text string
 
 	statement, err := db.Query("SELECT  texte FROM Post WHERE Id_post = (?)", id)
@@ -282,6 +280,12 @@ func IsLikedPOST(db *sql.DB, ID_like int) (int, int) {
 	return 0, IsLike
 }
 
+/*
+La fonction a besoins d'avoir le pointeur de la base de donné et des identifiant de like, user et post
+La fonction va renvoyer un int qui vaut soit : 500 soit : 0.
+500 etant un code d'erreur http error du a un probleme interne du serveur
+les erreurs peuvent venir du fait qu'on a pas pu recupper l'ettat du button like dans la BDD ou que la Querry n'as pas fonctionnait
+*/
 func UpdateLikePOST(db *sql.DB, ID_like int, ID_User int, ID_Post int) int {
 	status, IsLike := IsLikedPOST(db, ID_like)
 	if status == 500 {
