@@ -31,9 +31,9 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(" Voici le post écrit :", TextArea)
 	statusPost := BDD.MakePost(TextArea, 1)
 	if statusPost == 300 {
-		fmt.Println("Walla")
+		fmt.Println("Inscrit en BDD")
 	} else {
-		fmt.Println("WAlla il y avait plus de poulet curry")
+		fmt.Println("NON inscrit en BDD")
 	}
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 
