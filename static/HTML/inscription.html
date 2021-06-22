@@ -1,26 +1,30 @@
 {{ define "body" }}
 <body>
-  <div class="login-box">
-    <h2>Créer son compte</h2>
-    <form action="/sent" method="POST" id="form">
-      <div class="user-box">
-        <input type="text" name="Pseudo" >
-        <label>Pseudo</label>
-      </div>
-      <div class="user-box">
-        <input type="Password" name="Password" >
-        <label>Mot de passe</label>
-      </div>
-      <a onclick="formRecup()">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        envoyer
-      </a>
-    </form>
-  </div>
-  <script src="/static/JS/signIn.js"></script>
+    <div class="login-box">
+        <h2>Créer son compte</h2>
+    
+        <a href="/connexion" class="connexion__links"> Déja inscrit ?</a>
+    
+        <form action="/sent" method="POST" id="form">
+
+          <div class="user-box">
+            <input type="text" name="Pseudo" >
+            <label>Pseudo</label>
+          </div>
+          <div class="user-box">
+            <input type="Password" name="Password" >
+            <label>Mot de passe</label>
+          </div>
+          <a onclick="formRecup()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            soumettre
+          </a>
+        </form>
+    </div>
+    <script src="/static/JS/signIn.js"></script>
 </body>
 </html>
 
