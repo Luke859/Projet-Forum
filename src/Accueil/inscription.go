@@ -5,9 +5,26 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+	guuid"github.com/google/uuid"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 )
+
+func CreateCookie(w http.ResponseWriter, r *http.Request){
+	myuuid := guuid.New()
+
+	if r.Method == "GET" {
+		http.SetCookie(w, &http.Cookie{
+			Name: "cookieName",
+			Value: myuuid.String(),
+			Path: "/",
+			Expires: time.Now().Add(120*time.Second),
+			MaxAge: 86400,
+		})
+	}
+	fmt.Println(myuuid)
+}
 
 func InscriptionPage(w http.ResponseWriter, r *http.Request) {
 	// Déclaration des fichiers à parser
@@ -48,9 +65,11 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	}
 	pseudoconnect := r.FormValue("PseudoConnect")
 	passwordconnect := r.FormValue("PasswordConnect")
+	
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, passwordconnect)
-	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+	//CreateCookie(w http.ResponseWriter, r *http.Request)
+	//http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 }
 
 // Hash du mot de passe puis l'afficher dans le terminal
