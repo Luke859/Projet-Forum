@@ -92,19 +92,19 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 
 	_, db := BDD.GestionData()
 	_, recuphash := BDD.CheckPassword(pseudoconnect, db)
+	_, recupUUID := BDD.PutUUID(myuuid, db)
 	match := comparePasswords(recuphash, []byte(passwordconnect))
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, "/", passwordconnect)
 	fmt.Println("Match:   ", match)
-	if r.Method == "GET" {
-		http.SetCookie(w, &http.Cookie{
-			Name: "cookieName",
-			Value: myuuid.String(),
-			Path: "/",
-			Expires: time.Now().Add(120*time.Second),
-			MaxAge: 86400,
-		})
-	}
+	http.SetCookie(w, &http.Cookie{
+		Name: "cookieName",
+		Value: myuuid.String(),
+		Path: "/",
+		Expires: time.Now().Add(120*time.Second),
+		MaxAge: 86400,
+	})
+
 	fmt.Println(myuuid)
 	// http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
