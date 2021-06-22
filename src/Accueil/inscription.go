@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 	"text/template"
-	"time"
-	guuid"github.com/google/uuid"
+	/*"time"
+	guuid"github.com/google/uuid"*/
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -47,12 +47,12 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
-		log.Fatal()
+		log.Fatal(err)
 	}
 	pseudoconnect := r.FormValue("PseudoConnect")
 	passwordconnect := r.FormValue("PasswordConnect")
 
-	myuuid := guuid.New()
+	/*myuuid := guuid.New()
 	expire := time.Now().AddDate(0, 0, 1)
     cookie := http.Cookie{
         Name: "cookieName",
@@ -61,11 +61,11 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
         Expires: expire,
         MaxAge: 86400,
     }
-	fmt.Println(myuuid)
+	fmt.Println(myuuid)*/
 	
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, passwordconnect)
-	http.SetCookie(w, &cookie)
+	//http.SetCookie(w, &cookie)
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	
 }
