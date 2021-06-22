@@ -33,10 +33,17 @@
 
             <form action="/sentCmt" method="POST" id="cmtarea">
                 <div class="press">
-                    <input type="text" placeholder="Entrer commentaire" name="cmt">
+                    <input class="enter" type="text" placeholder="Entrer commentaire" name="cmt">
                     <button type="button" onclick="CmtRecup()"> Send</button>
                 </div>
             </form>
+
+            <button id="like">
+                <p id='addlike'>0</p>
+                ❤️Like
+            </button>
+
+            <script src="/static/JS/like.js"></script>
             <script src="/static/JS/CreeCmt.js"></script>
         </div>
     </div>

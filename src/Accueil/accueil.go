@@ -22,15 +22,18 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 
 	postsDouble = BDD.GetAllPost(db)
-	_, postsDouble = BDD.GetAllCmt(db, 1)
+    _, cmtsDouble := BDD.GetAllCmt(db, 1)
 
-	for _, postSync := range postsDouble {
-		p := PageAccueil{
-			Post: postSync[1],
-			Cmt: postSync[2],
-		}
-		postOne = append(postOne, p)
-	}
+    for _, postSync := range postsDouble {
+        for _, cmtSync := range cmtsDouble {
+            p := PageAccueil{
+                Post: postSync[1],
+                Cmt:  cmtSync[2],
+            }
+            postOne = append(postOne, p)
+        }
+
+    }
 
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/Accueil.html", "static/HTML/navbar.html")
 	if err != nil {
