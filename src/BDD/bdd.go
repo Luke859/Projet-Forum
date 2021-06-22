@@ -186,7 +186,7 @@ func MakePost(text string, ID_User int) int {
 
 ////////////////////////creation post///////////////////////////////
 
-func NewCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
+func MakeCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
 	statement, err := db.Prepare("INSERT INTO Commentaires (Id_user, Id_post, contenu) VALUES(?,?,?)")
 	if err != nil {
 		fmt.Println(err)

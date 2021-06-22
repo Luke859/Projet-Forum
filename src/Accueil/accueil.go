@@ -22,12 +22,13 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	var postOne []PageAccueil
 	_, db := BDD.GestionData()
 
-	_, postsDouble = BDD.GetAllPost(db)
-	//_, postsDoubleCmt = BDD.GetAllCmt(db, 1)
+	postsDouble = BDD.GetAllPost(db)
+	_, postsDouble = BDD.GetAllCmt(db, 1)
 
 	for _, postSync := range postsDouble {
 		p := PageAccueil{
 			Post: postSync[1],
+			Cmt:  postSync[1],
 		}
 		postOne = append(postOne, p)
 	}

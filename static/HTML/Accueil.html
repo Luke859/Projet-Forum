@@ -29,30 +29,18 @@
         <div class="post">
             <div class="name">{{.Post}}</div>
 
-            <div class="cmt">
-                {{.Cmt}}
-                <input class="commentaire" type="text">
-            </div>
+            <div class="cmt">{{.Cmt}}</div>
 
-            <div class="heart-btn">
-                <div class="content">
-                <span class="heart"></span>
-                <span class="text">Like</span>
-                <span class="numb"></span>
+            <form action="/sentCmt" method="POST" id="cmtarea">
+                <div class="press">
+                    <input type="text" placeholder="Entrer commentaire" name="cmt">
+                    <button type="button" onclick="CmtRecup()"> Send</button>
                 </div>
-            </div>
+            </form>
+            <script src="/static/JS/CreeCmt.js"></script>
         </div>
-        <!-- <script>
-            $(document).ready(function(){
-            $('.content').click(function(){
-                $('.content').toggleClass("heart-active")
-                $('.text').toggleClass("heart-active")
-                $('.numb').toggleClass("heart-active")
-                $('.heart').toggleClass("heart-active")
-            });
-            });
-        </script> -->
     </div>
+    
 {{end}}
 
 
