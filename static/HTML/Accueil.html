@@ -31,16 +31,13 @@
 
             <div class="cmt">{{.Cmt}}</div>
 
-            <form action="/sentText" method="POST" id="cmtarea">
-                <div class="user-box">
-                    <input type="text" name="text">
+            <form action="/sentCmt" method="POST" id="cmtarea">
+                <div class="press">
+                    <input type="text" placeholder="Entrer commentaire" name="cmt">
+                    <button type="button" onclick="CmtRecup()"> Send</button>
                 </div>
-                    
-                <a onclick="TextRecup2()">
-                    <div class="press">envoyer</div>
-                </a>
-             </form>
-             <script src="/static/JS/signIn.js"></script>
+            </form>
+            <script src="/static/JS/CreeCmt.js"></script>
         </div>
     </div>
     

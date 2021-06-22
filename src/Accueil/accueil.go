@@ -27,7 +27,7 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	for _, postSync := range postsDouble {
 		p := PageAccueil{
 			Post: postSync[1],
-			Cmt: postSync[2],
+			Cmt: postSync[1],
 		}
 		postOne = append(postOne, p)
 	}
