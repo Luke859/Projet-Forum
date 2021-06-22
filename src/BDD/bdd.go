@@ -232,3 +232,20 @@ func PutUUID(UUID string, db *sql.DB) int {
 	db.Close()
 	return (0)
 }
+
+func CheckPassword(username string, db *sql.DB) (int, string) {
+	var HashPass string
+	var password string
+
+	tsql, err := db.Query("SELECT password FROM User WHERE pseudo = (?)", username)
+	if err != nil {
+		fmt.Println(err)
+		return 500, HashPass
+	}
+
+	for tsql.Next() {
+		tsql.Scan(&password)
+	}
+	HashPass = password
+	return 0, HashPass
+}
