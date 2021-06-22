@@ -231,3 +231,24 @@ func PutUUID(UUID string, db *sql.DB) int {
 	db.Close()
 	return (0)
 }
+
+func GetLikes(db *sql.DB, id_post int) (int, [][]string) {
+    var tabAllPost [][]string
+
+    var boolean bool
+    var idUser int
+    var idPost int
+
+    statement, err := db.Query("SELECT Id_user, Id_post, verifLikes FROM Commentaires WHERE Id_post = ?", id_post)
+    if err != nil {
+        fmt.Println(err)
+        return 500, tabAllPost
+    }
+
+    for statement.Next() {
+        statement.Scan(&idUser, &idPost, &boolean)
+        save := []string{strconv.Itoa(idUser), strconv.Itoa(idPost), boolean}
+        tabAllPost = append(tabAllPost, save)
+    }
+    return 0, tabAllPost
+}

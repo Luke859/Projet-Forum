@@ -2,7 +2,7 @@ var like = document.getElementById('addlike');
 
 document.onclick = changeLike;
 
-function changeLike(e) {
+function changeLike() {
     like.textContent = "1";
 
     if(like.textContent === "1") {
@@ -11,8 +11,8 @@ function changeLike(e) {
 
 }
 
-function change2Like(e) {
-    like.textContent ="0"
+function change2Like() {
+    like.textContent ="0";
 
     if(like.textContent === "0") {
         document.onclick = changeLike;

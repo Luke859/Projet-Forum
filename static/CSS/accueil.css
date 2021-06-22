@@ -124,7 +124,7 @@ input {
     outline: none;
 }
 
-button {
+/* button {
     color: #fff;
     padding: 17px 22px;
     background-color: black;
@@ -132,7 +132,7 @@ button {
     border-radius: 12px;
     text-transform: uppercase;
     cursor: pointer;
-}
+} */
 
 #recherche{
     position: relative;
@@ -825,7 +825,7 @@ p {
 }
 
 /*/////////////////////////////////////////ACCUEIL POST//////////////////////////////////////////////////////////////////////////////////////*/
-.scroll {
+#scroll {
   margin-top: 100px;
 } 
 
@@ -864,6 +864,7 @@ p {
 }
 
 #like {
+  position: absolute;
   text-align: center;
   padding: 12px 20px;
   color: #fff;
@@ -882,4 +883,8 @@ p {
   to {
     box-shadow: 0 0 0 30px rgba(255, 71, 84, 0);
   }
+}
+
+.delete {
+  margin-left: 1000px;
 }
