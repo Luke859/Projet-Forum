@@ -51,7 +51,6 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, passwordconnect)
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
-
 }
 
 // Hash du mot de passe puis l'afficher dans le terminal
