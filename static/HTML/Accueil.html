@@ -12,12 +12,6 @@
     <ul>
         <li>
             <a href="">Catégorie des posts</a>
-            <!-- <ul>
-                <li><a href="#">sport</a></li>
-                <li><a href="#">art</a></li>
-                <li><a href="#">nourriture</a></li>
-
-            </ul> -->
         </li>
         
         <li><a href="">Posts</a>
@@ -35,30 +29,25 @@
         <div class="post">
             <div class="name">{{.Post}}</div>
 
-            <div class="cmt">
-                {{.Cmt}}
-                <input class="commentaire" type="text">
-            </div>
+            <div class="cmt">{{.Cmt}}</div>
 
-            <div class="heart-btn">
-                <div class="content">
-                <span class="heart"></span>
-                <span class="text">Like</span>
-                <span class="numb"></span>
+            <form action="/sentCmt" method="POST" id="cmtarea">
+                <div class="press">
+                    <input class="enter" type="text" placeholder="Entrer commentaire" name="cmt">
+                    <button type="button" onclick="CmtRecup()"> Send</button>
                 </div>
-            </div>
+            </form>
+
+            <button id="like">
+                <p id='addlike'>0</p>
+                ❤️Like
+            </button>
+
+            <script src="/static/JS/like.js"></script>
+            <script src="/static/JS/CreeCmt.js"></script>
         </div>
-        <!-- <script>
-            $(document).ready(function(){
-            $('.content').click(function(){
-                $('.content').toggleClass("heart-active")
-                $('.text').toggleClass("heart-active")
-                $('.numb').toggleClass("heart-active")
-                $('.heart').toggleClass("heart-active")
-            });
-            });
-        </script> -->
     </div>
+    
 {{end}}
 
 
