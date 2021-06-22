@@ -38,3 +38,22 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 
 }
+
+func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Fatal()
+	}
+	_, db := BDD.GestionData()
+
+	CmtArea := r.FormValue("cmt")
+	fmt.Println(" Voici le commentaire écrit :", CmtArea)
+	statusCmt := BDD.MakeCmt(1, 1, CmtArea, db)
+	if statusCmt == 300 {
+		fmt.Println("Walla")
+	} else {
+		fmt.Println("WAlla il y avait plus de poulet curry")
+	}
+	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+
+}

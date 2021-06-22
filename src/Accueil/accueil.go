@@ -18,18 +18,21 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	// Déclaration des fichiers à parser
 
 	var postsDouble [][]string
-	//var postsDoubleCmt [][]string
 	var postOne []PageAccueil
 	_, db := BDD.GestionData()
 
-	_, postsDouble = BDD.GetAllPost(db)
-	//_, postsDoubleCmt = BDD.GetAllCmt(db, 1)
+	postsDouble = BDD.GetAllPost(db)
+	_, cmtsDouble := BDD.GetAllCmt(db, 1)
 
 	for _, postSync := range postsDouble {
-		p := PageAccueil{
-			Post: postSync[1],
+		for _, cmtSync := range cmtsDouble {
+			p := PageAccueil{
+				Post: postSync[1],
+				Cmt:  cmtSync[2],
+			}
+			postOne = append(postOne, p)
 		}
-		postOne = append(postOne, p)
+
 	}
 
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/Accueil.html", "static/HTML/navbar.html")
