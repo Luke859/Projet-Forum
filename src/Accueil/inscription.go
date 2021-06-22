@@ -92,7 +92,7 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 
 	_, db := BDD.GestionData()
 	_, recuphash := BDD.CheckPassword(pseudoconnect, db)
-	//_, recupUUID := BDD.GetUUID_User(myuuid, db)
+	
 	match := comparePasswords(recuphash, []byte(passwordconnect))
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, "/", passwordconnect)
@@ -114,6 +114,10 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	})
 
 	fmt.Println(myuuid)
+	recupUUID := BDD.PutUUID(myuuid, pseudoconnect, db)
+	if recupUUID == 500 {
+		fmt.Println("Nous rencontrons des perturbations")
+	}
 	// http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
 

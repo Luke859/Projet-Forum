@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/google/uuid"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -221,18 +222,17 @@ func GetUUID_User(username string, db *sql.DB) (int, string) {
 
 ////////////////////////////////// put UUID in BDD //////////////////////////
 
-func PutUUID(UUID string, db *sql.DB) int {
-	statement, err := db.Prepare("INSERT INTO User UUID VALUES(?)")
+func PutUUID(UUID uuid.UUID, pseudo string, db *sql.DB) int {
+	statement, err := db.Prepare("UPDATE User SET uuid = ? WHERE (pseudo =?)")
 	if err != nil {
 		fmt.Println(err)
 		fmt.Println("error Prepare new user")
 		return (500)
 	}
-	statement.Exec(UUID)
+	statement.Exec(UUID, pseudo)
 	db.Close()
 	return (0)
 }
-
 func CheckPassword(username string, db *sql.DB) (int, string) {
 	var HashPass string
 	var password string
