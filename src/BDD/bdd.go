@@ -19,6 +19,9 @@ import (
 //fmt.Println("statu de l'ouverture de la BDD : ", status)
 //index := NewUser("PIERRIC", "TESTPASS", db)
 //fmt.Println(index)
+//status, db = GestionData()
+//fmt.Println(GetUUID_User("PIERRIC", db))
+//fmt.Println("statu get uuid", PutUUID("testUUID456", "PIERRIC", db))
 //fmt.Println(GetAllUsername(db))
 //statusUser, tab := CheckUser("PIERRIC", db)
 //fmt.Println(statusUser)
@@ -250,24 +253,22 @@ func GetUUID_User(username string, db *sql.DB) (int, string) {
 		fmt.Println(err)
 		return 500, UUID
 	}
-
 	for tsql.Next() {
 		tsql.Scan(&UUID)
 	}
 	return 0, UUID
-
 }
 
 ////////////////////////////////// put UUID in BDD //////////////////////////
 
-func PutUUID(UUID string, db *sql.DB) int {
-	statement, err := db.Prepare("INSERT INTO User UUID VALUES(?)")
+func PutUUID(UUID string, pseudo string, db *sql.DB) int {
+	statement, err := db.Prepare("UPDATE User SET uuid = ? WHERE (pseudo =?)")
 	if err != nil {
 		fmt.Println(err)
 		fmt.Println("error Prepare new user")
 		return (500)
 	}
-	statement.Exec(UUID)
+	statement.Exec(UUID, pseudo)
 	db.Close()
 	return (0)
 }
