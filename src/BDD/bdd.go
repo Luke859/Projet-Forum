@@ -39,7 +39,7 @@ import (
 //status, db = GestionData()
 //fmt.Println(GetAllCmt(db, 2))
 //fmt.Println(CreateLike(1, 1, true, db))
-//fmt.Println(UpdateLikeCMT(db, 1, 1, 1))
+//fmt.Println(UpdateLikePOST(db, 3, 1, 1))
 //}
 
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
@@ -277,7 +277,7 @@ func PutUUID(UUID uuid.UUID, pseudo string, db *sql.DB) int {
 /////////////////////////////////////////////// like /////////////////////////////////////////////
 
 func CreateLike(ID_User int, Id_cmt int, likebool bool, db *sql.DB) int {
-	statm, err := db.Prepare("INSERT INTO Likes (Id_cmt, Id_user, like_button) VALUES (?,?,?)")
+	statm, err := db.Prepare("INSERT INTO Likes (Id_post, Id_user, like_button) VALUES (?,?,?)")
 	if err != nil {
 		fmt.Println(err)
 		fmt.Println("error Prepare new like")
@@ -314,23 +314,27 @@ les erreurs peuvent venir du fait qu'on a pas pu recupper l'ettat du button like
 func UpdateLikePOST(db *sql.DB, ID_like int, ID_User int, ID_Post int) int {
 	status, IsLike := IsLikedPOST(db, ID_like)
 	if status == 500 {
+		fmt.Println("ISlike a bugger")
 		return 500
 	} else {
 		if IsLike == 0 {
-			statement, err := db.Prepare("UPDATE Likes SET like_button = true WHERE Id_likes = ?, Id_post =?, Id_user =?)")
+			statement, err := db.Prepare("UPDATE Likes SET like_button = true WHERE Id_likes = ? AND Id_post =? AND Id_user =?")
 			if err != nil {
+				fmt.Println("A")
 				fmt.Println(err)
 				return 500
 			}
 			statement.Exec(ID_like, ID_User, ID_Post)
+			fmt.Println("B")
 			db.Close()
 			return (0)
 		} else {
-			statement, err := db.Prepare("UPDATE Likes SET like_button = 0 WHERE Id_likes = ?, Id_post =?, Id_user =?)")
+			statement, err := db.Prepare("UPDATE Likes SET like_button = 0 WHERE Id_likes = ? AND Id_post =? AND Id_user =?")
 			if err != nil {
 				fmt.Println(err)
 				return 500
 			}
+			fmt.Println("C")
 			statement.Exec(ID_like, ID_User, ID_Post)
 			db.Close()
 			return (0)
@@ -370,7 +374,6 @@ func UpdateLikeCMT(db *sql.DB, ID_like int, ID_User int, ID_cmt int) int {
 		if IsLike == 0 {
 			statement, err := db.Prepare("UPDATE Likes SET like_button = 1 WHERE (Id_likes = ?, Id_cmt =?, Id_user =?)")
 			if err != nil {
-				fmt.Println("A")
 				fmt.Println(err)
 				return 500
 			}
