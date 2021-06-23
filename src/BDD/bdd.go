@@ -232,36 +232,36 @@ func PutUUID(UUID string, db *sql.DB) int {
 	return (0)
 }
 
-func MakeLikes(Id_likes int, Id_user int, Id_post int, like_button bool, db *sql.DB) int {
-    statement, err := db.Prepare("INSERT INTO Likes (Id_likes, Id_post, Id_user, like_button) VALUES(?,?,?)")
-    if err != nil {
-        fmt.Println(err)
-        fmt.Println("error Prepare new like")
-        return (500)
-    }
-    statement.Exec(Id_likes, Id_user, Id_post, like_button)
-    db.Close()
-    return (0)
-}
+// func MakeLikes(Id_likes int, Id_user int, Id_post int, like_button string, db *sql.DB) int {
+//     statement, err := db.Prepare("INSERT INTO Likes (Id_likes, Id_post, Id_user, like_button) VALUES(?,?,?)")
+//     if err != nil {
+//         fmt.Println(err)
+//         fmt.Println("error Prepare new like")
+//         return (500)
+//     }
+//     statement.Exec(Id_likes, Id_user, Id_post, like_button)
+//     db.Close()
+//     return (0)
+// }
 
-func GetLikes(db *sql.DB, id_post int) (int, [][]string) {
-    var tabAllPost [][]string
+// func GetLikes(db *sql.DB, id_post int) (int, [][]string) {
+//     var tabAllPost [][]string
 
-    var likes bool
-	var idLikes int
-    var idUser int
-    var idPost int
+//     var likes string
+// 	var idLikes int
+//     var idUser int
+//     var idPost int
 
-    statement, err := db.Query("SELECT Id_likes, Id_post, Id_user, like_button FROM Likes WHERE Id_post = ?", id_post)
-    if err != nil {
-        fmt.Println(err)
-        return 500, tabAllPost
-    }
+//     statement, err := db.Query("SELECT Id_likes, Id_post, Id_user, like_button FROM Likes WHERE Id_post = ?", id_post)
+//     if err != nil {
+//         fmt.Println(err)
+//         return 500, tabAllPost
+//     }
 
-    for statement.Next() {
-        statement.Scan(&idLikes, &idUser, &idPost, &likes)
-        save := []string{strconv.Itoa(idLikes), strconv.Itoa(idUser), strconv.Itoa(idPost), likes}
-        tabAllPost = append(tabAllPost, save)
-    }
-    return 0, tabAllPost
-}
+//     for statement.Next() {
+//         statement.Scan(&idLikes, &idUser, &idPost, &likes)
+//         save := []string{strconv.Itoa(idLikes), strconv.Itoa(idUser), strconv.Itoa(idPost), likes}
+//         tabAllPost = append(tabAllPost, save)
+//     }
+//     return 0, tabAllPost
+// }
