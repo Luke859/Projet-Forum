@@ -25,7 +25,8 @@
 
 <!-- Block Posts -->
 {{range .}}
-    <div class="scroll">
+    <div id="scroll">
+        <button class="delete" onclick="deletePost()">❌</button>
         <div class="post">
             <div class="name">{{.Post}}</div>
 
@@ -38,13 +39,16 @@
                 </div>
             </form>
 
-            <button id="like">
-                <p id='addlike'>0</p>
-                ❤️Like
-            </button>
+            <form action="/sentLike" method="POST" id="like" >
+                <button type="button" name="like">
+                    <p id='addlike'>0</p>
+                    ❤️Like
+                </button>
+            </form>
 
             <script src="/static/JS/like.js"></script>
             <script src="/static/JS/CreeCmt.js"></script>
+            <script src="/static/JS/deletePost.js"></script>
         </div>
     </div>
     
