@@ -12,6 +12,7 @@ import (
 	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
+	uuid "github.com/satori/go.uuid"
 )
 
 //func main() {
@@ -245,8 +246,8 @@ func GetAllCmt(db *sql.DB, id_post int) (int, [][]string) {
 
 //////////////////////////////////////// get UUID from User //////////////////////////////////////
 
-func GetUUID_User(username string, db *sql.DB) (int, string) {
-	var UUID string = ""
+func GetUUID_User(username string, db *sql.DB) (int, uuid.UUID) {
+	var UUID uuid.UUID
 
 	tsql, err := db.Query("SELECT UUID FROM User WHERE pseudo = (?)", username) // check for UUID name in database
 	if err != nil {
@@ -261,7 +262,7 @@ func GetUUID_User(username string, db *sql.DB) (int, string) {
 
 ////////////////////////////////// put UUID in BDD //////////////////////////
 
-func PutUUID(UUID string, pseudo string, db *sql.DB) int {
+func PutUUID(UUID uuid.UUID, pseudo string, db *sql.DB) int {
 	statement, err := db.Prepare("UPDATE User SET uuid = ? WHERE (pseudo =?)")
 	if err != nil {
 		fmt.Println(err)
@@ -388,4 +389,23 @@ func UpdateLikeCMT(db *sql.DB, ID_like int, ID_User int, ID_cmt int) int {
 			return (0)
 		}
 	}
+}
+
+//////////////////////////////////////// Is sesion OK ///////////////////////////////////////////
+
+/*
+la function prend la valeur des cookie le nom de l'utilisateur et le pointeur vers la base de donnée.
+et retourne un boolean.
+*/
+func CheckSession(cookie uuid.UUID, username string, db *sql.DB) bool {
+	var IsSessionOk bool
+	status, uuidBDD := GetUUID_User(username, db)
+	if status == 0 {
+		if cookie == uuidBDD {
+			IsSessionOk = true
+		} else {
+			IsSessionOk = false
+		}
+	}
+	return IsSessionOk
 }
