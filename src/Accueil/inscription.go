@@ -54,12 +54,10 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 // Hash du mot de passe puis l'afficher dans le terminal
 func hashPassword(password string) string {
 	var passByte = []byte(password)
-
 	hash, err := bcrypt.GenerateFromPassword(passByte, bcrypt.MinCost)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	return string(hash)
 }
 

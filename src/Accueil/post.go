@@ -5,13 +5,11 @@ import (
 	"log"
 	"net/http"
 	"text/template"
-
 	BDD "../BDD"
 	Accueil "../Accueil"
 )
 
 func PostPage(w http.ResponseWriter, r *http.Request) {
-
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/post.html", "static/HTML/navbar.html")
 	if err != nil {
 		log.Fatalf("Template execution: %s", err)
