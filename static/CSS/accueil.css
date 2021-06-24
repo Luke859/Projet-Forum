@@ -82,10 +82,9 @@ a.inscription__links {
   margin-left: 37%;
 } 
 
- #navbar {
-  float: initial;
+/* #navbar {
   margin-bottom:7%;
- }
+ } */
 
 
 #nav {
@@ -833,6 +832,7 @@ p {
 } 
 
 .post {
+  
   position: relative;
   margin-left: 20px;
   height: 300px;
