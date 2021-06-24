@@ -49,7 +49,7 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 	CmtArea := r.FormValue("cmt")
 	fmt.Println(" Voici le commentaire écrit :", CmtArea)
 	statusCmt := BDD.MakeCmt(1, 1, CmtArea, db)
-	if statusCmt == 300 {
+	if statusCmt == 0 {
 		fmt.Println("Walla")
 	} else {
 		fmt.Println("WAlla il y avait plus de poulet curry")
