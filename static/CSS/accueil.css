@@ -82,7 +82,10 @@ a.inscription__links {
   margin-left: 37%;
 } 
 
- 
+ #navbar {
+  float: initial;
+  margin-bottom:7%;
+ }
 
 
 #nav {
@@ -833,17 +836,15 @@ p {
   position: relative;
   margin-left: 20px;
   height: 300px;
-  width: 815px;
-  background-color: #243b55;
-  background: rgba(0,0,0,.5);
-  box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  width: 1000px;
+  background-color: #0a6479;
   border-radius: 10px;
-  
+
 }
 
 .name{
   font-size: 25px;
+  width: 150px;
   height: 40px;
   text-align: center;
   background-color: white;
@@ -869,8 +870,8 @@ p {
   text-align: center;
   padding: 12px 20px;
   color: #fff;
-  margin-left: 695px;
-  margin-top: 30px;
+  margin-left: 890px;
+  margin-top: 150px;
   border-radius: 5px;
   background: #F34D4D;
   width: 100px;

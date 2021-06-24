@@ -63,22 +63,7 @@ func hashPassword(password string) string {
 	return string(hash)
 }
 
-/*func CreateCookie(w http.ResponseWriter, r *http.Request){
-	myuuid := guuid.New()
-
-	if r.Method == "GET" {
-		http.SetCookie(w, &http.Cookie{
-			Name: "cookieName",
-			Value: myuuid.String(),
-			Path: "/",
-			Expires: time.Now().Add(120*time.Second),
-			MaxAge: 86400,
-		})
-	}
-	fmt.Println(myuuid)
-}*/
-
-// Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion"
+// Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion" et créer le cookie evec l'UUID
 
 func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	myuuid := guuid.New()
@@ -122,7 +107,19 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// Verif du mot de passe
+///////////////////////////////// Récupération de la valeur du cookie ( l'UUID ) pour vérif avec BDD ////////////////////////////////////////////////////////
+
+func RecupValueCookie(r *http.Request) string {
+	c, err := r.Cookie("cookieName")
+	if err != nil {
+		return ""
+	}
+	fmt.Println(c.Value)
+	verifUUID := c.Value
+	return verifUUID
+}
+
+//////////////////////// Verif du mot de passe ////////////////////////
 func comparePasswords(HashPass string, passwordconnect []byte) bool {
 
 	byteHash := []byte(HashPass)
