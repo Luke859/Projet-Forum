@@ -82,7 +82,10 @@ a.inscription__links {
   margin-left: 37%;
 } 
 
- 
+ #navbar {
+  float: initial;
+  margin-bottom:7%;
+ }
 
 
 #nav {
