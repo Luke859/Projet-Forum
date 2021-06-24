@@ -251,7 +251,7 @@ func CheckPassword(username string, db *sql.DB) (int, string) {
 }
 ///////////////////////////////////////////////LIKE/////////////////////////////////////////////////////////////////////////////////////////
 
-func CreateLike(ID_User int, Id_cmt int, likebool bool, db *sql.DB) int {
+func MakeLikes(ID_User int, Id_cmt int, likebool int, db *sql.DB) int {
     statm, err := db.Prepare("INSERT INTO Likes (Id_post, Id_user, like_button) VALUES (?,?,?)")
     if err != nil {
         fmt.Println(err)
@@ -292,7 +292,7 @@ func UpdateLikePOST(db *sql.DB, ID_like int, ID_User int, ID_Post int) int {
         return 500
     } else {
         if IsLike == 0 {
-            statement, err := db.Prepare("UPDATE Likes SET like_button = true WHERE Id_likes = ? AND Id_post =? AND Id_user =?")
+            statement, err := db.Prepare("UPDATE Likes SET like_button = 1 WHERE Id_likes = ? AND Id_post =? AND Id_user =?")
             if err != nil {
                 fmt.Println("A")
                 fmt.Println(err)
