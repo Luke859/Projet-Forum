@@ -1,5 +1,6 @@
 <img width="383" alt="GITPERSO" src="https://user-images.githubusercontent.com/72868466/123279370-12651080-d508-11eb-9f0c-07e229c2d1b7.png">
-<img width="383" alt="GITPERSO" src="https://user-images.githubusercontent.com/72868466/123279418-1f81ff80-d508-11eb-9ef0-177b6fb85c6e.png">
+<img width="383" alt="GITDEVREV" src="https://user-images.githubusercontent.com/72868466/123279643-548e5200-d508-11eb-9e05-6a9d8022b8dd.png">
+
 # Projet-Forum
 
 ### :one: L'ambition du projet : 
