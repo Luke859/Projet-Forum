@@ -1,3 +1,0 @@
-server go
-templates : sign in, log in, home
-js : 
