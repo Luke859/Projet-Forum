@@ -1,5 +1,4 @@
-<img width="383" alt="GITPERSO" src="https://user-images.githubusercontent.com/72868466/123279370-12651080-d508-11eb-9f0c-07e229c2d1b7.png">
-<img width="383" alt="GITDEVREV" src="https://user-images.githubusercontent.com/72868466/123279643-548e5200-d508-11eb-9e05-6a9d8022b8dd.png">
+
 
 # Projet-Forum
 
@@ -42,14 +41,14 @@ Tout d'abord installer les librairies ``sqlite3, bcrypt, uuid`` pour cela direct
 * ``github.com/mattn/go-sqlite3``
 * ``golang.org/x/crypto/bcrypt``
 * ``github.com/google/uuid``
-<img width="383" alt="GITPERSO" src="https://user-images.githubusercontent.com/72868466/123279556-3f192800-d508-11eb-98cc-4b93b07ff61f.png">
+
 
 Le serveur est fin prêt à être lancé pour cela utiliser la commande `` go run server.go`` dans le ***terminale*** ensuite aller dans votre ***navigateur web*** et inscriver ``localhost:8080`` dans la barre de navigation.
 ### :four: Environnement GIT:
-Tout d'abord notre réperoire ``Projet-Forum`` contient 7 branche. Chaque membre du projet possède une branche individuel
+Tout d'abord notre réperoire ``Projet-Forum`` contient 7 branche. Chaque membre du projet possède une branche individuel, cela permet d'éviter des conflits entre les parties de codes de chacuns. 
+<img width="300" alt="GITPERSO" src="https://user-images.githubusercontent.com/72868466/123279556-3f192800-d508-11eb-98cc-4b93b07ff61f.png">
 
-
-
+Ensuite notre répertoire contient une branche ```dev`` et ``main``. Ici
 ### :five: Membres du groupes :
 
 * **Pierric Come** _alias_ [@lancelot260](https://github.com/lancelot260)
