@@ -121,14 +121,11 @@ func RecupValueCookie(r *http.Request) string {
 
 //////////////////////// Verif du mot de passe ////////////////////////
 func comparePasswords(HashPass string, passwordconnect []byte) bool {
-
 	byteHash := []byte(HashPass)
 	err := bcrypt.CompareHashAndPassword(byteHash, passwordconnect)
 	if err != nil {
 		log.Println(err)
 		return false
 	}
-
 	return true
-
 }

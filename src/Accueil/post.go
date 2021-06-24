@@ -6,7 +6,8 @@ import (
 	"net/http"
 	"text/template"
 
-	"../BDD"
+	BDD "../BDD"
+	Accueil "../Accueil"
 )
 
 func PostPage(w http.ResponseWriter, r *http.Request) {
@@ -22,38 +23,45 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 
 // Recupération du TEXT dans le form TextArea
 func GetPostInformation(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		log.Fatal()
+	localUUID := Accueil.RecupValueCookie(r)
+	_, db := BDD.GestionData()
+	BDDUUID := BDD.CheckSession(localUUID, username, db)
+	if BDDUUID == true{
+		err := r.ParseForm()
+		if err != nil {
+			log.Fatal()
+		}
+		TextArea := r.FormValue("text")
+		fmt.Println(" Voici le post écrit :", TextArea)
+		statusPost := BDD.MakePost(TextArea, 1)
+		if statusPost == 300 {
+			fmt.Println("Walla")
+		} else {
+			fmt.Println("WAlla il y avait plus de poulet curry")
+		}
+		http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	}
-
-	TextArea := r.FormValue("text")
-	fmt.Println(" Voici le post écrit :", TextArea)
-	statusPost := BDD.MakePost(TextArea, 1)
-	if statusPost == 300 {
-		fmt.Println("Walla")
-	} else {
-		fmt.Println("WAlla il y avait plus de poulet curry")
-	}
-	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
-
 }
 
 func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		log.Fatal()
-	}
+	localUUID := Accueil.RecupValueCookie(r)
 	_, db := BDD.GestionData()
+	BDDUUID := BDD.CheckSession(localUUID, username, db)
+	if BDDUUID == true{
+		err := r.ParseForm()
+		if err != nil {
+			log.Fatal()
+		}
+		_, db := BDD.GestionData()
 
-	CmtArea := r.FormValue("cmt")
-	fmt.Println(" Voici le commentaire écrit :", CmtArea)
-	statusCmt := BDD.MakeCmt(1, 1, CmtArea, db)
-	if statusCmt == 300 {
-		fmt.Println("Walla")
-	} else {
-		fmt.Println("WAlla il y avait plus de poulet curry")
+		CmtArea := r.FormValue("cmt")
+		fmt.Println(" Voici le commentaire écrit :", CmtArea)
+		statusCmt := BDD.MakeCmt(1, 1, CmtArea, db)
+		if statusCmt == 300 {
+			fmt.Println("Walla")
+		} else {
+			fmt.Println("WAlla il y avait plus de poulet curry")
+		}
+		http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	}
-	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
-
 }
