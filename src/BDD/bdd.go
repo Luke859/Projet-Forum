@@ -205,32 +205,18 @@ func MakeCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
 
 //////////////////////////////////////// get UUID from User //////////////////////////////////////
 
-func GetUUID_User(username string, db *sql.DB) (int, string) {
-	var UUID string
+func GetUserByUUID(uuid string, db *sql.DB) (int, string) {
+    var username string
 
-	tsql, err := db.Query("SELECT UUID FROM User WHERE pseudo = (?)", username) // check for UUID name in database
-	if err != nil {
-		fmt.Println(err)
-		return 500, UUID
-	}
-
-	for tsql.Next() {
-		tsql.Scan(&UUID)
-	}
-	return 0, UUID
-}
-
-func CheckSession(cookie string, username string, db *sql.DB) bool {
-    var IsSessionOk bool
-    status, uuidBDD := GetUUID_User(username, db)
-    if status == 0 {
-        if cookie == uuidBDD {
-            IsSessionOk = true
-        } else {
-            IsSessionOk = false
-        }
+    tsql, err := db.Query("SELECT pseudo FROM User WHERE uuid = (?)", uuid) // check for UUID name in database
+    if err != nil {
+        fmt.Println(err)
+        return 400, username
     }
-    return IsSessionOk
+    for tsql.Next() {
+        tsql.Scan(&username)
+    }
+    return 0, username
 }
 
 ////////////////////////////////// put UUID in BDD //////////////////////////

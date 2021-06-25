@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"text/template"
 	BDD "../BDD"
-	Accueil "../Accueil"
 )
 
 func PostPage(w http.ResponseWriter, r *http.Request) {
@@ -21,17 +20,22 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 
 // Recupération du TEXT dans le form TextArea
 func GetPostInformation(w http.ResponseWriter, r *http.Request) {
-	localUUID := Accueil.RecupValueCookie(r)
+	localUUID := RecupValueCookie(r)
+	fmt.Println(localUUID)
 	_, db := BDD.GestionData()
-	BDDUUID := BDD.CheckSession(localUUID, username, db)
-	if BDDUUID == true{
+	statuErr, username := BDD.GetUserByUUID(localUUID, db)
+	IdErr, IdUser := BDD.GetId_User(username, db)
+	fmt.Println(statuErr)
+	fmt.Println(IdErr)
+	if  statuErr == 0 && IdErr == 0{
+		//fmt.Println("test")
 		err := r.ParseForm()
 		if err != nil {
 			log.Fatal()
 		}
 		TextArea := r.FormValue("text")
 		fmt.Println(" Voici le post écrit :", TextArea)
-		statusPost := BDD.MakePost(TextArea, 1)
+		statusPost := BDD.MakePost(TextArea, IdUser)
 		if statusPost == 300 {
 			fmt.Println("Walla")
 		} else {
@@ -42,10 +46,11 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
-	localUUID := Accueil.RecupValueCookie(r)
+	localUUID := RecupValueCookie(r)
 	_, db := BDD.GestionData()
-	BDDUUID := BDD.CheckSession(localUUID, username, db)
-	if BDDUUID == true{
+	statuErr, username := BDD.GetUserByUUID(localUUID, db)
+	IdErr, IdUser := BDD.GetId_User(username, db)
+	if statuErr == 0 && IdErr == 0{
 		err := r.ParseForm()
 		if err != nil {
 			log.Fatal()
@@ -54,7 +59,7 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 
 		CmtArea := r.FormValue("cmt")
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)
-		statusCmt := BDD.MakeCmt(1, 1, CmtArea, db)
+		statusCmt := BDD.MakeCmt(IdUser, 1, CmtArea, db)
 		if statusCmt == 300 {
 			fmt.Println("Walla")
 		} else {
