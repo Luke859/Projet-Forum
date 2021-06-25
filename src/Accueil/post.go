@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 	"text/template"
 
 	BDD "../BDD"
@@ -65,21 +64,21 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func GetLikesInformation(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
-		log.Fatal()
-	}
-	_, db := BDD.GestionData()
+// func GetLikesInformation(w http.ResponseWriter, r *http.Request) {
+// 	err := r.ParseForm()
+// 	if err != nil {
+// 		log.Fatal()
+// 	}
+// 	_, db := BDD.GestionData()
 
-	LikeArea, _ := strconv.Atoi(r.FormValue("like"))
-	fmt.Println(" Voici le nombre de likes écrit :", LikeArea)
-	statusLikes := BDD.CreateLike(1, 1, LikeArea, db)
-	if statusLikes == 300 {
-		fmt.Println("Walla")
-	} else {
-		fmt.Println("WAlla il y avait plus de poulet curry")
-	}
-	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+// 	LikeArea, _ := strconv.Atoi(r.FormValue("like"))
+// 	fmt.Println(" Voici le nombre de likes écrit :", LikeArea)
+// 	statusLikes := BDD.MakeLikes(1, 1, LikeArea, db)
+// 	if statusLikes == 300 {
+// 		fmt.Println("Walla")
+// 	} else {
+// 		fmt.Println("WAlla il y avait plus de poulet curry")
+// 	}
+// 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 
-}
+// }
