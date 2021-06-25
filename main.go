@@ -6,7 +6,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-struct type Catery {
+type Catery struct{
 	
 }
 
