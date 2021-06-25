@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> MergePierric
 let form = document.getElementById('form')
 
 function formRecup() {
@@ -17,8 +13,3 @@ function formRecupConnect(){
 
 let textarea = document.getElementById('textarea')   
 
-    function TextRecup(){
-        textarea.submit()
-    }
-=======
->>>>>>> MergePierric
