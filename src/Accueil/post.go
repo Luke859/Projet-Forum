@@ -22,20 +22,15 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 // Recupération du TEXT dans le form TextArea
 func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 	localUUID := RecupValueCookie(r)
-	fmt.Println(localUUID)
 	_, db := BDD.GestionData()
 	statuErr, username := BDD.GetUserByUUID(localUUID, db)
 	IdErr, IdUser := BDD.GetId_User(username, db)
-	fmt.Println(statuErr)
-	fmt.Println(IdErr)
 	if statuErr == 0 && IdErr == 0 {
-		//fmt.Println("test")
 		err := r.ParseForm()
 		if err != nil {
 			log.Fatal()
 		}
 		TextArea := r.FormValue("text")
-		fmt.Println(" Voici le post écrit :", TextArea)
 		statusPost := BDD.MakePost(TextArea, IdUser)
 		if statusPost == 300 {
 			fmt.Println("Walla")
@@ -56,7 +51,6 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal()
 		}
-		_, db := BDD.GestionData()
 
 		CmtArea := r.FormValue("cmt")
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)

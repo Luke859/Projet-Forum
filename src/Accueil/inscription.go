@@ -96,11 +96,11 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	})
 
 	fmt.Println(myuuid)
-	//recupUUID := BDD.PutUUID(myuuid, pseudoconnect, db)
-	//if recupUUID == 500 {
-	//	fmt.Println("Nous rencontrons des perturbations")
-	//}
-	// http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+	recupUUID := BDD.PutUUID(myuuid, pseudoconnect, db)
+	if recupUUID == 500 {
+		fmt.Println("Nous rencontrons des perturbations")
+	}
+	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
 
 }

@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 
+	uuid "github.com/google/uuid"
 	_ "github.com/mattn/go-sqlite3"
-	uuid "github.com/satori/go.uuid"
 )
 
 func NewUser(Pseudo string, HashPass string, db *sql.DB) int {
@@ -42,7 +42,7 @@ func CheckPassword(username string, db *sql.DB) (int, string) {
 /////////////////////////////////////////////////////////get id_user/////////////////////////////////////////
 
 func GetId_User(username string, db *sql.DB) (int, int) {
-	var Id_user int = -1
+	var Id_user int
 
 	tsql, err := db.Query("SELECT Id_user FROM User WHERE pseudo = (?)", username)
 	if err != nil {
@@ -53,7 +53,10 @@ func GetId_User(username string, db *sql.DB) (int, int) {
 	for tsql.Next() {
 		tsql.Scan(&Id_user)
 	}
-	return 0, Id_user
+	if Id_user > 0 {
+		return 0, Id_user
+	}
+	return 500, Id_user
 }
 
 ////////////////////////////////// Get All Username /////////////////////////////////////////////////////////////////////:
