@@ -1,5 +1,4 @@
 
-
 # Projet-Forum
 
 ### :one: L'ambition du projet : 
@@ -52,6 +51,7 @@ Tout d'abord notre réperoire ``Projet-Forum`` contient 7 branche. Chaque membre
 
 Ensuite notre répertoire contient une branche ``dev`` et une branche ``main``. Dans notre cas la ``dev`` permet de regrouper tous les bouts de code de chaque membre et de regler les conflict uniquement sur cette branche. Contrairement a la ``dev`` la branche ``main`` permet de récuperer le regroupement de tous les codes dont la version finale.
 <br>
+ <img width="383" alt="GITDEVREV" src="https://user-images.githubusercontent.com/72868466/123381824-84ce0300-d591-11eb-957f-06b66605fa4c.png">
 
 
 ### :five: Membres du groupes :
