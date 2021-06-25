@@ -32,7 +32,7 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 		for _, cmtSync := range cmtsDouble {
 			p := PageAccueil{
 				Post: postSync[1],
-				Cmt: CmtArea,
+				Cmt:  CmtArea,
 				// Like: postSync[1],
 			}
 			postOne = append(postOne, p)
