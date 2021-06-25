@@ -170,38 +170,38 @@ func MakePost(text string, ID_User int) int {
 
 ////////////////////////creation post///////////////////////////////
 
-// func GetAllCmt(db *sql.DB, id_post int) (int, [][]string) {
-// 	var tabAllPost [][]string
+func GetAllCmt(db *sql.DB, id_post int) (int, [][]string) {
+	var tabAllPost [][]string
 
-// 	var text string
-// 	var idUser int
-// 	var idPost int
+	var text string
+	var idUser int
+	var idPost int
 
-// 	statement, err := db.Query("SELECT Id_user, Id_post, contenu FROM Commentaires WHERE Id_post = ?", id_post)
-// 	if err != nil {
-// 		fmt.Println(err)
-// 		return 500, tabAllPost
-// 	}
+	statement, err := db.Query("SELECT Id_user, Id_post, contenu FROM Commentaires WHERE Id_post = ?", id_post)
+	if err != nil {
+		fmt.Println(err)
+		return 500, tabAllPost
+	}
 
-// 	for statement.Next() {
-// 		statement.Scan(&idUser, &idPost, &text)
-// 		save := []string{strconv.Itoa(idUser), strconv.Itoa(idPost), text}
-// 		tabAllPost = append(tabAllPost, save)
-// 	}
-// 	return 0, tabAllPost
-// }
+	for statement.Next() {
+		statement.Scan(&idUser, &idPost, &text)
+		save := []string{strconv.Itoa(idUser), strconv.Itoa(idPost), text}
+		tabAllPost = append(tabAllPost, save)
+	}
+	return 0, tabAllPost
+}
 
-// func MakeCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
-// 	statement, err := db.Prepare("INSERT INTO Commentaires (Id_user, Id_post, contenu) VALUES(?,?,?)")
-// 	if err != nil {
-// 		fmt.Println(err)
-// 		fmt.Println("error Prepare new comment")
-// 		return (500)
-// 	}
-// 	statement.Exec(Id_user, Id_post, contenu)
-// 	db.Close()
-// 	return (0)
-// }
+func MakeCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
+	statement, err := db.Prepare("INSERT INTO Commentaires (Id_user, Id_post, contenu) VALUES(?,?,?)")
+	if err != nil {
+		fmt.Println(err)
+		fmt.Println("error Prepare new comment")
+		return (500)
+	}
+	statement.Exec(Id_user, Id_post, contenu)
+	db.Close()
+	return (0)
+}
 
 //////////////////////////////////////// get UUID from User //////////////////////////////////////
 
