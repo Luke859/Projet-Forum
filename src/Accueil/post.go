@@ -33,9 +33,9 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 		TextArea := r.FormValue("text")
 		statusPost := BDD.MakePost(TextArea, IdUser)
 		if statusPost == 300 {
-			fmt.Println("Walla")
+			fmt.Println("Post envoyer")
 		} else {
-			fmt.Println("WAlla il y avait plus de poulet curry")
+			fmt.Println("Erreur envoie post")
 		}
 		http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	} else {
@@ -58,9 +58,9 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)
 		statusCmt := BDD.MakeCmt(IdUser, 1, CmtArea, db)
 		if statusCmt == 300 {
-			fmt.Println("Walla")
+			fmt.Println("Commentaire envoyer")
 		} else {
-			fmt.Println("WAlla il y avait plus de poulet curry")
+			fmt.Println("Erreur envoie commentaire")
 		}
 		http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	} else {
