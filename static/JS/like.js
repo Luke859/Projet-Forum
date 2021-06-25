@@ -1,20 +1,12 @@
-var like = document.getElementById('addlike');
+let like = document.getElementById('addlike')
 
-document.onclick = changeLike;
+function changeLike() {
 
-function changeLike(e) {
-    like.textContent = "1";
-
-    if(like.textContent === "1") {
-        document.onclick = change2Like;
+    if(like === 0){
+        like.onclick() = 1;
+    } else {
+        like.onclick() = 0;
     }
 
-}
-
-function change2Like(e) {
-    like.textContent ="0"
-
-    if(like.textContent === "0") {
-        document.onclick = changeLike;
-    }
+    like.submit()
 }
