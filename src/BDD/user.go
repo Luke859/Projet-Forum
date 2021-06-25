@@ -77,18 +77,18 @@ func GetAllUsername(db *sql.DB) (int, []string) {
 
 //////////////////////////////////////// get UUID from User //////////////////////////////////////
 
-func GetUUID_User(username string, db *sql.DB) (int, uuid.UUID) {
-	var UUID uuid.UUID
+func GetUserByUUID(uuid string, db *sql.DB) (int, string) {
+	var username string
 
-	tsql, err := db.Query("SELECT UUID FROM User WHERE pseudo = (?)", username) // check for UUID name in database
+	tsql, err := db.Query("SELECT pseudo FROM User WHERE uuid = (?)", uuid) // check for UUID name in database
 	if err != nil {
 		fmt.Println(err)
-		return 500, UUID
+		return 400, username
 	}
 	for tsql.Next() {
-		tsql.Scan(&UUID)
+		tsql.Scan(&username)
 	}
-	return 0, UUID
+	return 0, username
 }
 
 ////////////////////////////////// put UUID in BDD //////////////////////////
@@ -103,23 +103,4 @@ func PutUUID(UUID uuid.UUID, pseudo string, db *sql.DB) int {
 	statement.Exec(UUID, pseudo)
 	db.Close()
 	return (0)
-}
-
-//////////////////////////////////////// Is sesion OK ///////////////////////////////////////////
-
-/*
-la function prend la valeur des cookie le nom de l'utilisateur et le pointeur vers la base de donnée.
-et retourne un boolean.
-*/
-func CheckSession(cookie uuid.UUID, username string, db *sql.DB) bool {
-	var IsSessionOk bool
-	status, uuidBDD := GetUUID_User(username, db)
-	if status == 0 {
-		if cookie == uuidBDD {
-			IsSessionOk = true
-		} else {
-			IsSessionOk = false
-		}
-	}
-	return IsSessionOk
 }
