@@ -1,4 +1,3 @@
-<img width="383" alt="GITDEVREV" src="https://user-images.githubusercontent.com/72868466/123381118-995dcb80-d590-11eb-9e38-cb5f8e11e183.png">
 
 
 # Projet-Forum
@@ -46,10 +45,15 @@ Tout d'abord installer les librairies ``sqlite3, bcrypt, uuid`` pour cela direct
 
 Le serveur est fin prêt à être lancé pour cela utiliser la commande `` go run server.go`` dans le ***terminale*** ensuite aller dans votre ***navigateur web*** et inscriver ``localhost:8080`` dans la barre de navigation.
 ### :four: Environnement GIT:
-Tout d'abord notre réperoire ``Projet-Forum`` contient 7 branche. Chaque membre du projet possède une branche individuel, cela permet d'éviter des conflits entre les parties de codes de chacuns. 
+Tout d'abord notre réperoire ``Projet-Forum`` contient 7 branche. Chaque membre du projet possède une branche individuel, cela permet d'éviter des conflits entre les parties de codes de chacuns.
+ 
 <img width="300" alt="GITPERSO" src="https://user-images.githubusercontent.com/72868466/123279556-3f192800-d508-11eb-98cc-4b93b07ff61f.png">
+<br>
 
-Ensuite notre répertoire contient une branche ``dev`` et une branche ``main``. Dans notre cas la la ``dev`` permet
+Ensuite notre répertoire contient une branche ``dev`` et une branche ``main``. Dans notre cas la ``dev`` permet de regrouper tous les bouts de code de chaque membre et de regler les conflict uniquement sur cette branche. Contrairement a la ``dev`` la branche ``main`` permet de récuperer le regroupement de tous les codes dont la version finale.
+<br>
+
+
 ### :five: Membres du groupes :
 
 * **Pierric Come** _alias_ [@lancelot260](https://github.com/lancelot260)
