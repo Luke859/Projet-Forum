@@ -1,41 +1,59 @@
-# **Projet-Forum**
-### **Groupe :**
-- Nathy MELLAL
-- Pierric COME
-- Florian DAGNAS
-- Luke JONES
-- Quincy OBOUNOU
+# Projet-Forum
 
-### **Le projet en quelques phrases:**
+### L'ambition du projet : 
 
-Le but de ce projet est de créer un forum dans le sens général, c'est à dire un site qui permette de :
-- Créer des posts (sujets) qui soient du texte et/ou des images.
-- Chaque post aura une ou plusieurs catégories (parmi une liste pré-déterminée)
-- Laisser d'autres utilisateurs y réagir en postant des commentaires (ou réponses).
-- Ajouter des votes (Likes et dislikes)
-- Les posts et commentaires seront accessible par tout le monde, mais participernécessitera de créer un compte utilisateur.
-- On pourra filtrer les posts:
-    - Par catégorie
-    - Pour ne voir que les posts qu'on a soi-même likés
-    - Pour ne voir que les posts qu'on a soi-même postés
+Le but de ce projet est de créer un forum dans le sens général, c'est a dire un site qui permet de créer des posts qui soient du texte et/ou image. Chaque post aura une ou plusieurs catégories de plus les utilisateurs peuvent y réagir en postant des commentaires et via des votes (likes, dislikes). En outre les posts et les commentaires seront accessible par tout le monde, mais participer nécessitera de créer un compte utilisateur. Enfin on pourra filtrer les posts par catégorie, par posts qu'on a soi-meme liké ou disliké.
 
-### **Les attendus du projet:**
+### Les modalités :
 
-- Il faudra pouvoir s'inscrire et s'authentifier; les mots de passe devront être hashés.
-- Une session utilisateur sera mise en place en utilisant un cookie avec un tempsd'expiration.
+Le projet sera dévlopper par groupes de 4 ou 5 sur une durée d'un mois et donnera lieu a une soutenance sur la dernière journée.
+
+##### Language utiliser :
+
+<img alt="HTML5" src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white%22/%3E"/> 
+
+``Hypertext Markup Language``
+
+<img alt="js" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/>
+
+``JavaScript``
+
+<img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white"/>
+
+``Cascading Style Sheets``
 
 
-### **Les contraintes:**
+<img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white
+"/>
+``golang``
 
-- Le serveur web devra être écrit en GoUne URL par page
-- La base de données sera créée et administrée grâce à la bibliothèque SQLite
-- Les mots de passe seront sécurisés
-- Les sessions de connexion exploiteront des cookiesLe site pourra être déployé avec Docker
-- Les packages autorisés sont les packages standards, bcrypt, sqlite3, uuid
+<img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white"/> 
 
-### **Liens**
+``SQLite``
 
-[Lien Google DOC](https://docs.google.com/document/d/1omAeKbQOeYaap4RX3qKg7whCzQdDwmaRJPslWD8ngG0/edit)     
-[ Lien du Trello](https://trello.com/invite/b/QIs6SPOM/3b503994258364af562537706bf98691/projet-forum)   
-[Lien du Diapo](https://docs.google.com/presentation/d/1dRf_fcqrLJjJ2455lpEHPBQ1LyhFJx_12ttFqVdK6aw/edit#slide=id.p)    
+
+
+
+
+### Pré-requis :
+
+Afin d'utiliser les librairies ``sqlite3, bcrypt, uuid`` direction dans le ***terminal*** de ***Visual Studio Code*** et utiliser la commande suivante ``go get`` :
+* ``github.com/mattn/go-sqlite3``
+* ``golang.org/x/crypto/bcrypt``
+* ``github.com/google/uuid``
+
+
+
+### Membres du groupes :
+
+
+* **Pierric Come** _alias_ [@lancelot260](https://github.com/lancelot260)
+
+* **Luke Jones** _alias_ [@Luke859](https://github.com/Luke859)
+
+* **Florian Dagnas** _alias_ [@Flodagnas](https://github.com/Flodagnas)
+
+* **Nathy Mellal** _alias_ [@nathymellal](https://github.com/nathymellal)
+
+
 

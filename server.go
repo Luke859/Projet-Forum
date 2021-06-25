@@ -17,6 +17,7 @@ func main() {
 	http.HandleFunc("/sentConnect", Accueil.GetSignConnect)
 	http.HandleFunc("/sentText", Accueil.GetPostInformation)
 	http.HandleFunc("/sentCmt", Accueil.GetCmtInformation)
+	// http.HandleFunc("/sentLike", Accueil.GetLikesInformation)
 
 	http.ListenAndServe(":8080", nil)
 
