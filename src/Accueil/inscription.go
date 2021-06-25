@@ -9,8 +9,8 @@ import (
 
 	BDD "../BDD"
 
+	guuid "github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
-	guuid"github.com/google/uuid"
 )
 
 func InscriptionPage(w http.ResponseWriter, r *http.Request) {
@@ -76,7 +76,7 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 
 	_, db := BDD.GestionData()
 	_, recuphash := BDD.CheckPassword(pseudoconnect, db)
-	
+
 	match := comparePasswords(recuphash, []byte(passwordconnect))
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, "/", passwordconnect)
@@ -98,10 +98,10 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	})
 
 	fmt.Println(myuuid)
-	recupUUID := BDD.PutUUID(myuuid, pseudoconnect, db)
-	if recupUUID == 500 {
-		fmt.Println("Nous rencontrons des perturbations")
-	}
+	//recupUUID := BDD.PutUUID(myuuid, pseudoconnect, db)
+	//if recupUUID == 500 {
+	//	fmt.Println("Nous rencontrons des perturbations")
+	//}
 	// http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
 
@@ -111,7 +111,7 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 
 func RecupValueCookie(r *http.Request) string {
 	c, err := r.Cookie("cookieName")
-	if err != nil{
+	if err != nil {
 		return ""
 	}
 	fmt.Println(c.Value)

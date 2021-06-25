@@ -21,15 +21,13 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	var postOne []PageAccueil
 	_, db := BDD.GestionData()
 
-	postsDouble = BDD.GetAllPost(db)
+	_, postsDouble = BDD.GetAllPost(db)
 
 	for _, postSync := range postsDouble {
-
 		p := PageAccueil{
 			Post: postSync[1],
 		}
 		postOne = append(postOne, p)
-
 	}
 
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/Accueil.html", "static/HTML/navbar.html")
