@@ -54,12 +54,10 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 // Hash du mot de passe puis l'afficher dans le terminal
 func hashPassword(password string) string {
 	var passByte = []byte(password)
-
 	hash, err := bcrypt.GenerateFromPassword(passByte, bcrypt.MinCost)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	return string(hash)
 }
 
@@ -121,14 +119,11 @@ func RecupValueCookie(r *http.Request) string {
 
 //////////////////////// Verif du mot de passe ////////////////////////
 func comparePasswords(HashPass string, passwordconnect []byte) bool {
-
 	byteHash := []byte(HashPass)
 	err := bcrypt.CompareHashAndPassword(byteHash, passwordconnect)
 	if err != nil {
 		log.Println(err)
 		return false
 	}
-
 	return true
-
 }
