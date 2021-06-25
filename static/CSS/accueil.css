@@ -1,0 +1,400 @@
+body {
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+  background: #243b55;
+    
+}
+
+/* /////////////////////////////BAR DE NAVIGATION ///////////////////////////////////////////////////////////////////////////////////////////////////// */
+header {  
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+    padding: 40px 100px;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0,5;
+}
+
+header.sticky{
+   
+    background-color: rgba(9, 9, 53, 0.5);
+    background: rgba(0,0,0,.5);
+    padding: 10px 100px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: 0,5;
+}
+
+#nav {
+  position: relative;
+  display: flex;
+}
+
+.navbar__links { 
+    color: white;
+    background-color: rgba(9, 9, 53, 0.5);
+    background: rgba(0,0,0,.5);
+    font-size: 27px;
+    margin-top: 0px;
+    border-radius: 44px;
+    padding: 9px 64px;
+    text-decoration: none;
+    margin-left: 40%;
+ } 
+
+.navbar__links:hover {
+    color: black;
+    background: #0a6479;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+} 
+
+/* ////////////////////////////////////////////////PAGE ACCUEIL ///////////////////////////////////////////////////////////////////////////////////// */
+
+/*////////////////////////////////////////////////BURGER BUTTON////////////////////////////////////////////////////////*/
+
+.burger{
+  position: fixed;
+  left: 30px;
+  top: 160px;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.burger .barre {
+  width: 30px;
+  height: 3px;
+  background: rgba(0,0,0,.5);
+  margin-top: 3px;
+}
+
+.filtre {
+  position: fixed;
+  background: rgba(0,0,0,.5);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  width: 15% ;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  transition: transform .6s ease-in-out;
+  -webkit-transition: transform .6s ease-in-out;
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+
+}
+
+.filtre.isOpen{
+  transform: translateX(0%);
+  -webkit-transform: translateX(0%);
+}
+
+.filtre ul {
+  position: relative;
+  top: 32%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+.filtre ul li {
+  margin: 80px 0;
+  
+}
+
+.filtre ul li:hover ul {
+  display: block;
+  
+}
+
+.filtre ul li a{
+  color: floralwhite;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.filtre ul li ul{
+  display: none;
+  position: absolute;
+  margin: 10px 0;
+  top: 180px;
+}
+
+.filtre ul li ul li{
+  margin: 30px 0;
+
+}
+
+.filtre ul li ul li a:hover{
+  background-color: gray;
+  padding: 10px;
+}
+
+/*///////////////////////////////////////// Page accueil avec les posts//////////////////////////////////////////////////////////////////////////////////////*/
+
+#test {
+  display: flex;
+  margin-top: 100px;
+  margin-left: 500px;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+} 
+
+.post {
+  margin-top: 150px;
+  height: 300px;
+  width: 1000px;
+  background-color: #0a6479;
+  border-radius: 10px;
+}
+
+.name{
+  font-size: 25px;
+  width: 1000px;
+  height: 40px;
+  text-align: center;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+
+/*/////////////////////////////////Page accueil avec les commentaires////////////////*/
+
+.press {
+  position: relative;
+  top: 200px;
+  margin-left: 10px;
+  height: 40px;
+}
+
+.press button{
+  height: 35px;
+  width: 70px;
+  text-transform: uppercase;
+}
+.enter {
+  border-radius: 5px;
+  width: 775px;
+  height: 35px;
+}
+
+/*///////////////////////////Page accueil avec les likes///////////////////////////////////////////////*/
+
+#like {
+  position: relative;
+  color: #fff;
+  margin-left: 880px;
+  margin-top: 160px;
+  border-radius: 5px;
+  background: #F34D4D;
+  width: 100px;
+  height: 40px;
+  box-shadow: 0 0 0 0 rgba(255, 71, 84, .7);
+  animation: battement 2s infinite cubic-bezier(.66, 0, 0, 1);
+  cursor: pointer;
+}
+
+@keyframes battement {
+  to {
+    box-shadow: 0 0 0 30px rgba(255, 71, 84, 0);
+  }
+}
+
+/*/////////////////////////////////////PAGE INSCRIPTION /////////////////////////////////////////*/
+
+
+a.inscription__links { 
+  color: white;
+  background-color: rgba(9, 9, 53, 0.5);
+  background: rgba(0,0,0,.5);
+  font-size: 12px;
+  margin-top: 9px;
+  border-radius: 50px;
+  padding: 7px 54px;
+  text-decoration: none;
+  margin-left: 60%;
+} 
+
+a.connexion__links { 
+color: white;
+background-color: rgba(9, 9, 53, 0.5);
+background: rgba(0,0,0,.5);
+font-size: 15px;
+margin-top: 9px;
+border-radius: 50px;
+padding: 5px 58px;
+text-decoration: none;
+margin-left: 37%;
+} 
+
+/* ////////////////////////////////////////////////PAGE CONNEXION ET POST ///////////////////////////////////////////////////////////////////////////////////// */
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 425px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+  height: 450px;
+}
+  
+  .login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .login-box .user-box {
+    position: relative;
+  }
+  
+  .login-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 50px;
+    margin-top: 26px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+  }
+  .login-box .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  .login-box .user-box input:focus ~ label,
+  .login-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+  }
+  
+  .login-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 13px;
+    letter-spacing: 4px
+  }
+  
+  .login-box a:hover {
+    background: #0a6479;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+  }
+  
+  .login-box a span {
+    position: absolute;
+    display: block;
+  }
+  
+  .login-box a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 1s linear infinite;
+  }
+  
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+    50%,100% {
+      left: 100%;
+    }
+  }
+  
+  .login-box a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #03e9f4);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
+  }
+  
+  @keyframes btn-anim2 {
+    0% {
+      top: -100%;
+    }
+    50%,100% {
+      top: 100%;
+    }
+  }
+  
+  .login-box a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #03e9f4);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: .5s
+  }
+  
+  @keyframes btn-anim3 {
+    0% {
+      right: -100%;
+    }
+    50%,100% {
+      right: 100%;
+    }
+  }
+  
+  .login-box a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #03e9f4);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: .75s
+  }
+  
+  @keyframes btn-anim4 {
+    0% {
+      bottom: -100%;
+    }
+    50%,100% {
+      bottom: 100%;
+    }
+  }

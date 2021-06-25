@@ -1,0 +1,62 @@
+{{ define "body" }}
+<!-- BLOCK BOUTON BURGER -->
+<div id="test">
+    <div class="burger">
+        <div class="barre"></div>
+        <div class="barre"></div>
+        <div class="barre"></div>
+    
+    </div>
+    
+    <!-- Listes des filtres -->
+    <div class="filtre">
+        <ul>
+            <li>
+                <a href="">Catégorie des posts</a>
+            </li>
+            
+            <li><a href="">Posts</a>
+                <ul>
+                    <li><a href="#">Likés</a></li>
+                    <li><a href="#">Postés</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+<!-- BLOCK POSTS -->
+    {{range .}}
+        <div id="scroll">
+            <div class="post">
+                <div class="name">{{.Post}}</div>
+    
+                <div class="cmt">{{.Cmt}}</div>
+    
+                <form action="/sentCmt" method="POST" id="cmtarea">
+                    <div class="press">
+                        <input class="enter" type="text" placeholder="Entrer commentaire" name="cmt">
+                        <button type="button" onclick="CmtRecup()"> Send</button>
+                    </div>
+                </form>
+    
+          
+                    <button type="button" onclick="changeLike()" name="like" action="/sentLike" method="POST" id="like">
+                        <div id='addlike'>0 Like❤️</div>
+                    </button>
+    
+    
+                <script src="/static/JS/like.js"></script>
+                <script src="/static/JS/CreeCmt.js"></script>
+                <script src="/static/JS/deletePost.js"></script>
+            </div>
+        </div>
+        
+    {{end}}
+</div>
+
+
+
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/JS/burger.js"></script>
+
+{{ end }}
