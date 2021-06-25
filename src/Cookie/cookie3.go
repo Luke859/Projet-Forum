@@ -1,24 +1,22 @@
 package main
 
 import (
+	guuid"github.com/google/uuid"
 	"fmt"
-	"github.com/satori/go.uuid"
-	"net/http"
 	"time"
+	"net/http"
 )
 
-func main(w http.ResponseWriter, r *http.Request){
-	myuuid, err := uuid.NewV4()
-	if err == nil{
-		fmt.Println("Your UUID is:", myuuid)
-	}
-	http.SetCookie(w, &http.Cookie{
-		Name: "cookieName",
-		Value: myuuid.String(),
-		Path: "/",
-		Expires: time.Now().Add(120*time.Second),
-		MaxAge: 86400,
-	})
+func CreateCookie() string{
+	myuuid := guuid.New()
+	expire := time.Now().AddDate(0, 0, 1)
+    cookie := http.Cookie{
+        Name: "cookieName",
+        Value: myuuid.String(),
+        Path: "/",
+        Expires: expire,
+        MaxAge: 86400,
+    }
 	fmt.Println(myuuid)
-	return
+	return ""
 }

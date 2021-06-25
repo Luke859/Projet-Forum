@@ -18,7 +18,13 @@ func WriteCookieServer(w http.ResponseWriter, req *http.Request) {
         fmt.Println("Your UUID is:", myuuid)
     }
     expire := time.Now().AddDate(0, 0, 1)
-    cookie := http.Cookie{Name: "testcookiename", Value: myuuid, Path: "/", Expires: expire, MaxAge: 86400}
+    cookie := http.Cookie{
+        Name: "testcookiename",
+        Value: myuuid,
+        Path: "/",
+        Expires: expire,
+        MaxAge: 86400
+    }
 
     http.SetCookie(w, &cookie)
     DrawMenu(w)

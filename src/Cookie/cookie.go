@@ -1,14 +1,17 @@
-package main
+document.cookie = "test1=Hello; SameSite=None; Secure";
+document.cookie = "test2=World; SameSite=None; Secure";
 
-document.cookie = "test1= test; SameSite=None; Secure; HttpOnly";
+const cookieValue = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('test1='))
+  .split('=')[1];
 
-const cookieValue1 = document.cookie
-	.split('; ')
-	.find(row => row.startsWith('test1='))
-	.split('=')[1];
+function showCookieValue() {
+  const output = document.getElementById('cookie-value')
+  output.textContent = '> ' + cookieValue
+}
 
-func showCookieValue(){
-	const output = document.getElementById('cookie-value')
-	output.textContent = '> ' + cookieValue1
-	return output
+function clearOutputCookieValue() {
+  const output = document.getElementById('cookie-value')
+  output.textContent = ''
 }
