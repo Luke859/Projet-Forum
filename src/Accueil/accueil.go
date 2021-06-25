@@ -23,18 +23,18 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 
 	postsDouble = BDD.GetAllPost(db)
-	_, cmtsDouble := BDD.GetAllCmt(db, 1)
+	// _, cmtsDouble := BDD.GetAllCmt(db, 1)
 	// _, postsDouble = BDD.IsLikedPOST(db, 1)
 
 	for _, postSync := range postsDouble {
-		for _, cmtSync := range cmtsDouble {
+		// for _, cmtSync := range cmtsDouble {
 			p := PageAccueil{
 				Post: postSync[1],
-				Cmt:  cmtSync[2],
+				// Cmt:  cmtSync[2],
 				// Like: postSync[1],
 			}
 			postOne = append(postOne, p)
-		}
+		// }
 
 	}
 
