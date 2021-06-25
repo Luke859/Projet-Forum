@@ -5,9 +5,11 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+	"time"
 
 	BDD "../BDD"
 
+	guuid "github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -42,9 +44,9 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 	statusBDD, db := BDD.GestionData()
 	status := BDD.NewUser(pseudo, HashPass, db)
 	if status == 0 && statusBDD == 0 {
-		fmt.Println("Inscrit en BDD")
+		fmt.Println("walla")
 	} else {
-		fmt.Println("NON inscrit en BDD")
+		fmt.Println("Walla il y avait plus de poulet curry")
 	}
 
 }
@@ -52,18 +54,17 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 // Hash du mot de passe puis l'afficher dans le terminal
 func hashPassword(password string) string {
 	var passByte = []byte(password)
-
 	hash, err := bcrypt.GenerateFromPassword(passByte, bcrypt.MinCost)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	return string(hash)
 }
 
-// Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion"
+// Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion" et créer le cookie evec l'UUID
 
 func GetSignConnect(w http.ResponseWriter, r *http.Request) {
+	myuuid := guuid.New()
 	err := r.ParseForm()
 	if err != nil {
 		log.Fatal()
@@ -73,25 +74,56 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 
 	_, db := BDD.GestionData()
 	_, recuphash := BDD.CheckPassword(pseudoconnect, db)
+
 	match := comparePasswords(recuphash, []byte(passwordconnect))
 
 	fmt.Println(" Identifiant de connexion : ", pseudoconnect, "/", passwordconnect)
 	fmt.Println("Match:   ", match)
-	// http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+	expire := time.Now().AddDate(0, 0, 1)
+	http.SetCookie(w, &http.Cookie{
+		Name:       "cookieName",
+		Value:      myuuid.String(),
+		Path:       "/",
+		Domain:     "",
+		Expires:    expire,
+		RawExpires: "",
+		MaxAge:     86400,
+		Secure:     true,
+		HttpOnly:   true,
+		SameSite:   0,
+		Raw:        "",
+		Unparsed:   []string{},
+	})
+
+	fmt.Println(myuuid)
+	recupUUID := BDD.PutUUID(myuuid, pseudoconnect, db)
+	if recupUUID == 500 {
+		fmt.Println("Nous rencontrons des perturbations")
+	}
+	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
 
 }
 
-// Verif du mot de passe
-func comparePasswords(HashPass string, passwordconnect []byte) bool {
+///////////////////////////////// Récupération de la valeur du cookie ( l'UUID ) pour vérif avec BDD ////////////////////////////////////////////////////////
 
+func RecupValueCookie(r *http.Request) string {
+	c, err := r.Cookie("cookieName")
+	if err != nil {
+		return ""
+	}
+	fmt.Println(c.Value)
+	verifUUID := c.Value
+	return verifUUID
+}
+
+//////////////////////// Verif du mot de passe ////////////////////////
+func comparePasswords(HashPass string, passwordconnect []byte) bool {
 	byteHash := []byte(HashPass)
 	err := bcrypt.CompareHashAndPassword(byteHash, passwordconnect)
 	if err != nil {
 		log.Println(err)
 		return false
 	}
-
 	return true
-
 }

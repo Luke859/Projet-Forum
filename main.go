@@ -1,14 +1,13 @@
 package main
 
-/*
 import (
 	"database/sql"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 )
 
-struct type Catery {
-
+type Catery struct{
+	
 }
 
 func main(){
@@ -22,17 +21,18 @@ func main(){
 		fmt.Println("Could not Query database")
 		return
 	}
-	var name string
+	var name string 
 	var color string
 
 	for entries.Next() {
 		entries.Scan(&name, &color)
 		fmt.Println(name + " " + color)
 	}
-
+	
 	var cat Category{
 
 	}
 }
 
-*/
+
+	
