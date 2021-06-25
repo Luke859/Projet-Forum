@@ -22,7 +22,7 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	var postOne []PageAccueil
 	_, db := BDD.GestionData()
 
-	postsDouble = BDD.GetAllPost(db)
+	_, postsDouble = BDD.GetAllPost(db)
 	// _, cmtsDouble := BDD.GetAllCmt(db, 1)
 	// _, postsDouble = BDD.IsLikedPOST(db, 1)
 

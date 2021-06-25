@@ -9,7 +9,6 @@ let formconnect = document.getElementById('formconnect')
 function formRecupConnect(){
     formconnect.submit()
 }
-<<<<<<< HEAD
 
 let textarea = document.getElementById('textarea')   
 

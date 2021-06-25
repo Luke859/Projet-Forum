@@ -74,7 +74,7 @@ func GetLikesInformation(w http.ResponseWriter, r *http.Request) {
 
 	LikeArea, _ := strconv.Atoi(r.FormValue("like"))
 	fmt.Println(" Voici le nombre de likes écrit :", LikeArea)
-	statusLikes := BDD.MakeLikes(1, 1, LikeArea, db)
+	statusLikes := BDD.CreateLike(1, 1, LikeArea, db)
 	if statusLikes == 300 {
 		fmt.Println("Walla")
 	} else {
