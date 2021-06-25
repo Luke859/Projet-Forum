@@ -48,7 +48,7 @@ Le serveur est fin prêt à être lancé pour cela utiliser la commande `` go ru
 Tout d'abord notre réperoire ``Projet-Forum`` contient 7 branche. Chaque membre du projet possède une branche individuel, cela permet d'éviter des conflits entre les parties de codes de chacuns. 
 <img width="300" alt="GITPERSO" src="https://user-images.githubusercontent.com/72868466/123279556-3f192800-d508-11eb-98cc-4b93b07ff61f.png">
 
-Ensuite notre répertoire contient une branche ```dev`` et ``main``. Ici
+Ensuite notre répertoire contient une branche ``dev`` et une branche ``main``. Dans notre cas la la ``dev`` permet
 ### :five: Membres du groupes :
 
 * **Pierric Come** _alias_ [@lancelot260](https://github.com/lancelot260)
