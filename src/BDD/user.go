@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 
+	uuid "github.com/google/uuid"
 	_ "github.com/mattn/go-sqlite3"
-	uuid "github.com/satori/go.uuid"
 )
 
 func NewUser(Pseudo string, HashPass string, db *sql.DB) int {
@@ -42,7 +42,7 @@ func CheckPassword(username string, db *sql.DB) (int, string) {
 /////////////////////////////////////////////////////////get id_user/////////////////////////////////////////
 
 func GetId_User(username string, db *sql.DB) (int, int) {
-	var Id_user int = -1
+	var Id_user int
 
 	tsql, err := db.Query("SELECT Id_user FROM User WHERE pseudo = (?)", username)
 	if err != nil {
@@ -53,7 +53,10 @@ func GetId_User(username string, db *sql.DB) (int, int) {
 	for tsql.Next() {
 		tsql.Scan(&Id_user)
 	}
-	return 0, Id_user
+	if Id_user > 0 {
+		return 0, Id_user
+	}
+	return 500, Id_user
 }
 
 ////////////////////////////////// Get All Username /////////////////////////////////////////////////////////////////////:
@@ -77,18 +80,18 @@ func GetAllUsername(db *sql.DB) (int, []string) {
 
 //////////////////////////////////////// get UUID from User //////////////////////////////////////
 
-func GetUUID_User(username string, db *sql.DB) (int, uuid.UUID) {
-	var UUID uuid.UUID
+func GetUserByUUID(uuid string, db *sql.DB) (int, string) {
+	var username string
 
-	tsql, err := db.Query("SELECT UUID FROM User WHERE pseudo = (?)", username) // check for UUID name in database
+	tsql, err := db.Query("SELECT pseudo FROM User WHERE uuid = (?)", uuid) // check for UUID name in database
 	if err != nil {
 		fmt.Println(err)
-		return 500, UUID
+		return 400, username
 	}
 	for tsql.Next() {
-		tsql.Scan(&UUID)
+		tsql.Scan(&username)
 	}
-	return 0, UUID
+	return 0, username
 }
 
 ////////////////////////////////// put UUID in BDD //////////////////////////
@@ -103,23 +106,4 @@ func PutUUID(UUID uuid.UUID, pseudo string, db *sql.DB) int {
 	statement.Exec(UUID, pseudo)
 	db.Close()
 	return (0)
-}
-
-//////////////////////////////////////// Is sesion OK ///////////////////////////////////////////
-
-/*
-la function prend la valeur des cookie le nom de l'utilisateur et le pointeur vers la base de donnée.
-et retourne un boolean.
-*/
-func CheckSession(cookie uuid.UUID, username string, db *sql.DB) bool {
-	var IsSessionOk bool
-	status, uuidBDD := GetUUID_User(username, db)
-	if status == 0 {
-		if cookie == uuidBDD {
-			IsSessionOk = true
-		} else {
-			IsSessionOk = false
-		}
-	}
-	return IsSessionOk
 }
