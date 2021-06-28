@@ -81,13 +81,13 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Match:   ", match)
 	expire := time.Now().AddDate(0, 0, 1)
 	http.SetCookie(w, &http.Cookie{
-		Name:       "cookieName",
+		Name:       pseudoconnect,
 		Value:      myuuid.String(),
 		Path:       "/",
 		Domain:     "",
 		Expires:    expire,
 		RawExpires: "",
-		MaxAge:     86400,
+		MaxAge:     14400,
 		Secure:     true,
 		HttpOnly:   true,
 		SameSite:   0,
