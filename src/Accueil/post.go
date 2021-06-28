@@ -53,7 +53,6 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal()
 		}
-
 		CmtArea := r.FormValue("cmt")
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)
 		statusCmt := BDD.MakeCmt(IdUser, 1, CmtArea, db)
