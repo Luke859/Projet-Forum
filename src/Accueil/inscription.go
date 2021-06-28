@@ -77,7 +77,7 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 		}
 		c := http.Cookie{
 			Name:   pseudoconnect,
-			MaxAge: -1
+			MaxAge: -1,
 		}
 		http.SetCookie(w, &c)
 	}
