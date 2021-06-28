@@ -33,7 +33,7 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 		TextArea := r.FormValue("text")
 		statusPost := BDD.MakePost(TextArea, IdUser)
 		if statusPost == 300 {
-			fmt.Println("Post envoyer")
+			fmt.Println("Post envoyer : ", TextArea)
 		} else {
 			fmt.Println("Erreur envoie post")
 		}
