@@ -5,13 +5,15 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+	"strconv"
 
 	BDD "../BDD"
 )
 
 type PageAccueil struct {
+	Id_Post int 
 	Post string
-	Cmt  string
+	Cmt  []string
 	Like int
 }
 
@@ -22,21 +24,28 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	var postOne []PageAccueil
 	_, db := BDD.GestionData()
 
-	CmtArea := r.FormValue("cmt")
-
-	postsDouble = BDD.GetAllPost(db)
-	_, cmtsDouble := BDD.GetAllCmt(db, 1)
+	_, postsDouble = BDD.GetAllPost(db)
 	// _, postsDouble = BDD.IsLikedPOST(db, 1)
 
 	for _, postSync := range postsDouble {
-		for _, cmtSync := range cmtsDouble {
-			p := PageAccueil{
-				Post: postSync[1],
-				Cmt:  CmtArea,
-				// Like: postSync[1],
-			}
-			postOne = append(postOne, p)
+
+		id_post, _ := strconv.Atoi(postSync[0])
+		_, cmtsDouble := BDD.GetAllCmt(db, id_post)
+
+		//fmt.Println(id_post)
+
+		p := PageAccueil{
+			Post: postSync[1],
+			Cmt: make([]string, 0),
+			Id_Post: id_post,
+			// Like: postSync[1],
 		}
+		//fmt.Println(p.Id_Post)
+		for _, cmtSync := range cmtsDouble {
+			p.Cmt = append(p.Cmt, cmtSync[2])
+		}
+
+		postOne = append(postOne, p)
 
 	}
 
