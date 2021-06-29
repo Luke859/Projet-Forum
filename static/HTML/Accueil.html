@@ -37,6 +37,12 @@
                     {{end}}
                 </div>
                 
+                <div id='addlike'>Likes</div>
+
+                <button onclick="deleteLike()" id="dislike">
+                    💔 Dislike
+                </button>
+                
                 <form action="/sentCmt" method="POST" id="cmtarea">
                     <div class="press">
                         <input value="{{.Id_Post}}" hidden name="idPost">
@@ -45,14 +51,10 @@
                     </div>
                 </form>
     
-          
-                <button type="button" onclick="changeLike()" name="like" action="/sentLike" method="POST" id="like">
-                    <div id='addlike'>❤️</div>
+                <button onclick="changeLike()" name="like" action="/sentLike" method="POST" id="like">
+                    ❤️ Like
                 </button>
 
-                <button type="button" onclick="deleteLike()" name="like" action="/sentLike" method="POST"id="dislike">
-                    <div id= "addlike">💔</div>
-                </button>
     
     
                 <script src="/static/JS/like.js"></script>
