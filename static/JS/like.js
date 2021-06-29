@@ -2,11 +2,22 @@ let like = document.getElementById('addlike')
 
 function changeLike() {
 
-    if(like === 0){
-        like.onclick() = 1;
-    } else {
-        like.onclick() = 0;
-    }
+    like.textContent = 1
 
+    if(like.textContent === 1){
+        like.onclick() = deleteLike;
+    }
+    
+    like.submit()
+}
+
+function deleteLike(){
+
+    like.textContent = 0
+
+    if(like.textContent === 0){
+        like.onclick() = changelike();
+    }
+    
     like.submit()
 }

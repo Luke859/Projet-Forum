@@ -207,7 +207,7 @@ header.sticky{
 }
 .enter {
   border-radius: 5px;
-  width: 775px;
+  width: 700px;
   height: 35px;
 }
 
@@ -216,15 +216,24 @@ header.sticky{
 #like {
   position: relative;
   color: #fff;
-  margin-left: 880px;
+  margin-left: 870px;
   margin-bottom: 20px;
   border-radius: 5px;
   background: #F34D4D;
-  width: 100px;
+  width: 50px;
   height: 40px;
   box-shadow: 0 0 0 0 rgba(255, 71, 84, .7);
   animation: battement 2s infinite cubic-bezier(.66, 0, 0, 1);
   cursor: pointer;
+}
+
+#dislike {
+  margin-left: 940px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #F34D4D;
+  width: 50px;
+  height: 40px;
 }
 
 @keyframes battement {
