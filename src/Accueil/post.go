@@ -54,7 +54,6 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 		}
 
 		id_post, _ := strconv.Atoi(r.FormValue("idPost"))
-		fmt.Println(id_post)
 		CmtArea := r.FormValue("cmt")
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)
 		statusCmt := BDD.MakeCmt(IdUser, id_post, CmtArea, db)
