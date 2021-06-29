@@ -23,7 +23,6 @@ func MakeCmt(Id_user int, Id_post int, contenu string, db *sql.DB) int {
 		fmt.Println("error Prepare new comment")
 		return (500)
 	}
-	fmt.Println("BDD commentaire text : " +contenu)
 	statement.Exec(Id_user, Id_post, contenu)
 	db.Close()
 	return (0)
