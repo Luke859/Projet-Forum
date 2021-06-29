@@ -32,15 +32,13 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 		id_post, _ := strconv.Atoi(postSync[0])
 		_, cmtsDouble := BDD.GetAllCmt(db, id_post)
 
-		//fmt.Println(id_post)
-
 		p := PageAccueil{
 			Post: postSync[1],
 			Cmt: make([]string, 0),
 			Id_Post: id_post,
 			// Like: postSync[1],
 		}
-		//fmt.Println(p.Id_Post)
+		fmt.Println(p.Id_Post)
 		for _, cmtSync := range cmtsDouble {
 			p.Cmt = append(p.Cmt, cmtSync[2])
 		}
