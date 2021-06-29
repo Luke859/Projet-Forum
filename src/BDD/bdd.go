@@ -50,7 +50,7 @@ renvois un int qui sert de status d'erreur :
 renvois un pointeur *sql.DB qui sert dans toute les autre fonctions
 */
 func GestionData() (int, *sql.DB) {
-	db, err := sql.Open("sqlite3", "./BDD/ProjetForum.db") //lancer depuis : (../../bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
+	db, err := sql.Open("sqlite3", "./BDD/ProjetForum_5.db") //lancer depuis : (../../bdd.go) lancer depuis serveur.go : (./BDD/ProjetForum.db) le chemin du projet devra changer dependant de l'endroit exectution
 	if err != nil {
 		fmt.Println(err)
 		fmt.Print("error ouvertur base")
