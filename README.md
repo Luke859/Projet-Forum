@@ -20,7 +20,6 @@ Le but de ce projet est de créer un forum dans le sens général, c’est-à-di
 
 ``Cascading Style Sheets``
 
-
 <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white
 "/>
 ``golang``

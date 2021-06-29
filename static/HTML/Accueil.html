@@ -29,20 +29,23 @@
         <div id="scroll">
             <div class="post">
                 <div class="name">{{.Post}}</div>
-    
-                <div class="cmt">{{.Cmt}}</div>
-    
+                
+                {{range .Cmt}}
+                <div class="cmt">{{.}}</div>
+
+                {{end}}
                 <form action="/sentCmt" method="POST" id="cmtarea">
                     <div class="press">
+                        <input value="{{.Id_Post}}" hidden name="idPost">
                         <input class="enter" type="text" placeholder="Entrer commentaire" name="cmt">
                         <button type="button" onclick="CmtRecup()"> Send</button>
                     </div>
                 </form>
     
           
-                    <button type="button" onclick="changeLike()" name="like" action="/sentLike" method="POST" id="like">
-                        <div id='addlike'>0 Like❤️</div>
-                    </button>
+                <button type="button" onclick="changeLike()" name="like" action="/sentLike" method="POST" id="like">
+                    <div id='addlike'>0 Like❤️</div>
+                </button>
     
     
                 <script src="/static/JS/like.js"></script>

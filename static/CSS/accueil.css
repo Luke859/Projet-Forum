@@ -149,11 +149,6 @@ header.sticky{
   justify-content: space-between;
 } 
 
-#pseudo {
-  margin-top: 50px;
-  margin-right: 20px;
-}
-
 .post {
   margin-top: 150px;
   height: 300px;
