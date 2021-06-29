@@ -14,21 +14,20 @@ type PageAccueil struct {
 	Id_Post int
 	Post    string
 	Cmt     []string
-	Like    int
+	//Like    int
 }
 
 func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	// Déclaration des fichiers à parser
 
 	var postsDouble [][]string
-	var postOne []PageAccueil
+	var AllPosts []PageAccueil
 	_, db := BDD.GestionData()
 
 	_, postsDouble = BDD.GetAllPost(db)
 	//_, postsDouble = BDD.IsLikedPOST(db, 1)
 
 	for _, postSync := range postsDouble {
-
 		id_post, _ := strconv.Atoi(postSync[0])
 		_, cmtsDouble := BDD.GetAllCmt(db, id_post)
 
@@ -41,9 +40,9 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 		for _, cmtSync := range cmtsDouble {
 			p.Cmt = append(p.Cmt, cmtSync[2])
 		}
-
-		postOne = append(postOne, p)
-
+		AllPosts = append(AllPosts, p)
+		fmt.Print("AllPosts : ")
+		fmt.Println(AllPosts)
 	}
 
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/Accueil.html", "static/HTML/navbar.html")
@@ -51,7 +50,7 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Template execution: %s", err)
 		return
 	}
-	t.Execute(w, postOne)
+	t.Execute(w, AllPosts)
 	fmt.Println("Page Accueil ✔️")
 
 }

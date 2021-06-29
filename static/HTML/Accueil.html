@@ -36,9 +36,8 @@
                 {{end}}
                 <form action="/sentCmt" method="POST" id="cmtarea">
                     <div class="press">
-                        <input value="{{.Id_Post}}" hidden name="idPost">
                         <input class="enter" type="text" placeholder="Entrer commentaire" name="cmt">
-                        <button type="button" onclick="CmtRecup()"> Send</button>
+                        <button type="button" value="{{.Id_Post}}" onclick="CmtRecup()"  name="idPost"> Send</button>
                     </div>
                 </form>
     
