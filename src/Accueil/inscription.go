@@ -81,7 +81,7 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 		}
 		http.SetCookie(w, &c)
 	}
-	pseudoconnect = r.FormValue("PseudoConnect")     // pseudo de la connexion
+	pseudoconnect = r.FormValue("PseudoConnect")      // pseudo de la connexion
 	passwordconnect := r.FormValue("PasswordConnect") // mdp de la connexion
 
 	_, db := BDD.GestionData()
