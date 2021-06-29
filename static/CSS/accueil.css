@@ -151,7 +151,7 @@ header.sticky{
 
 .post {
   margin-top: 150px;
-  height: 300px;
+  height: auto;
   width: 1000px;
   background-color: #0a6479;
   border-radius: 10px;
@@ -169,7 +169,27 @@ header.sticky{
 
 
 /*/////////////////////////////////Page accueil avec les commentaires////////////////*/
+.mainCmt{
+  background: violet;
+  margin-left: 50px;
+  margin-right: 50px;
+  height: auto;
+  top: 20px;
+  border-radius: 5px;
 
+}
+
+.cmt {
+  overflow-y: auto;
+  background: blue;
+  width: 500px;
+  margin-left: 200px;
+  border-radius: 5px;
+  text-align: center;
+  top: 20px;
+  height: 25px;
+  margin-bottom: 5px;
+}
 .press {
   position: relative;
   top: 200px;
@@ -186,6 +206,10 @@ header.sticky{
   border-radius: 5px;
   width: 775px;
   height: 35px;
+}
+
+#cmtarea {
+  position: relative;
 }
 
 /*///////////////////////////Page accueil avec les likes///////////////////////////////////////////////*/

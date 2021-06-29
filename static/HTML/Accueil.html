@@ -30,10 +30,13 @@
             <div class="post">
                 <div class="name">{{.Post}}</div>
                 
-                {{range .Cmt}}
-                <div class="cmt">{{.}}</div>
+                <div class="mainCmt">
+                Commentaires : 
+                    {{range .Cmt}}
+                    <div class="cmt">{{.}}</div>
+                    {{end}}
+                </div>
                 
-                {{end}}
                 <form action="/sentCmt" method="POST" id="cmtarea">
                     <div class="press">
                         <input value="{{.Id_Post}}" hidden name="idPost">
@@ -44,7 +47,7 @@
     
           
                 <button type="button" onclick="changeLike()" name="like" action="/sentLike" method="POST" id="like">
-                    <div id='addlike'>0 Like❤️</div>
+                    <div id='addlike'>Like❤️</div>
                 </button>
     
     
