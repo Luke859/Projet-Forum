@@ -54,7 +54,7 @@ Ensuite notre répertoire contient une branche ``dev`` et une branche ``main`` e
 Pour l'architecture du projet, nous avons créer 3 grands dossiers pour la répartition des fichiers :    
 * BDD (contient tous les fichers lier a la BDD comme les fichiers ".db")     
 * src (contient quasiment tous les fichiers en golang que ce soit pour la BDD ou les scripts basiques)     
-* static(contient le CSS, les fichiers HTML et les fichiers Java Scripts)      
+* static (contient le CSS, les fichiers HTML et les fichiers Java Scripts)      
 
 De plus, nous avons le fichier "server.go" à la racine du projet.   
 Pour mieux comprendre, voici une capture d'écran de la disposition des fichiers ci-dessous      
