@@ -34,10 +34,10 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 		statusPost := BDD.MakePost(TextArea, IdUser)
 		if statusPost == 300 {
 			fmt.Println("Post envoyer : ", TextArea)
+			http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 		} else {
 			fmt.Println("Erreur envoie post")
 		}
-		http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	} else {
 		http.Redirect(w, r, "/inscription", http.StatusSeeOther)
 	}
