@@ -38,7 +38,6 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 			Id_Post: id_post,
 			// Like: postSync[1],
 		}
-		fmt.Println(p.Id_Post)
 		for _, cmtSync := range cmtsDouble {
 			p.Cmt = append(p.Cmt, cmtSync[2])
 		}

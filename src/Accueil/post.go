@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"text/template"
 
 	BDD "../BDD"
@@ -49,15 +50,18 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 	statuErr, username := BDD.GetUserByUUID(localUUID, db)
 	IdErr, IdUser := BDD.GetId_User(username, db)
+	idpost, _ := strconv.Atoi(r.FormValue("idPost"))
 	if statuErr == 0 && IdErr == 0 {
 		err := r.ParseForm()
 		if err != nil {
 			log.Fatal()
 		}
 		CmtArea := r.FormValue("cmt")
+		fmt.Print("id post from html : ")
+		fmt.Println(idpost)
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)
-		statusCmt := BDD.MakeCmt(IdUser, 1, CmtArea, db)
-		if statusCmt == 300 {
+		statusCmt := BDD.MakeCmt(IdUser, idpost, CmtArea, db)
+		if statusCmt == 0 {
 			fmt.Println("Commentaire envoyer")
 		} else {
 			fmt.Println("Erreur envoie commentaire")
