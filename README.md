@@ -58,6 +58,7 @@ Pour l'architecture du projet, nous avons créer 3 grands dossiers pour la répa
 
 De plus, nous avons le fichier "server.go" à la racine du projet.   
 pour mieux comprendre, voici une capture d'écran de la disposition des fichiers ci-dessous      
+        
 <img src="https://cdn.discordapp.com/attachments/754974960845324309/859418457091211274/Screenshot_from_2021-06-29_14-40-12.png">
 
 ### :six: Membres du groupes :
