@@ -52,9 +52,9 @@ Ensuite notre répertoire contient une branche ``dev`` et une branche ``main`` e
 ### :five: Architecture du projet :
 
 Pour l'architecture du projet, nous avons créer 3 grands dossiers pour la répartition des fichiers :    
-    BDD     
-    src     
-    static      
+* BDD     
+* src     
+* static      
 
 
 
