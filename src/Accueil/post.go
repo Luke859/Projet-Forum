@@ -63,7 +63,7 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 		statusCmt := BDD.MakeCmt(IdUser, id_post, CmtArea, db)
 		fmt.Println(id_post)
 
-		if statusCmt == 300 {
+		if statusCmt == 0 {
 			fmt.Println("Commentaire envoyer")
 			http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 		} else {
