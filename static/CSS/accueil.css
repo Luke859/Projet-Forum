@@ -165,23 +165,25 @@ header.sticky{
   background-color: white;
   border-radius: 5px;
   margin-top: 10px;
+  font-weight: bold;
 }
 
 
 /*/////////////////////////////////Page accueil avec les commentaires////////////////*/
 .mainCmt{
-  background: violet;
+  background: #1A6FC1;
+  overflow-y:scroll;
+  font-weight: bold;
   margin-left: 50px;
   margin-right: 50px;
-  height: auto;
+  height: 300px;
   top: 20px;
   border-radius: 5px;
 
 }
 
 .cmt {
-  overflow-y: auto;
-  background: blue;
+  background: #4189CE;
   width: 500px;
   margin-left: 200px;
   border-radius: 5px;
@@ -190,9 +192,10 @@ header.sticky{
   height: 25px;
   margin-bottom: 5px;
 }
+
 .press {
   position: relative;
-  top: 200px;
+  top: 40px;
   margin-left: 10px;
   height: 40px;
 }
@@ -208,17 +211,13 @@ header.sticky{
   height: 35px;
 }
 
-#cmtarea {
-  position: relative;
-}
-
 /*///////////////////////////Page accueil avec les likes///////////////////////////////////////////////*/
 
 #like {
   position: relative;
   color: #fff;
   margin-left: 880px;
-  margin-top: 160px;
+  margin-bottom: 20px;
   border-radius: 5px;
   background: #F34D4D;
   width: 100px;
