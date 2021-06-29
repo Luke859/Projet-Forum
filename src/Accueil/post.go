@@ -48,15 +48,16 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 	statuErr, username := BDD.GetUserByUUID(localUUID, db)
 	IdErr, IdUser := BDD.GetId_User(username, db)
-	if statuErr == 0 && IdErr == 0 {
+	CmtErr, _, IdPost := BDD.GetAllPost(db)
+	if statuErr == 0 && IdErr == 0 && CmtErr == 0{
 		err := r.ParseForm()
 		if err != nil {
 			log.Fatal()
 		}
 		CmtArea := r.FormValue("cmt")
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)
-		statusCmt := BDD.MakeCmt(IdUser, 1, CmtArea, db)
-		if statusCmt == 300 {
+		statusCmt := BDD.MakeCmt(IdUser, IdPost, CmtArea, db)
+		if statusCmt == 0 {
 			fmt.Println("Commentaire envoyer")
 			http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 		} else {

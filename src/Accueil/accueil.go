@@ -24,7 +24,7 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	var postOne []PageAccueil
 	_, db := BDD.GestionData()
 
-	_, postsDouble = BDD.GetAllPost(db)
+	_, postsDouble, _ = BDD.GetAllPost(db)
 	// _, postsDouble = BDD.IsLikedPOST(db, 1)
 
 	for _, postSync := range postsDouble {

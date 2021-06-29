@@ -30,7 +30,7 @@ func GetPost(db *sql.DB, id int) (int, [1]string) {
 
 ////////////////////////////////Get All Post///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-func GetAllPost(db *sql.DB) (int, [][]string) {
+func GetAllPost(db *sql.DB) (int, [][]string, int) {
 	var tabAllPost [][]string
 
 	var text string
@@ -39,7 +39,7 @@ func GetAllPost(db *sql.DB) (int, [][]string) {
 	statement, err := db.Query("SELECT Id_post, texte FROM Post")
 	if err != nil {
 		fmt.Println(err)
-		return 500, tabAllPost
+		return 500, tabAllPost, id
 	}
 
 	for statement.Next() {
@@ -48,7 +48,7 @@ func GetAllPost(db *sql.DB) (int, [][]string) {
 		tabAllPost = append(tabAllPost, save)
 	}
 
-	return 0, tabAllPost
+	return 0, tabAllPost, id
 }
 
 /*////////////////////////////////////// create post///////////////////////////////*/
