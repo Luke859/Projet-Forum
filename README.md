@@ -63,7 +63,7 @@ Pour mieux comprendre, voici une capture d'écran de la disposition des fichiers
 
 ### 6️⃣: Vidéo de demonstration :
 
-Lien de la vidéo youtbe, [cliqez ici](https://youtu.be/O3fKHsLJQwQ)
+Lien de la vidéo youtbe, [cliquez ici](https://youtu.be/O3fKHsLJQwQ)
 
 
 ### :sept: Membres du groupes :
