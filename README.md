@@ -70,6 +70,3 @@ Pour mieux comprendre, voici une capture d'écran de la disposition des fichiers
 * **Florian Dagnas** _alias_ [@Flodagnas](https://github.com/Flodagnas)
 
 * **Nathy Mellal** _alias_ [@nathymellal](https://github.com/nathymellal)
-
-
-
