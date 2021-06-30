@@ -66,7 +66,7 @@ Pour mieux comprendre, voici une capture d'écran de la disposition des fichiers
 Lien de la vidéo youtbe, [cliquez ici](https://youtu.be/O3fKHsLJQwQ)
 
 
-### :sept: Membres du groupes :
+### :seven: Membres du groupes :
 
 * **Pierric Come** _alias_ [@lancelot260](https://github.com/lancelot260)
 
