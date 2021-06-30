@@ -3,7 +3,7 @@
 
 ### :one: L'ambition du projet : 
 
-Le but de ce projet est de créer un forum dans le sens général, c’est-à-dire un site qui permet de créer des posts qui soient du texte et/ou image. Chaque poste une ou plusieurs catégories de plus les utilisateurs peuvent y réagir en postant des commentaires et via des votes (likes, dislikes). En outre les posts et les commentaires seront accessibles par tout le monde, mais participer nécessitera de créer un compte utilisateur. Enfin on pourra filtrer les posts par catégorie, par posts qu'on a soi-même liké ou disliké.
+Le but de ce projet est de créer un forum dans le sens général, c’est-à-dire un site qui permet de créer des posts qui soient du texte et/ou image. Chaque poste a une ou plusieurs catégories de plus les utilisateurs peuvent y réagir en postant des commentaires et via des votes (likes, dislikes). En outre les posts et les commentaires seront accessibles par tout le monde, mais participer nécessitera de créer un compte utilisateur. Enfin on pourra filtrer les posts par catégorie, par posts qu'on a soi-même liké ou disliké.
 
 
 ### :two: Language utiliser :
