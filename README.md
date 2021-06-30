@@ -72,9 +72,9 @@ Lien de la vidéo youtbe, [cliquez ici](https://youtu.be/O3fKHsLJQwQ)
 
 * **Luke Jones** _alias_ [@Luke859](https://github.com/Luke859)
 
-* **Florian Tagada** _alias_ [@Flodagnas](https://github.com/Flodagnas)
+* **Florian Dagnas** _alias_ [@Flodagnas](https://github.com/Flodagnas)
 
-* **knacky Mellal** _alias_ [@nathymellal](https://github.com/nathymellal)
+* **Nathy Mellal** _alias_ [@nathymellal](https://github.com/nathymellal)
 
 
 
