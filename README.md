@@ -68,13 +68,13 @@ Lien de la vidéo youtbe, [cliquez ici](https://youtu.be/O3fKHsLJQwQ)
 
 ### :seven: Membres du groupes :
 
-* **Pierric Come** _alias_ [@lancelot260](https://github.com/lancelot260)
+* **Pierric Côme** _alias_ [@lancelot260](https://github.com/lancelot260)
 
 * **Luke Jones** _alias_ [@Luke859](https://github.com/Luke859)
 
 * **Florian Tagada** _alias_ [@Flodagnas](https://github.com/Flodagnas)
 
-* **Nathy Mellal** _alias_ [@nathymellal](https://github.com/nathymellal)
+* **knacky Mellal** _alias_ [@nathymellal](https://github.com/nathymellal)
 
 
 
