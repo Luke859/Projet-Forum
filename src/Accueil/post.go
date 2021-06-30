@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 	"text/template"
+	"strconv"
 
 	BDD "../BDD"
 )
@@ -34,12 +34,11 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 		TextArea := r.FormValue("text")
 		statusPost := BDD.MakePost(TextArea, IdUser)
 		if statusPost == 300 {
-			fmt.Println("Post envoyer")
+			fmt.Println("Post envoyer : ", TextArea)
 			http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 		} else {
 			fmt.Println("Erreur envoie post")
 		}
-
 	} else {
 		http.Redirect(w, r, "/inscription", http.StatusSeeOther)
 	}
@@ -50,23 +49,26 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 	statuErr, username := BDD.GetUserByUUID(localUUID, db)
 	IdErr, IdUser := BDD.GetId_User(username, db)
-	idpost, _ := strconv.Atoi(r.FormValue("IdPost"))
 	if statuErr == 0 && IdErr == 0 {
 		err := r.ParseForm()
 		if err != nil {
 			log.Fatal()
 		}
+
+		id_post, _ := strconv.Atoi(r.FormValue("idPost"))
+
 		CmtArea := r.FormValue("cmt")
-		fmt.Print("id post from html : ")
-		fmt.Println(idpost)
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)
-		statusCmt := BDD.MakeCmt(IdUser, idpost, CmtArea, db)
+
+		statusCmt := BDD.MakeCmt(IdUser, id_post, CmtArea, db)
+		fmt.Println(id_post)
+
 		if statusCmt == 0 {
 			fmt.Println("Commentaire envoyer")
+			http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 		} else {
 			fmt.Println("Erreur envoie commentaire")
 		}
-		http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	} else {
 		http.Redirect(w, r, "/inscription", http.StatusSeeOther)
 	}

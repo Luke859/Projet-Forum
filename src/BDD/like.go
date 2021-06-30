@@ -7,7 +7,7 @@ import (
 
 /////////////////////////////////////////////// like /////////////////////////////////////////////
 
-func CreateLike(ID_User int, Id_cmt int, likebool int, db *sql.DB) int {
+func CreateLike(ID_User int, Id_cmt int, likebool bool, db *sql.DB) int {
 	statm, err := db.Prepare("INSERT INTO Likes (Id_post, Id_user, like_button) VALUES (?,?,?)")
 	if err != nil {
 		fmt.Println(err)
