@@ -51,12 +51,10 @@ func UpdateLikePOST(db *sql.DB, ID_like int, ID_User int, ID_Post int) int {
 		if IsLike == 0 {
 			statement, err := db.Prepare("UPDATE Likes SET like_button = true WHERE Id_likes = ? AND Id_post =? AND Id_user =?")
 			if err != nil {
-				fmt.Println("A")
 				fmt.Println(err)
 				return 500
 			}
 			statement.Exec(ID_like, ID_User, ID_Post)
-			fmt.Println("B")
 			db.Close()
 			return (0)
 		} else {
@@ -65,7 +63,6 @@ func UpdateLikePOST(db *sql.DB, ID_like int, ID_User int, ID_Post int) int {
 				fmt.Println(err)
 				return 500
 			}
-			fmt.Println("C")
 			statement.Exec(ID_like, ID_User, ID_Post)
 			db.Close()
 			return (0)
@@ -114,7 +111,6 @@ func UpdateLikeCMT(db *sql.DB, ID_like int, ID_User int, ID_cmt int) int {
 		} else {
 			statement, err := db.Prepare("UPDATE Likes SET like_button = 0 WHERE Id_likes = ?, Id_cmt =? , Id_post =?, Id_user =?)")
 			if err != nil {
-				fmt.Println("B")
 				fmt.Println(err)
 				return 500
 			}

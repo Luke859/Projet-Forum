@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"text/template"
 	"strconv"
+	"text/template"
 
 	BDD "../BDD"
 )
@@ -61,7 +61,6 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(" Voici le commentaire écrit :", CmtArea)
 
 		statusCmt := BDD.MakeCmt(IdUser, id_post, CmtArea, db)
-		fmt.Println(id_post)
 
 		if statusCmt == 0 {
 			fmt.Println("Commentaire envoyer")

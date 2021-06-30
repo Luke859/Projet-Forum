@@ -13,33 +13,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-//func main() {
-//status, db := GestionData()
-//fmt.Println("statu de l'ouverture de la BDD : ", status)
-//index := NewUser("PIERRIC", "TESTPASS", db)
-//fmt.Println(index)
-//status, db = GestionData()
-//fmt.Println(GetUUID_User("PIERRIC", db))
-//fmt.Println("statu get uuid", PutUUID("testUUID456", "PIERRIC", db))
-//fmt.Println(GetAllUsername(db))
-//statusUser, tab := CheckUser("PIERRIC", db)
-//fmt.Println(statusUser)
-//fmt.Println(tab)
-//statusPost := MakePost("Lorem IPSUM", 3)
-//fmt.Println(statusPost)
-//statusGetPost, tabPost := GetPost(db, 4)
-//fmt.Println(statusGetPost)
-//fmt.Println(tabPost)
-//statusAllPost, tabAllPost := GetAllPost(db)
-//fmt.Println(statusAllPost)
-//fmt.Println(tabAllPost)
-//fmt.Println("status de la creation d'un nouveau cmt :", NewCmt(1, 1, "lorem ipsum", db))
-//status, db = GestionData()
-//fmt.Println(GetAllCmt(db, 2))
-//fmt.Println(CreateLike(1, 1, true, db))
-//fmt.Println(UpdateLikePOST(db, 3, 1, 1))
-//}
-
 /*///////////////////////////////////recuperation de la base de donnée ///////////////////////////*/
 
 /*

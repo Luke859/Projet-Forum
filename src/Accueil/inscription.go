@@ -46,9 +46,9 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 	statusBDD, db := BDD.GestionData()
 	status := BDD.NewUser(pseudo, HashPass, db)
 	if status == 0 && statusBDD == 0 {
-		fmt.Println("walla")
+		fmt.Println("creation d'un nouveau utilisateur")
 	} else {
-		fmt.Println("Walla il y avait plus de poulet curry")
+		fmt.Println("echec de la creation d'un nouveau utilisateur")
 	}
 
 }
@@ -81,7 +81,7 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 		}
 		http.SetCookie(w, &c)
 	}
-	pseudoconnect = r.FormValue("PseudoConnect")     // pseudo de la connexion
+	pseudoconnect = r.FormValue("PseudoConnect")      // pseudo de la connexion
 	passwordconnect := r.FormValue("PasswordConnect") // mdp de la connexion
 
 	_, db := BDD.GestionData()
@@ -123,7 +123,6 @@ func RecupValueCookie(r *http.Request) string {
 	if err != nil {
 		return ""
 	}
-	fmt.Println(c.Value)
 	verifUUID := c.Value
 	return verifUUID
 }

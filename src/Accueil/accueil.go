@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"text/template"
 	"strconv"
+	"text/template"
 
 	BDD "../BDD"
 )
 
 type PageAccueil struct {
-	Id_Post int 
-	Post string
-	Cmt  []string
-	Like int
+	Id_Post int
+	Post    string
+	Cmt     []string
+	Like    int
 }
 
 func AccueilPage(w http.ResponseWriter, r *http.Request) {
@@ -33,12 +33,11 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 		_, cmtsDouble := BDD.GetAllCmt(db, id_post)
 
 		p := PageAccueil{
-			Post: postSync[1],
-			Cmt: make([]string, 0),
+			Post:    postSync[1],
+			Cmt:     make([]string, 0),
 			Id_Post: id_post,
 			// Like: postSync[1],
 		}
-		fmt.Println(p.Id_Post)
 		for _, cmtSync := range cmtsDouble {
 			p.Cmt = append(p.Cmt, cmtSync[2])
 		}
