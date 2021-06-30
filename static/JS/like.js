@@ -1,21 +1,23 @@
-function changeLike(id) {
+let like = document.getElementById('addlike')
 
-    let like = document.getElementById(id)
+function changeLike() {
 
     like.textContent = "Liked post ❤️" + 1
 
     if(like.textContent === "Liked post ❤️" + 1){
-        like.onclick = deleteLike;
+        like.onclick() = deleteLike;
     }
+    
+    like.submit()
 }
 
-function deleteLike(id){
-
-    let like = document.getElementById(id)
+function deleteLike(){
 
     like.textContent = "Disliked post 💔" + 0
 
     if(like.textContent === "Disliked post 💔" + 0){
-        like.onclick = changeLike;
+        like.onclick() = changelike();
     }
+    
+    like.submit()
 }
