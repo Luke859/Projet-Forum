@@ -26,7 +26,7 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 
 	_, postsDouble = BDD.GetAllPost(db)
-	_, usersDouble = BDD.GetAllUsername(db)
+	// _, usersDouble = BDD.GetAllUsername(db)
 
 	// _, postsDouble = BDD.IsLikedPOST(db, 1)
 
@@ -39,7 +39,7 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 			Post:    postSync[1],
 			Cmt:     make([]string, 0),
 			Id_Post: id_post,
-			User:    make([]string, 0),
+			// User:    make([]string, 0),
 			// Like: postSync[1],
 		}
 
@@ -51,9 +51,9 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 			p.Cmt = append(p.Cmt, cmtSync[2])
 		}
 
-		for _, userSync := range usersDouble {
-			p.User = append(p.User, userSync[2])
-		}
+		// for _, userSync := range usersDouble {
+		// 	p.User = append(p.User, userSync[2])
+		// }
 
 		postOne = append(postOne, p)
 
