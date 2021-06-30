@@ -3,7 +3,7 @@
 
 ### :one: L'ambition du projet : 
 
-Le but de ce projet est de créer un forum dans le sens général, c’est-à-dire un site qui permet de créer des posts qui soient du texte et/ou image. Chaque poste une ou plusieurs catégories de plus les utilisateurs peuvent y réagir en postant des commentaires et via des votes (likes, dislikes). En outre les posts et les commentaires seront accessibles par tout le monde, mais participer nécessitera de créer un compte utilisateur. Enfin on pourra filtrer les posts par catégorie, par posts qu'on a soi-même liké ou disliké.
+Le but de ce projet est de créer un forum dans le sens général, c’est-à-dire un site qui permet de créer des posts qui soient du texte et/ou image. Chaque poste a une ou plusieurs catégories, de plus les utilisateurs peuvent y réagir en postant des commentaires et via des votes (likes, dislikes). En outre les posts et les commentaires seront accessibles par tout le monde, mais participer nécessitera de créer un compte utilisateur. Enfin on pourra filtrer les posts par catégorie, par posts qu'on a soi-même liké ou disliké.
 
 
 ### :two: Language utiliser :
@@ -31,7 +31,7 @@ Le but de ce projet est de créer un forum dans le sens général, c’est-à-di
 ### :three: Pré-requis :
 Pour acquérire le projet en .zip [cliquez ici !](https://github.com/Luke859/Projet-Forum)
 
-Tout d'abord installer les librairies ``sqlite3, bcrypt, uuid`` pour cela direction donc  dans le ***terminal*** de ***Visual Studio Code*** et utiliser la commande suivante ``go get`` :
+Tout d'abord installer les librairies ``sqlite3, bcrypt, uuid`` pour cela direction dans le ***terminal*** de ***Visual Studio Code*** et utiliser la commande suivante ``go get`` :
 * ``github.com/mattn/go-sqlite3``
 * ``golang.org/x/crypto/bcrypt``
 * ``github.com/google/uuid``
