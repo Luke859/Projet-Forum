@@ -43,11 +43,11 @@
                     💔 Dislike
                 </button>
                 
-                <form action="/sentCmt" method="POST" id="cmtarea">
+                <form action="/sentCmt" method="POST">
                     <div class="press">
                         <input value="{{.Id_Post}}" hidden name="idPost">
                         <input class="enter" type="text" placeholder="Entrer commentaire" name="cmt">
-                        <button type="button" onclick="CmtRecup()"> Send</button>
+                        <input type="submit" value="Send">
                     </div>
                 </form>
     
