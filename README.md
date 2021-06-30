@@ -29,7 +29,7 @@ Le but de ce projet est de créer un forum dans le sens général, c’est-à-di
 ``SQLite``
 
 ### :three: Pré-requis :
-Pour acquérire le projet en .zip [cliquez ici !](https://github.com/Luke859/Projet-Forum)
+Pour acquérir le projet en .zip [cliquez ici !](https://github.com/Luke859/Projet-Forum)
 
 Tout d'abord installer les librairies ``sqlite3, bcrypt, uuid`` pour cela direction dans le ***terminal*** de ***Visual Studio Code*** et utiliser la commande suivante ``go get`` :
 * ``github.com/mattn/go-sqlite3``
