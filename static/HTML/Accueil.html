@@ -37,9 +37,9 @@
                     {{end}}
                 </div>
                 
-                <div id='addlike-{{.Id_Post}}'>Likes</div>
+                <div id='addlike'>Likes</div>
 
-                <button onclick="deleteLike('addlike-{{.Id_Post}}')" id="dislike">
+                <button onclick="deleteLike()" id="dislike">
                     💔 Dislike
                 </button>
                 
@@ -51,7 +51,7 @@
                     </div>
                 </form>
     
-                <button onclick="changeLike('addlike-{{.Id_Post}}')" name="like" action="/sentLike" method="POST" id="like">
+                <button onclick="changeLike()" name="like" action="/sentLike" method="POST" id="like">
                     ❤️ Like
                 </button>
 
