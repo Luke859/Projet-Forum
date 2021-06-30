@@ -1,6 +1,6 @@
 {{ define "body" }}
 <!-- BLOCK BOUTON BURGER -->
-<div id="test">
+<div id="touteLaPage">
     <div class="burger">
         <div class="barre"></div>
         <div class="barre"></div>
@@ -37,23 +37,23 @@
                         {{end}}
                 </div>
 
-                <div id="addlike-{{.Id_Post}}">Likes</div>
+                <div class="affLike" id="addlike-{{.Id_Post}}">Likes</div>
+
+                <button onclick="changeLike('addlike-{{.Id_Post}}')" name="like" action="/sentLike" method="POST" id="like">
+                    ❤️ Like
+                </button>
 
                 <button onclick="deleteLike('addlike-{{.Id_Post}}')" id="dislike">
                     💔 Dislike
                 </button>
 
                 <form action="/sentCmt" method="POST">
-                    <div class="press">
+                    <div class="buttonCmt">
                         <input value="{{.Id_Post}}" hidden name="idPost">
-                        <input class="enter" type="text" placeholder="Entrer commentaire" name="cmt">
-                        <input type="submit" value="Send">
+                        <input class="enterText" type="text" placeholder="Entrer commentaire" name="cmt">
+                        <input class="btnSend" type="submit" value="Send">
                     </div>
                 </form>
-
-                <button onclick="changeLike('addlike-{{.Id_Post}}')" name="like" action="/sentLike" method="POST" id="like">
-                    ❤️ Like
-                </button>
 
 
 
