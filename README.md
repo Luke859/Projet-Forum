@@ -20,7 +20,6 @@ Le but de ce projet est de créer un forum dans le sens général, c’est-à-di
 
 ``Cascading Style Sheets``
 
-
 <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white
 "/>
 ``golang``
@@ -52,12 +51,15 @@ Ensuite notre répertoire contient une branche ``dev`` et une branche ``main`` e
 
 ### :five: Architecture du projet :
 
-_a faire ! a la fin_
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce augue ipsum, aliquam a condimentum sit amet, iaculis id lectus. Praesent tempor vel urna sit amet ultricies. Suspendisse nibh augue, porta vel odio et, gravida tempus magna. Suspendisse gravida erat sed feugiat lobortis. Curabitur nec aliquet risus, a malesuada nunc. Fusce sit amet vulputate est. Mauris aliquet libero vitae est accumsan consequat. Mauris commodo at erat ut eleifend. Sed et enim placerat, rutrum dolor ac, fermentum dui. Integer dapibus massa nisl, vitae porta urna sollicitudin vitae. Mauris auctor, nisl a tristique rhoncus, sem eros fermentum erat, ut rhoncus arcu ligula eget odio. Etiam nisl massa, auctor id blandit et, mattis non eros. Sed id laoreet augue, nec porta ex. Vestibulum a metus vitae erat semper mattis ac vitae purus. Nullam est elit, dictum vitae egestas vel, venenatis eu tortor. Phasellus euismod in augue at imperdiet.
+Pour l'architecture du projet, nous avons créer 3 grands dossiers pour la répartition des fichiers :    
+* *BDD* → contient la Base De Donnée (les fichiers ".db") et son schéma.     
+* *src* → contient les fichiers en golang répartis en 2 sous-dossiers qui sont Base De Donnée pour tous les fichiers lier à la récupération de données de la Base De Donnée et, le sous-dossier Accueil qui contient tous les scripts nécessaire au bon fonctionnement de forum.     
+* *static* → contient le CSS, les fichiers HTML et les fichiers Java Scripts.     
 
-Duis sit amet mi vel neque tempor porta. Sed ornare in quam sed imperdiet. Nullam sollicitudin vehicula nulla, in rutrum sem faucibus ut. Donec volutpat pharetra est, vel elementum erat consequat vitae. Cras blandit diam vel justo porttitor, vitae egestas orci venenatis. Nulla eu commodo nibh. In hac habitasse platea dictumst. Mauris mattis velit eu tellus pretium aliquet. Duis eget auctor purus. Aenean suscipit diam ac pulvinar bibendum. Cras consectetur, tellus nec ultricies elementum, purus nibh porta nisl, tincidunt consectetur diam enim eu risus. Nulla sagittis est lacus, vitae ullamcorper erat dapibus volutpat. Fusce porttitor sagittis justo, ac vehicula magna vulputate ut. Morbi vestibulum lacus at fringilla dapibus. Aliquam at viverra risus, non commodo nunc.
+De plus, nous avons le fichier "server.go" à la racine du projet.   
+Pour mieux comprendre, voici une capture d'écran de la disposition des fichiers ci-dessous:      
 
-
+<img src="https://cdn.discordapp.com/attachments/754974960845324309/859418457091211274/Screenshot_from_2021-06-29_14-40-12.png">
 
 ### :six: Membres du groupes :
 

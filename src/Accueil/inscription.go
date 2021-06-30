@@ -13,6 +13,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+var pseudoconnect = ""
+
 func InscriptionPage(w http.ResponseWriter, r *http.Request) {
 
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/inscription.html", "static/HTML/navbar.html")
@@ -69,7 +71,17 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal()
 	}
-	pseudoconnect := r.FormValue("PseudoConnect")     // pseudo de la connexion
+	if pseudoconnect != "" {
+		if err != nil {
+			panic(err.Error())
+		}
+		c := http.Cookie{
+			Name:   pseudoconnect,
+			MaxAge: -1,
+		}
+		http.SetCookie(w, &c)
+	}
+	pseudoconnect = r.FormValue("PseudoConnect")     // pseudo de la connexion
 	passwordconnect := r.FormValue("PasswordConnect") // mdp de la connexion
 
 	_, db := BDD.GestionData()
@@ -81,13 +93,13 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Match:   ", match)
 	expire := time.Now().AddDate(0, 0, 1)
 	http.SetCookie(w, &http.Cookie{
-		Name:       "cookieName",
+		Name:       pseudoconnect,
 		Value:      myuuid.String(),
 		Path:       "/",
 		Domain:     "",
 		Expires:    expire,
 		RawExpires: "",
-		MaxAge:     86400,
+		MaxAge:     14400,
 		Secure:     true,
 		HttpOnly:   true,
 		SameSite:   0,
@@ -102,13 +114,12 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
-
 }
 
 ///////////////////////////////// Récupération de la valeur du cookie ( l'UUID ) pour vérif avec BDD ////////////////////////////////////////////////////////
 
 func RecupValueCookie(r *http.Request) string {
-	c, err := r.Cookie("cookieName")
+	c, err := r.Cookie(pseudoconnect)
 	if err != nil {
 		return ""
 	}
