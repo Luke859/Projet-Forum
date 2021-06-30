@@ -61,7 +61,7 @@ Pour mieux comprendre, voici une capture d'écran de la disposition des fichiers
 
 <img src="https://cdn.discordapp.com/attachments/754974960845324309/859418457091211274/Screenshot_from_2021-06-29_14-40-12.png">
 
-### 6️⃣Vidéo de demonstration :
+### 6️⃣Vidéo de démonstration :
 
 Lien de la vidéo youtbe, [cliquez ici](https://youtu.be/O3fKHsLJQwQ)
 
