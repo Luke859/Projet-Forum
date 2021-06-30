@@ -140,8 +140,7 @@ header.sticky{
 }
 
 /*///////////////////////////////////////// Page accueil avec les posts//////////////////////////////////////////////////////////////////////////////////////*/
-
-#test {
+#touteLaPage{
   display: flex;
   margin-top: 100px;
   margin-left: 500px;
@@ -193,31 +192,37 @@ header.sticky{
   margin-bottom: 5px;
 }
 
-.press {
-  position: relative;
-  top: 40px;
+.buttonCmt {
   margin-left: 10px;
-  height: 40px;
+  height: auto;
+
 }
 
-.press button{
+.buttonCmt button{
   height: 35px;
   width: 70px;
   text-transform: uppercase;
 }
-.enter {
+
+.enterText {
   border-radius: 5px;
-  width: 775px;
-  height: 35px;
+  width: 890px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.btnSend {
+  height: 45px;
+  font-size: 25px;
+  border-radius: 10px;
 }
 
 /*///////////////////////////Page accueil avec les likes///////////////////////////////////////////////*/
 
 #like {
-  position: relative;
   color: #fff;
+  font-weight: bold;
   margin-left: 900px;
-  margin-bottom: 20px;
   border-radius: 5px;
   background: #F34D4D;
   width: 75px;
@@ -225,13 +230,13 @@ header.sticky{
   box-shadow: 0 0 0 0 rgba(255, 71, 84, .7);
   animation: battement 2s infinite cubic-bezier(.66, 0, 0, 1);
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 #dislike {
-  position: relative;
   color: #fff;
+  font-weight: bold;
   margin-left: 900px;
-  top: 20px;
   border-radius: 5px;
   background-color: #F34D4D;
   box-shadow: 0 0 0 0 rgba(255, 71, 84, .7);
@@ -239,15 +244,18 @@ header.sticky{
   width: 85px;
   height: 40px;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
-#addlike {
-  background: #F34D4D;
+.affLike {
+  background: white;
   border-radius: 5px;
-  height: 50px;
-  width: 150px;
+  height: 35px;
+  width: 250px;
   margin-top: 10px;
   text-align: center;
+  font-weight: bold;
+
 }
 
 @keyframes battement {
