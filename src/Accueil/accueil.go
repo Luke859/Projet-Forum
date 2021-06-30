@@ -4,17 +4,18 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"text/template"
 	"strconv"
+	"text/template"
 
 	BDD "../BDD"
 )
 
 type PageAccueil struct {
-	Id_Post int 
-	Post string
-	Cmt  []string
-	Like int
+	Id_Post int
+	Post    string
+	Cmt     []string
+	Like    int
+	User    []string
 }
 
 func AccueilPage(w http.ResponseWriter, r *http.Request) {
@@ -25,6 +26,8 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 
 	_, postsDouble = BDD.GetAllPost(db)
+	_, usersDouble = BDD.GetAllUsername(db)
+
 	// _, postsDouble = BDD.IsLikedPOST(db, 1)
 
 	for _, postSync := range postsDouble {
@@ -33,14 +36,23 @@ func AccueilPage(w http.ResponseWriter, r *http.Request) {
 		_, cmtsDouble := BDD.GetAllCmt(db, id_post)
 
 		p := PageAccueil{
-			Post: postSync[1],
-			Cmt: make([]string, 0),
+			Post:    postSync[1],
+			Cmt:     make([]string, 0),
 			Id_Post: id_post,
+			User:    make([]string, 0),
 			// Like: postSync[1],
 		}
-		fmt.Println(p.Id_Post)
+
+		// for _, userSync := range userDouble {
+		// 	p.User = append(p.User, userSync[2])
+		// }
+
 		for _, cmtSync := range cmtsDouble {
 			p.Cmt = append(p.Cmt, cmtSync[2])
+		}
+
+		for _, userSync := range usersDouble {
+			p.User = append(p.User, userSync[2])
 		}
 
 		postOne = append(postOne, p)
