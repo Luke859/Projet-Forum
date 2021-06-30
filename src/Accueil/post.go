@@ -50,7 +50,7 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 	_, db := BDD.GestionData()
 	statuErr, username := BDD.GetUserByUUID(localUUID, db)
 	IdErr, IdUser := BDD.GetId_User(username, db)
-	idpost, _ := strconv.Atoi(r.FormValue("idPost"))
+	idpost, _ := strconv.Atoi(r.FormValue("IdPost"))
 	if statuErr == 0 && IdErr == 0 {
 		err := r.ParseForm()
 		if err != nil {
