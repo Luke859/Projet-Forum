@@ -26,23 +26,23 @@
     
 <!-- BLOCK POSTS -->
     {{range .}}
-        <div id="scroll">
-            <div class="post">
-                <div class="name">{{.Post}}</div>
-                
+    <div id="scroll">
+        <div class="post">
+            <div class="name">{{.Post}}</div>
+            
                 <div class="mainCmt">
-                Commentaires : 
-                    {{range .Cmt}}
-                    <div class="cmt">{{.}}</div>
-                    {{end}}
+                    Commentaires : 
+                        {{range .Cmt}}
+                        <div class="cmt">{{.}}</div>
+                        {{end}}
                 </div>
-                
-                <div id='addlike'>Likes</div>
 
-                <button onclick="deleteLike()" id="dislike">
+                <div id="addlike-{{.Id_Post}}">Likes</div>
+
+                <button onclick="deleteLike('addlike-{{.Id_Post}}')" id="dislike">
                     💔 Dislike
                 </button>
-                
+
                 <form action="/sentCmt" method="POST">
                     <div class="press">
                         <input value="{{.Id_Post}}" hidden name="idPost">
@@ -50,20 +50,20 @@
                         <input type="submit" value="Send">
                     </div>
                 </form>
-    
-                <button onclick="changeLike()" name="like" action="/sentLike" method="POST" id="like">
+
+                <button onclick="changeLike('addlike-{{.Id_Post}}')" name="like" action="/sentLike" method="POST" id="like">
                     ❤️ Like
                 </button>
 
-    
-    
+
+
                 <script src="/static/JS/like.js"></script>
                 <script src="/static/JS/CreeCmt.js"></script>
             </div>
         </div>
-        
-    {{end}}
-</div>
+
+        {{end}}
+    </div>
 
 
 
