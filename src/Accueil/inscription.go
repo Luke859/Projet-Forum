@@ -46,9 +46,9 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 	statusBDD, db := BDD.GestionData()
 	status := BDD.NewUser(pseudo, HashPass, db)
 	if status == 0 && statusBDD == 0 {
-		fmt.Println("walla")
+		fmt.Println("creation d'un nouveau utilisateur")
 	} else {
-		fmt.Println("Walla il y avait plus de poulet curry")
+		fmt.Println("erreur de la creation d'un nouveau utilisateur")
 	}
 
 }
