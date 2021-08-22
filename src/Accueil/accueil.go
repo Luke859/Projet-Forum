@@ -15,7 +15,7 @@ type PageAccueil struct {
 	Post    string
 	Cmt     []string
 	Like    int
-	User    []string
+	// User    []string
 }
 
 func AccueilPage(w http.ResponseWriter, r *http.Request) {
