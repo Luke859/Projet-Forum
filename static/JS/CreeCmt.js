@@ -1,5 +1,5 @@
 function CmtRecup(){
 
-    var inputCmt = document.getElementById('cmtarea');
+    let inputCmt = document.getElementById('cmtarea');
     inputCmt.submit()
 }

@@ -1,26 +1,21 @@
-document.onclick = changeLike;
+function changeLike(id) {
 
-function changeLike() {
-    like.textContent = "1";
+    let like = document.getElementById(id)
 
-    if(like.textContent === "1") {
-        document.onclick = change2Like;
-    }
+    like.textContent = "Liked post ❤️" + 1
 
-}
-
-function change2Like() {
-    like.textContent ="0";
-
-    if(like.textContent === "0") {
-        document.onclick = changeLike;
+    if(like.textContent === "Liked post ❤️" + 1){
+        like.onclick = deleteLike;
     }
 }
 
+function deleteLike(id){
 
-// function changeLike(){
+    let like = document.getElementById(id)
 
-//     var like = document.getElementById('like');
-//     like.submit()
-// }
+    like.textContent = "Disliked post 💔" + 0
 
+    if(like.textContent === "Disliked post 💔" + 0){
+        like.onclick = changeLike;
+    }
+}

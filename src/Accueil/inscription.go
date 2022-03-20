@@ -13,6 +13,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+var pseudoconnect = ""
+
 func InscriptionPage(w http.ResponseWriter, r *http.Request) {
 
 	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/inscription.html", "static/HTML/navbar.html")
@@ -54,31 +56,14 @@ func GetSign(w http.ResponseWriter, r *http.Request) {
 // Hash du mot de passe puis l'afficher dans le terminal
 func hashPassword(password string) string {
 	var passByte = []byte(password)
-
 	hash, err := bcrypt.GenerateFromPassword(passByte, bcrypt.MinCost)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	return string(hash)
 }
 
-/*func CreateCookie(w http.ResponseWriter, r *http.Request){
-	myuuid := guuid.New()
-
-	if r.Method == "GET" {
-		http.SetCookie(w, &http.Cookie{
-			Name: "cookieName",
-			Value: myuuid.String(),
-			Path: "/",
-			Expires: time.Now().Add(120*time.Second),
-			MaxAge: 86400,
-		})
-	}
-	fmt.Println(myuuid)
-}*/
-
-// Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion"
+// Fonction qui récupère le PSEUDO et le MDP du formulaire "connexion" et créer le cookie evec l'UUID
 
 func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	myuuid := guuid.New()
@@ -86,7 +71,17 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal()
 	}
-	pseudoconnect := r.FormValue("PseudoConnect")     // pseudo de la connexion
+	if pseudoconnect != "" {
+		if err != nil {
+			panic(err.Error())
+		}
+		c := http.Cookie{
+			Name:   pseudoconnect,
+			MaxAge: -1,
+		}
+		http.SetCookie(w, &c)
+	}
+	pseudoconnect = r.FormValue("PseudoConnect")      // pseudo de la connexion
 	passwordconnect := r.FormValue("PasswordConnect") // mdp de la connexion
 
 	_, db := BDD.GestionData()
@@ -98,13 +93,13 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Match:   ", match)
 	expire := time.Now().AddDate(0, 0, 1)
 	http.SetCookie(w, &http.Cookie{
-		Name:       "cookieName",
+		Name:       pseudoconnect,
 		Value:      myuuid.String(),
 		Path:       "/",
 		Domain:     "",
 		Expires:    expire,
 		RawExpires: "",
-		MaxAge:     86400,
+		MaxAge:     14400,
 		Secure:     true,
 		HttpOnly:   true,
 		SameSite:   0,
@@ -117,21 +112,29 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	if recupUUID == 500 {
 		fmt.Println("Nous rencontrons des perturbations")
 	}
-	// http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
 	fmt.Println()
-
 }
 
-// Verif du mot de passe
-func comparePasswords(HashPass string, passwordconnect []byte) bool {
+///////////////////////////////// Récupération de la valeur du cookie ( l'UUID ) pour vérif avec BDD ////////////////////////////////////////////////////////
 
+func RecupValueCookie(r *http.Request) string {
+	c, err := r.Cookie(pseudoconnect)
+	if err != nil {
+		return ""
+	}
+	fmt.Println(c.Value)
+	verifUUID := c.Value
+	return verifUUID
+}
+
+//////////////////////// Verif du mot de passe ////////////////////////
+func comparePasswords(HashPass string, passwordconnect []byte) bool {
 	byteHash := []byte(HashPass)
 	err := bcrypt.CompareHashAndPassword(byteHash, passwordconnect)
 	if err != nil {
 		log.Println(err)
 		return false
 	}
-
 	return true
-
 }
