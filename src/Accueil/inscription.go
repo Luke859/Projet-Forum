@@ -7,7 +7,7 @@ import (
 	"text/template"
 	"time"
 
-	BDD "../BDD"
+	"Forum/src/BDD"
 
 	guuid "github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"

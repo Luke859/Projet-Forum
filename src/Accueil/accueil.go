@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"text/template"
 
-	BDD "../BDD"
+	"Forum/src/BDD"
 )
 
 type PageAccueil struct {

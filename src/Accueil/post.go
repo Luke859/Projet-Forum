@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"text/template"
 
-	BDD "../BDD"
+	"Forum/src/BDD"
 )
 
 func PostPage(w http.ResponseWriter, r *http.Request) {
