@@ -1,11 +1,10 @@
 package Accueil
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
-	"text/template"
+	"html/template"
 
 	"Forum/src/BDD"
 )
@@ -14,57 +13,77 @@ type PageAccueil struct {
 	Id_Post int
 	Post    string
 	Cmt     []string
+	User    []string
 	Like    int
-	// User    []string
 }
 
+// AccueilPage gère l'affichage de la page d'accueil avec tous les posts
 func AccueilPage(w http.ResponseWriter, r *http.Request) {
-	// Déclaration des fichiers à parser
-
-	var postsDouble [][]string
-	var postOne []PageAccueil
-	_, db := BDD.GestionData()
-
-	_, postsDouble = BDD.GetAllPost(db)
-	// _, usersDouble = BDD.GetAllUsername(db)
-
-	// _, postsDouble = BDD.IsLikedPOST(db, 1)
-
-	for _, postSync := range postsDouble {
-
-		id_post, _ := strconv.Atoi(postSync[0])
-		_, cmtsDouble := BDD.GetAllCmt(db, id_post)
-
-		p := PageAccueil{
-			Post:    postSync[1],
-			Cmt:     make([]string, 0),
-			Id_Post: id_post,
-			// User:    make([]string, 0),
-			// Like: postSync[1],
-		}
-
-		// for _, userSync := range userDouble {
-		// 	p.User = append(p.User, userSync[2])
-		// }
-
-		for _, cmtSync := range cmtsDouble {
-			p.Cmt = append(p.Cmt, cmtSync[2])
-		}
-
-		// for _, userSync := range usersDouble {
-		// 	p.User = append(p.User, userSync[2])
-		// }
-
-		postOne = append(postOne, p)
-
-	}
-
-	t, err := template.ParseFiles("static/HTML/layout.html", "static/HTML/Accueil.html", "static/HTML/navbar.html")
-	if err != nil {
-		log.Fatalf("Template execution: %s", err)
+	// Ouverture de la base de données
+	status, db := BDD.GestionData()
+	if status != 0 {
+		log.Printf("Erreur ouverture BDD: status=%d", status)
+		http.Error(w, "Erreur interne", http.StatusInternalServerError)
 		return
 	}
-	t.Execute(w, postOne)
-	fmt.Println("Page Accueil ✔️")
+	defer db.Close()
 
+	// Récupération de tous les posts
+	status, postsRaw := BDD.GetAllPost(db)
+	if status != 0 {
+		log.Printf("Erreur GetAllPost: status=%d", status)
+		http.Error(w, "Erreur interne", http.StatusInternalServerError)
+		return
+	}
+	log.Printf("Nombre de posts récupérés : %d", len(postsRaw))
+
+	// Construction du modèle pour le template
+	var posts []PageAccueil
+	for _, entry := range postsRaw {
+		idPost, err := strconv.Atoi(entry[0])
+		if err != nil {
+			log.Printf("Erreur conversion Id_post: %v", err)
+			continue
+		}
+
+		// Récupérer les commentaires du post
+		cStatus, cmtsRaw := BDD.GetAllCmt(db, idPost)
+		if cStatus != 0 {
+			log.Printf("Erreur GetAllCmt pour post %d: status=%d", idPost, cStatus)
+		}
+		comments := make([]string, 0, len(cmtsRaw))
+		for _, c := range cmtsRaw {
+			if len(c) > 2 {
+				comments = append(comments, c[2])
+			}
+		}
+
+		// Initialisation du slice User pour éviter l'erreur {{.User}} dans le template
+		posts = append(posts, PageAccueil{
+			Id_Post: idPost,
+			Post:    entry[1],
+			Cmt:     comments,
+			User:    make([]string, 0),
+			Like:    0,
+		})
+	}
+
+	// Parsing des templates (layout, navbar puis body)
+	tmpl, err := template.ParseFiles(
+		"static/HTML/layout.html",
+		"static/HTML/navbar.html",
+		"static/HTML/Accueil.html",
+	)
+	if err != nil {
+		log.Printf("Erreur ParseFiles template: %v", err)
+		http.Error(w, "Erreur interne template", http.StatusInternalServerError)
+		return
+	}
+
+	// Exécution du template avec les données
+	if err := tmpl.Execute(w, posts); err != nil {
+		log.Printf("Erreur Execute template: %v", err)
+	}
+
+	log.Println("Page Accueil ✔️")
 }

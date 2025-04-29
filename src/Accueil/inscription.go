@@ -112,7 +112,7 @@ func GetSignConnect(w http.ResponseWriter, r *http.Request) {
 	if recupUUID == 500 {
 		fmt.Println("Nous rencontrons des perturbations")
 	}
-	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 	fmt.Println()
 }
 

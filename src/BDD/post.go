@@ -46,6 +46,7 @@ func GetAllPost(db *sql.DB) (int, [][]string) {
 		statement.Scan(&id, &text)
 		save := []string{strconv.Itoa(id), text}
 		tabAllPost = append(tabAllPost, save)
+		fmt.Println(tabAllPost)
 	}
 
 	return 0, tabAllPost

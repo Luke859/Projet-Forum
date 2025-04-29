@@ -35,7 +35,7 @@ func GetPostInformation(w http.ResponseWriter, r *http.Request) {
 		statusPost := BDD.MakePost(TextArea, IdUser)
 		if statusPost == 300 {
 			fmt.Println("Post envoyer : ", TextArea)
-			http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+			http.Redirect(w, r, "/", http.StatusSeeOther)
 		} else {
 			fmt.Println("Erreur envoie post")
 		}
@@ -64,7 +64,7 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 
 		if statusCmt == 0 {
 			fmt.Println("Commentaire envoyer")
-			http.Redirect(w, r, "/accueil", http.StatusSeeOther)
+			http.Redirect(w, r, "/", http.StatusSeeOther)
 		} else {
 			fmt.Println("Erreur envoie commentaire")
 		}
@@ -72,22 +72,3 @@ func GetCmtInformation(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/inscription", http.StatusSeeOther)
 	}
 }
-
-// func GetLikesInformation(w http.ResponseWriter, r *http.Request) {
-// 	err := r.ParseForm()
-// 	if err != nil {
-// 		log.Fatal()
-// 	}
-// 	_, db := BDD.GestionData()
-
-// 	LikeArea, _ := strconv.Atoi(r.FormValue("like"))
-// 	fmt.Println(" Voici le nombre de likes écrit :", LikeArea)
-// 	statusLikes := BDD.MakeLikes(1, 1, LikeArea, db)
-// 	if statusLikes == 300 {
-// 		fmt.Println("Walla")
-// 	} else {
-// 		fmt.Println("WAlla il y avait plus de poulet curry")
-// 	}
-// 	http.Redirect(w, r, "/accueil", http.StatusSeeOther)
-
-// }

@@ -9,6 +9,7 @@ import (
 func main() {
 
 	http.HandleFunc("/", Accueil.AccueilPage)
+	http.HandleFunc("/accueil", Accueil.AccueilPage)
 	http.HandleFunc("/connexion", Accueil.ConnexionPage)
 	http.HandleFunc("/inscription", Accueil.InscriptionPage)
 	http.HandleFunc("/post", Accueil.PostPage)
